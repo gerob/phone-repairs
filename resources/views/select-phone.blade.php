@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html>
-@include('partials/_header')
-<body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+@extends('template')
 
-@include('partials/_top_nav')
+@section('content')
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
 
-<div class="container">
-    @yield('content')
-</div>
+            <div class="panel panel-default">
+                <img src="img/stLogo1.png" alt="Square Trade" class="panel-logo">
 
-@include('partials/_footer')
+                <div class="panel-body">
 
-</body>
-</html>
+                    <h3>Mobile Device Repair Pricing Portal</h3>
+
+                    <p><b>NOTE:</b> all screen replacements include both the LCD and digitizer (except iPads). This is
+                        the best and most efficient way to perform a screen replacement. Smaller independent retailers
+                        may offer screen repairs at a lower price, but many are not replacing the full assembly - only
+                        the front glass. </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
