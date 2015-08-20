@@ -1,23 +1,26 @@
 @extends('template')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
 
-            <div class="panel panel-default">
-                <img src="img/stLogo1.png" alt="Square Trade" class="panel-logo">
+    <div class="panel-heading">
+        <h4 class="panel-title">Mobile Device Repair Pricing Portal</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="center-all">
+                    <strong>In-Store Device Repair</strong>
 
-                <div class="panel-body">
-
-                    <h3>Mobile Device Repair Pricing Portal</h3>
-
-                    <p><b>NOTE:</b> all screen replacements include both the LCD and digitizer (except iPads). This is
-                        the best and most efficient way to perform a screen replacement. Smaller independent retailers
-                        may offer screen repairs at a lower price, but many are not replacing the full assembly - only
-                        the front glass. </p>
-
+                    <p>Choose one of the following manufacturers for in-store service.</p>
                 </div>
+                <form action="{{ route('repairs.post') }}">
+                    {!! csrf_field() !!}
+
+
+                </form>
             </div>
         </div>
+
     </div>
+
 @endsection

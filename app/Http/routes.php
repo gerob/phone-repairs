@@ -12,9 +12,15 @@
 */
 
 get('/', function () {
+    return view('login');
+});
+
+post('login', ['as' => 'login', 'uses' => 'AuthController@postLogin']);
+
+get('repairs/select', function () {
     return view('select-phone');
 });
 
-get('repair/{phone-type}', 'PhoneRepairController@pricing');
+get('repairs/{phone-type}', 'PhoneRepairController@pricing');
 
-post('repair', 'PhoneRepairController@processPricingForm');
+post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postPhoneSelection']);
