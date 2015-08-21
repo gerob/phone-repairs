@@ -11,7 +11,7 @@ class PhoneRepairController extends Controller
 {
     public function getManufacturerSelection()
     {
-        return view('select-phone');
+        return view('select-manufacturer');
     }
 
     public function postManufacturerForm(Request $request)
@@ -20,14 +20,31 @@ class PhoneRepairController extends Controller
             'manufacturer' => 'required'
         ]);
 
-        return redirect()->route('repairs.form', $request->get('manufacturer'));
+        return redirect()->route('repairs.device', $request->get('manufacturer'));
     }
 
-    public function getPricingForm($manufacturer)
+    public function getDeviceSelection($manufacturer)
     {
         // Get available devices
-        $devices = \App\Device::all();
+        $devices = \App\Device::where('manufacturer', $manufacturer)->get();
 
-        return view('pricing')->with('devices', $devices);
+        return view('select-device')->with(['devices' => $devices, 'manufacturer' => $manufacturer]);
+    }
+
+    public function postDeviceSelection(Request $request)
+    {
+        $this->validate($request, [
+            'device' => 'required|integer'
+        ]);
+
+        return redirect()->route('repairs.pricing', $request->get('device'));
+
+    }
+
+    public function getPricingForm($device)
+    {
+        $device = \App\Device::find($device);
+
+        return view('pricing')->with('device', $device);
     }
 }

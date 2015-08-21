@@ -139,13 +139,8 @@
                     <h4>Device Information</h4>
 
                     <div class="form-group">
-                        <label for="device"> Supported Device</label>
-                        <select class="form-control" name="device">
-                            <option value="">Choose a Device:</option>
-                            @foreach($devices as $device)
-                                <option value="{{ $device->id }}">{{ $device->model }}</option>
-                            @endforeach
-                        </select>
+                        <label for="device"> Device Name</label>
+                        <input type="text" class="form-control" name="device" value="{{ $device->model }}" readonly>
                     </div>
 
                     <div class="form-group">
@@ -193,8 +188,9 @@
                 </div>
         </div>
         <div class="row">
-            <h4>Choose Your Repair Services (all applicable)</h4>
-
+            <div class="panel-body">
+                <h4>Choose Your Repair Services (all applicable)</h4>
+            </div>
         </div>
         </form>
     </div>

@@ -29,13 +29,13 @@
                             <img src="/img/iPhoneImage-300x300.jpg" alt="Apple iPhone"
                                  class="pull-right img-responsive img-radio">
                             <button type="button" class="btn btn-radio">Apple</button>
-                            <input type="radio" name="manufacturer" value="apple" class="hidden">
+                            <input type="radio" name="manufacturer" value="AppleSC" class="hidden">
                         </div>
                         <div class="col-xs-5">
                             <img src="/img/smartphoneimage-300x300.jpg" alt="Samsung Smartphone"
                                  class="img-responsive img-radio">
                             <button type="button" class="btn btn-radio">Samsung</button>
-                            <input type="radio" name="manufacturer" value="samsung" class="hidden">
+                            <input type="radio" name="manufacturer" value="SamsungSC" class="hidden">
                         </div>
                         <div class="center-all">
                             <button type="submit" class="btn btn-primary btn-block">Select manufacturer</button>
