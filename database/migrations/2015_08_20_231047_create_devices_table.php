@@ -12,7 +12,12 @@ class CreateDevicesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('devices', function (Blueprint $table) {
+            $table->integer('id');
+            $table->string('manufacturer');
+            $table->string('model');
+            $table->string('level');
+        });
     }
 
     /**
@@ -22,6 +27,6 @@ class CreateDevicesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('devices');
     }
 }
