@@ -13,12 +13,10 @@ class DeviceServicesSeeder extends Seeder
     {
         $devices = \App\Device::all();
         $services = \App\Service::all();
+
         foreach ($devices as $device) {
             foreach ($services as $service) {
-dd($service->id, $device->id);
-                \App\DeviceService::create([
-                    'device_id' => $device->id,
-                    'service_id' => $service->id,
+                $device->services()->save($service, [
                     'price' => rand(7500, 20000),
                     'upc' => '00000000000000'
                 ]);

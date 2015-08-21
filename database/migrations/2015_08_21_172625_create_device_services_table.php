@@ -15,12 +15,14 @@ class CreateDeviceServicesTable extends Migration
         Schema::create('device_services', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('service_id')->unsigned();
+            $table->integer('device_id')->unsigned();
 
             $table->integer('price')->unsigned();
             $table->string('upc');
 
             $table->timestamps();
             $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('device_id')->references('id')->on('devices');
         });
     }
 

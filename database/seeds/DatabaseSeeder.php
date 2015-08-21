@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(DeviceSeeder::class);
         $this->call(ServicesSeeder::class);
-//        $this->call(DeviceServicesSeeder::class);
+        $this->call(DeviceServicesSeeder::class);
 
         Model::reguard();
     }

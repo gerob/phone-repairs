@@ -15,13 +15,4 @@ class DeviceService extends Model
         'upc'
     ];
 
-    public function device()
-    {
-        return $this->hasOne(Device::class);
-    }
-
-    public function service()
-    {
-        return $this->hasOne(Service::class);
-    }
 }

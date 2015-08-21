@@ -12,6 +12,8 @@ class Device extends Model
 
     public function services()
     {
-        return $this->hasMany(DeviceService::class);
+        return $this->belongsToMany(DeviceService::class, 'device_services', 'device_id', 'service_id')
+            ->withPivot('price', 'upc')
+            ->withTimestamps();
     }
 }
