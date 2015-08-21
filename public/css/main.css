@@ -6,3 +6,17 @@
 .panel-logo {
     padding: 0px 15px 15px 15px;
 }
+
+/*Forms*/
+.btn-radio {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.img-radio {
+    opacity: 0.5;
+    margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}

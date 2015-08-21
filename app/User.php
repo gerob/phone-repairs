@@ -37,6 +37,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         // Overriding this with something empty
         // so it doesn't try to set the remember token
-        // during logout.
+        // during logout. #hacks
     }
 }

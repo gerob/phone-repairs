@@ -21,11 +21,10 @@ get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
 Route::group(['middleware' => 'auth'], function () {
 
-    get('repairs/select', function () {
-        return view('select-phone');
-    });
+    get('repairs/manufacturer', 'PhoneRepairController@getManufacturerSelection');
+    post('repairs/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'PhoneRepairController@postManufacturerForm']);
 
-    get('repairs/{phone-type}', 'PhoneRepairController@pricing');
+    get('repairs/{manufacturer}', ['as' => 'repairs.form', 'uses' => 'PhoneRepairController@getPricingForm']);
 
-    post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postPhoneSelection']);
+    post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postRepairForm']);
 });
