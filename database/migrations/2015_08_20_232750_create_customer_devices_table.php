@@ -13,8 +13,9 @@ class CreateCustomerDevicesTable extends Migration
     public function up()
     {
         Schema::create('customer_devices', function (Blueprint $table) {
-            $table->integer('customer_id');
-            $table->integer('device_id');
+            $table->increments('id');
+            $table->integer('customer_id')->unsigned();
+            $table->integer('device_id')->unsigned();
 
             $table->string('store_number');
             $table->string('color');

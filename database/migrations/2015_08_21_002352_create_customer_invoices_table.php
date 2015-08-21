@@ -14,7 +14,7 @@ class CreateCustomerInvoicesTable extends Migration
     {
         Schema::create('customer_invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->unsigned();
 
             $table->string('first_name', 64);
             $table->string('last_name', 64);

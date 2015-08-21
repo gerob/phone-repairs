@@ -13,7 +13,8 @@ class CreateDevicesTable extends Migration
     public function up()
     {
         Schema::create('devices', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
+
             $table->string('manufacturer');
             $table->string('model');
             $table->string('level');
