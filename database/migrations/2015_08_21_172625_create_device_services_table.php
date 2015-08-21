@@ -12,22 +12,16 @@ class CreateDeviceServicesTable extends Migration
      */
     public function up()
     {
-        $services = [
-            'Screen Replacement',
-            'Battery Replacement',
-            'Unlocking'
-        ];
+        Schema::create('device_services', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('service_id')->unsigned();
 
-        $devices = \App\Device::all();
+            $table->integer('price')->unsigned();
+            $table->string('upc');
 
-        foreach ($devices as $device) {
-            foreach ($services as $service) {
-                \App\DeviceService::create([
-                    'service' => $service,
-
-                ]);
-            }
-        }
+            $table->timestamps();
+            $table->foreign('service_id')->references('id')->on('services');
+        });
     }
 
     /**
@@ -37,6 +31,6 @@ class CreateDeviceServicesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('device_services');
     }
 }

@@ -9,13 +9,19 @@ class DeviceService extends Model
     protected $table = 'device_services';
 
     protected $fillable = [
-        'service',
+        'device_id',
+        'service_id',
         'price',
         'upc'
     ];
 
     public function device()
     {
-        return $this->belongsTo(Device::class);
+        return $this->hasOne(Device::class);
+    }
+
+    public function service()
+    {
+        return $this->hasOne(Service::class);
     }
 }

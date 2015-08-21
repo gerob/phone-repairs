@@ -17,6 +17,7 @@ class CreateDevicesTable extends Migration
 
             $table->string('manufacturer');
             $table->string('model');
+            $table->string('image');
             $table->string('level')->nullable();
         });
     }

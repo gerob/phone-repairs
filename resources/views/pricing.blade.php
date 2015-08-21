@@ -8,7 +8,7 @@
         <form action="{{ route('repairs.post') }}">
         <div class="row">
             <div class="col-sm-12">
-                <p>
+                <p class="alert-info">
                     <strong>NOTE:</strong> all screen replacements include both the LCD and digitizer (except iPads).
                     This is the best and most efficient way to perform a screen replacement. Smaller independent
                     retailers may offer screen repairs at a lower price, but many are not replacing the full assembly -

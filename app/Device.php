@@ -8,7 +8,7 @@ class Device extends Model
 {
     protected $table = 'devices';
 
-    protected $fillable = ['manufacturer', 'model', 'level'];
+    protected $fillable = ['manufacturer', 'model', 'image', 'level'];
 
     public function services()
     {
