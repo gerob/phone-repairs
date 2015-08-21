@@ -11,7 +11,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        App\User::create([
             'name' => 'Gerob Lee',
             'email' => 'gerobk@gmail.com',
             'password' => bcrypt('pa$$word')
