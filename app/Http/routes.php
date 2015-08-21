@@ -15,12 +15,17 @@ get('/', function () {
     return view('login');
 });
 
-post('login', ['as' => 'login', 'uses' => 'AuthController@postLogin']);
+post('login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 
-get('repairs/select', function () {
-    return view('select-phone');
+get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+Route::group(['middleware' => 'auth'], function () {
+
+    get('repairs/select', function () {
+        return view('select-phone');
+    });
+
+    get('repairs/{phone-type}', 'PhoneRepairController@pricing');
+
+    post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postPhoneSelection']);
 });
-
-get('repairs/{phone-type}', 'PhoneRepairController@pricing');
-
-post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postPhoneSelection']);

@@ -23,6 +23,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    public $loginPath = '/repairs/select';
+
     /**
      * Create a new authentication controller instance.
      *

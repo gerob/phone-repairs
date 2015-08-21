@@ -31,5 +31,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password'];
+
+    public function setRememberToken($value)
+    {
+        // Overriding this with something empty
+        // so it doesn't try to set the remember token
+        // during logout.
+    }
 }

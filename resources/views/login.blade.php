@@ -7,7 +7,8 @@
     </div>
 
     <div class="panel-body">
-        <form action="{{ route('login') }}" class="login-form col-md-6 col-md-offset-3">
+        <form action="{{ route('login') }}" method="post" class="login-form col-md-6 col-md-offset-3">
+            {!! csrf_field() !!}
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}" class="form-control">
