@@ -16,18 +16,17 @@ class CreateCustomerDevicesTable extends Migration
             $table->integer('customer_id');
             $table->integer('device_id');
 
-            $table->string('storeNumber');
+            $table->string('store_number');
             $table->string('color');
-            $table->string('serialNumber');
+            $table->string('serial_number');
             $table->string('carrier');
             $table->text('description');
-            $table->string('memberType');
-            $table->string('memberNumber');
             $table->text('claim');
-            $table->string('claimNumber');
-            $table->string('warrantyYears');
+            $table->string('claim_number');
+            $table->integer('warranty_years');
             $table->string('services');
 
+            $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('device_id')->references('id')->on('devices');
         });
