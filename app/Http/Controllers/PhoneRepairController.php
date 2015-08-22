@@ -71,6 +71,15 @@ class PhoneRepairController extends Controller
             'services'      => 'required'
         ]);
 
+        // Remove the service if it does not have a name
+        $check_services = $request->get('services');
+        $services = [];
+        foreach($check_services as $index => $service) {
+            if (array_has($service, 'name')) {
+                $services[$index] = $service;
+            }
+        }
+
         // Find and update or create our customer
         $customer = \App\Customer::firstOrNew(['email' => $request->get('email')]);
         $customer->first_name = $request->get('first_name');
@@ -93,7 +102,7 @@ class PhoneRepairController extends Controller
             'claim_number'  => $request->get('claim_number', NULL),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
-            'services'      => serialize($request->get('services'))
+            'services'      => serialize($services)
         ]);
 
         $invoice = $customer->invoices()->create([
@@ -115,7 +124,7 @@ class PhoneRepairController extends Controller
             'claim_number'  => $request->get('claim_number', null),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
-            'services'      => serialize($request->get('services'))
+            'services'      => serialize($services)
         ]);
 
         return redirect()->route('repairs.confirmation', $invoice->id);

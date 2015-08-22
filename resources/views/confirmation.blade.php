@@ -53,7 +53,7 @@
                                 <tr>
                                     <td>{{ $index + 1 }} {{ $service['name'] }} - {{ $service['price'] }}</td>
                                     <td>
-                                        <img src="{{ \DNS2D::getBarcodeHTML($service['upc'], "EAN13") }}" alt="barcode"   />
+                                        <img src="{{ \DNS1D::getBarcodePNGPath($service['upc'], "EAN13", 3, 30) }}" alt="barcode"   />
                                     </td>
                                 </tr>
                             @endforeach
