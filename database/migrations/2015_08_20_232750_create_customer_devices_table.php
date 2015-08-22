@@ -15,21 +15,20 @@ class CreateCustomerDevicesTable extends Migration
         Schema::create('customer_devices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
-            $table->integer('device_id')->unsigned();
 
+            $table->string('device_name');
             $table->string('store_number');
             $table->string('color');
             $table->string('serial_number');
             $table->string('carrier');
             $table->text('description');
-            $table->text('claim');
-            $table->string('claim_number');
+            $table->boolean('claim')->default(false);
+            $table->string('claim_number')->nullable();
             $table->integer('warranty_years');
             $table->string('services');
 
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('device_id')->references('id')->on('devices');
         });
     }
 

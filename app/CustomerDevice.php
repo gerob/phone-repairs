@@ -6,32 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerDevice extends Model
 {
-    protected $table = 'customer_device';
+    protected $table = 'customer_devices';
 
     protected $fillable = [
-        'customer_id',
-        'storeNumber',
-        'deviceName',
+        'store_number',
+        'device_name',
         'color',
-        'serialNumber',
+        'serial_number',
         'carrier',
         'description',
-        'memberType',
-        'memberNumber',
         'claim',
-        'claimNumber',
-        'warrantyYears',
+        'claim_number',
+        'warranty_years',
         'services'
     ];
 
     public function customer()
     {
         return $this->hasOne(Customer::class);
-    }
-
-    public function device()
-    {
-        return $this->hasOne(Device::class);
     }
 
 }

@@ -11,7 +11,8 @@ class CustomerInvoice extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'address1',
+        'email',
+        'address',
         'address2',
         'city',
         'state',
@@ -34,5 +35,16 @@ class CustomerInvoice extends Model
     public function customer()
     {
         return $this->hasOne(Customer::class);
+    }
+
+    /**
+     * Unserialize the services array when accessed
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function getServicesAttribute($value)
+    {
+        return unserialize($value);
     }
 }

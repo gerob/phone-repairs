@@ -214,12 +214,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($services as $service)
+                            @foreach($services as $index => $service)
                                 <tr>
                                     <td>{{ $service->name }}</td>
                                     <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
                                     <td>{{ $service->pivot->upc }}</td>
-                                    <td><input type="checkbox" name="services[]" value="{{ $service->name }}"></td>
+                                    <td>
+                                        <input type="checkbox" name="services[{{ $index }}][name]" value="{{ $service->name }}">
+                                        <input type="hidden" name="services[{{ $index }}][price]" value="${{ number_format(($service->pivot->price/100), 2) }}">
+                                        <input type="hidden" name="services[{{ $index }}][upc]" value="{{ $service->pivot->upc }}">
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

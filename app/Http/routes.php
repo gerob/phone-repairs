@@ -24,10 +24,14 @@ Route::group(['middleware' => 'auth'], function () {
     get('repairs/manufacturer', 'PhoneRepairController@getManufacturerSelection');
     post('repairs/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'PhoneRepairController@postManufacturerForm']);
 
+    get('repairs/confirmation/{invoice_id}', ['as' => 'repairs.confirmation', 'uses' => 'PhoneRepairController@getConfirmRepairs']);
+    post('repairs/confirmed', ['as' => 'repairs.confirmed', 'uses' => 'PhoneRepairController@postConfirmedRepairs']);
+
     get('repairs/{manufacturer}', ['as' => 'repairs.device', 'uses' => 'PhoneRepairController@getDeviceSelection']);
     post('repairs/device', ['as' => 'repairs.device.post', 'uses' => 'PhoneRepairController@postDeviceSelection']);
 
     get('repairs/pricing/{device}', ['as' => 'repairs.pricing', 'uses' => 'PhoneRepairController@getPricingForm']);
 
     post('repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
+
 });
