@@ -144,6 +144,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Package service providers
+         */
+        Dinesh\Barcode\BarcodeServiceProvider::class
+
     ],
 
     /*
@@ -191,6 +196,12 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Package aliases
+         */
+        'DNS1D' => Dinesh\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Dinesh\Barcode\Facades\DNS2DFacade::class
 
     ],
 

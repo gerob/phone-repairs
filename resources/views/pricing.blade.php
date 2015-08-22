@@ -5,7 +5,8 @@
         <h4 class="panel-title">Mobile Device Repair Pricing Portal</h4>
     </div>
     <div class="panel-body">
-        <form action="{{ route('repairs.post') }}">
+        <form action="{{ route('repairs.pricing.post') }}" method="post">
+            {!! csrf_field() !!}
             <div class="row">
                 <div class="col-sm-12">
                     <p class="alert-info">
@@ -209,7 +210,7 @@
                                     <td>{{ $service->name }}</td>
                                     <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
                                     <td>{{ $service->pivot->upc }}</td>
-                                    <td><input type="checkbox" name="service"></td>
+                                    <td><input type="checkbox" name="service" value="{{ $service->name }}"></td>
                                 </tr>
                             @endforeach
                             </tbody>

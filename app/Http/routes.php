@@ -29,5 +29,5 @@ Route::group(['middleware' => 'auth'], function () {
 
     get('repairs/pricing/{device}', ['as' => 'repairs.pricing', 'uses' => 'PhoneRepairController@getPricingForm']);
 
-    post('repairs', ['as' => 'repairs.post', 'uses' => 'PhoneRepairController@postRepairForm']);
+    post('repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
 });

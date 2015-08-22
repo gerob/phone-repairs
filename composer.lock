@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
+    "hash": "b87a76102d249ec562fc2e00bc3b8f9f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -115,6 +115,58 @@
                 "utils"
             ],
             "time": "2015-07-23 00:54:12"
+        },
+        {
+            "name": "dinesh/barcode",
+            "version": "V4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dineshrabara/barcode.git",
+                "reference": "3c380718623e602f1d80e2e8868a88f4ebff514c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dineshrabara/barcode/zipball/3c380718623e602f1d80e2e8868a88f4ebff514c",
+                "reference": "3c380718623e602f1d80e2e8868a88f4ebff514c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Dinesh\\Barcode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dinesh Rabara",
+                    "email": "dinesh.rabara@gmail.com"
+                }
+            ],
+            "description": "Barcode generator like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) ",
+            "keywords": [
+                "CODABAR",
+                "CODE 128",
+                "CODE 39",
+                "barcode",
+                "datamatrix",
+                "ean",
+                "laravel",
+                "pdf417",
+                "qr code",
+                "qrcode"
+            ],
+            "time": "2015-06-17 09:10:06"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

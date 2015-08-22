@@ -49,4 +49,28 @@ class PhoneRepairController extends Controller
 
         return view('pricing')->with(['device' => $device, 'services' => $services]);
     }
+
+    public function postPricingForm(Request $request)
+    {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'device' => 'required',
+            'color' => 'required',
+            'serial_number' => 'required',
+            'carrier' => 'required',
+            'claim_number' => 'required_with:claim',
+            'description' => 'required',
+            'store_number' => 'required',
+            'service' => 'required'
+        ]);
+
+        dd($request->all());
+    }
 }
