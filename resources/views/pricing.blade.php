@@ -6,15 +6,17 @@
     </div>
     <div class="panel-body">
         <form action="{{ route('repairs.post') }}">
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="alert-info">
-                    <strong>NOTE:</strong> all screen replacements include both the LCD and digitizer (except iPads).
-                    This is the best and most efficient way to perform a screen replacement. Smaller independent
-                    retailers may offer screen repairs at a lower price, but many are not replacing the full assembly -
-                    only the front glass.
-                </p>
-            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="alert-info">
+                        <strong>NOTE:</strong> all screen replacements include both the LCD and digitizer (except
+                        iPads).
+                        This is the best and most efficient way to perform a screen replacement. Smaller independent
+                        retailers may offer screen repairs at a lower price, but many are not replacing the full
+                        assembly -
+                        only the front glass.
+                    </p>
+                </div>
 
                 <div class="col-md-6">
                     <h4>Customer Information</h4>
@@ -186,12 +188,37 @@
                         <input type="text" class="form-control" name="store_number">
                     </div>
                 </div>
-        </div>
-        <div class="row">
-            <div class="panel-body">
-                <h4>Choose Your Repair Services (all applicable)</h4>
             </div>
-        </div>
+            <div class="row">
+                <div class="panel-body">
+                    <h4>Choose Your Repair Services (all applicable)</h4>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>UPC</th>
+                                <th>Select</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($services as $service)
+                                <tr>
+                                    <td>{{ $service->name }}</td>
+                                    <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
+                                    <td>{{ $service->pivot->upc }}</td>
+                                    <td><input type="checkbox" name="service"></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <input type="submit" value="Submit Pricing Form" class="btn btn-block btn-primary">
+                </div>
+            </div>
         </form>
     </div>
 @endsection

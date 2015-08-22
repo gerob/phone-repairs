@@ -45,6 +45,8 @@ class PhoneRepairController extends Controller
     {
         $device = \App\Device::find($device);
 
-        return view('pricing')->with('device', $device);
+        $services = $device->services()->get();
+
+        return view('pricing')->with(['device' => $device, 'services' => $services]);
     }
 }
