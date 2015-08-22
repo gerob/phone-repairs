@@ -52,7 +52,9 @@
                             @foreach($invoice->services as $index => $service)
                                 <tr>
                                     <td>{{ $index + 1 }} {{ $service['name'] }} - {{ $service['price'] }}</td>
-                                    <td>{{ $service['upc'] }}</td>
+                                    <td>
+                                        <img src="{{ \DNS2D::getBarcodePNGPath($service['upc'], "PDF417") }}" alt="barcode"   />
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
