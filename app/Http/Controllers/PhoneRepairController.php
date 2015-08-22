@@ -68,7 +68,7 @@ class PhoneRepairController extends Controller
             'claim_number' => 'required_with:claim',
             'description' => 'required',
             'store_number' => 'required',
-            'service' => 'required'
+            'services' => 'required'
         ]);
 
         dd($request->all());

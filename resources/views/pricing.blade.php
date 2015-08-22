@@ -5,6 +5,15 @@
         <h4 class="panel-title">Mobile Device Repair Pricing Portal</h4>
     </div>
     <div class="panel-body">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('repairs.pricing.post') }}" method="post">
             {!! csrf_field() !!}
             <div class="row">
@@ -24,117 +33,117 @@
 
                     <div class="form-group">
                         <label for="first_name"> First Name </label>
-                        <input type="text" class="form-control" name="first_name">
+                        <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="last_name"> Last Name </label>
-                        <input type="text" class="form-control" name="last_name">
+                        <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="email"> Email </label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" value="{{ old('email') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="phone"> Telephone Number</label>
-                        <input type="text" class="form-control" name="phone" placeholder="123-456-7890">
+                        <input type="text" class="form-control" name="phone" placeholder="123-456-7890" value="{{ old('phone') }}">
 
                         <div class="help-block">List phone other than one being repaired.</div>
                     </div>
                     <div class="form-group">
                         <label for="address"> Address </label>
-                        <input type="text" class="form-control" name="address">
+                        <input type="text" class="form-control" name="address" value="{{ old('address') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="address2"> Address 2 </label>
-                        <input type="text" class="form-control" name="address2">
+                        <input type="text" class="form-control" name="address2" value="{{ old('address2') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="city"> City </label>
-                        <input type="text" class="form-control" name="city">
+                        <input type="text" class="form-control" name="city" value="{{ old('city') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="state"> State </label>
                         <select class="form-control" name="state">
                             <option value="">Choose a State:</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="DC">District Of Columbia</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
+                            <option value="AL" {{ (old('state') == 'AL' ? "selected":"") }}>Alabama</option>
+                            <option value="AK" {{ (old('state') == 'AK' ? "selected":"") }}>Alaska</option>
+                            <option value="AZ" {{ (old('state') == 'AZ' ? "selected":"") }}>Arizona</option>
+                            <option value="AR" {{ (old('state') == 'AR' ? "selected":"") }}>Arkansas</option>
+                            <option value="CA" {{ (old('state') == 'CA' ? "selected":"") }}>California</option>
+                            <option value="CO" {{ (old('state') == 'CO' ? "selected":"") }}>Colorado</option>
+                            <option value="CT" {{ (old('state') == 'CT' ? "selected":"") }}>Connecticut</option>
+                            <option value="DE" {{ (old('state') == 'DE' ? "selected":"") }}>Delaware</option>
+                            <option value="DC" {{ (old('state') == 'DC' ? "selected":"") }}>District Of Columbia</option>
+                            <option value="FL" {{ (old('state') == 'FL' ? "selected":"") }}>Florida</option>
+                            <option value="GA" {{ (old('state') == 'GA' ? "selected":"") }}>Georgia</option>
+                            <option value="HI" {{ (old('state') == 'HI' ? "selected":"") }}>Hawaii</option>
+                            <option value="ID" {{ (old('state') == 'ID' ? "selected":"") }}>Idaho</option>
+                            <option value="IL" {{ (old('state') == 'IL' ? "selected":"") }}>Illinois</option>
+                            <option value="IN" {{ (old('state') == 'IN' ? "selected":"") }}>Indiana</option>
+                            <option value="IA" {{ (old('state') == 'IA' ? "selected":"") }}>Iowa</option>
+                            <option value="KS" {{ (old('state') == 'KS' ? "selected":"") }}>Kansas</option>
+                            <option value="KY" {{ (old('state') == 'KY' ? "selected":"") }}>Kentucky</option>
+                            <option value="LA" {{ (old('state') == 'LA' ? "selected":"") }}>Louisiana</option>
+                            <option value="ME" {{ (old('state') == 'ME' ? "selected":"") }}>Maine</option>
+                            <option value="MD" {{ (old('state') == 'MD' ? "selected":"") }}>Maryland</option>
+                            <option value="MA" {{ (old('state') == 'MA' ? "selected":"") }}>Massachusetts</option>
+                            <option value="MI" {{ (old('state') == 'MI' ? "selected":"") }}>Michigan</option>
+                            <option value="MN" {{ (old('state') == 'MN' ? "selected":"") }}>Minnesota</option>
+                            <option value="MS" {{ (old('state') == 'MS' ? "selected":"") }}>Mississippi</option>
+                            <option value="MO" {{ (old('state') == 'MO' ? "selected":"") }}>Missouri</option>
+                            <option value="MT" {{ (old('state') == 'MT' ? "selected":"") }}>Montana</option>
+                            <option value="NE" {{ (old('state') == 'NE' ? "selected":"") }}>Nebraska</option>
+                            <option value="NV" {{ (old('state') == 'NV' ? "selected":"") }}>Nevada</option>
+                            <option value="NH" {{ (old('state') == 'NH' ? "selected":"") }}>New Hampshire</option>
+                            <option value="NJ" {{ (old('state') == 'NJ' ? "selected":"") }}>New Jersey</option>
+                            <option value="NM" {{ (old('state') == 'NM' ? "selected":"") }}>New Mexico</option>
+                            <option value="NY" {{ (old('state') == 'NY' ? "selected":"") }}>New York</option>
+                            <option value="NC" {{ (old('state') == 'NC' ? "selected":"") }}>North Carolina</option>
+                            <option value="ND" {{ (old('state') == 'ND' ? "selected":"") }}>North Dakota</option>
+                            <option value="OH" {{ (old('state') == 'OH' ? "selected":"") }}>Ohio</option>
+                            <option value="OK" {{ (old('state') == 'OK' ? "selected":"") }}>Oklahoma</option>
+                            <option value="OR" {{ (old('state') == 'OR' ? "selected":"") }}>Oregon</option>
+                            <option value="PA" {{ (old('state') == 'PA' ? "selected":"") }}>Pennsylvania</option>
+                            <option value="RI" {{ (old('state') == 'RI' ? "selected":"") }}>Rhode Island</option>
+                            <option value="SC" {{ (old('state') == 'SC' ? "selected":"") }}>South Carolina</option>
+                            <option value="SD" {{ (old('state') == 'SD' ? "selected":"") }}>South Dakota</option>
+                            <option value="TN" {{ (old('state') == 'TN' ? "selected":"") }}>Tennessee</option>
+                            <option value="TX" {{ (old('state') == 'TX' ? "selected":"") }}>Texas</option>
+                            <option value="UT" {{ (old('state') == 'UT' ? "selected":"") }}>Utah</option>
+                            <option value="VT" {{ (old('state') == 'VT' ? "selected":"") }}>Vermont</option>
+                            <option value="VA" {{ (old('state') == 'VA' ? "selected":"") }}>Virginia</option>
+                            <option value="WA" {{ (old('state') == 'WA' ? "selected":"") }}>Washington</option>
+                            <option value="WV" {{ (old('state') == 'WV' ? "selected":"") }}>West Virginia</option>
+                            <option value="WI" {{ (old('state') == 'WI' ? "selected":"") }}>Wisconsin</option>
+                            <option value="WY" {{ (old('state') == 'WY' ? "selected":"") }}>Wyoming</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="zip"> Zip Code </label>
-                        <input type="text" class="form-control" name="zip">
+                        <input type="text" class="form-control" name="zip" value="{{ old('zip') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="membership_type"> Membership Type</label>
                         <select class="form-control" name="membership_type">
                             <option value="">Choose a Membership:</option>
-                            <option value="plus">Plus</option>
-                            <option value="business">Business</option>
-                            <option value="savings">Savings</option>
-                            <option value="trial">Trial Pass</option>
+                            <option value="plus" {{ (old('membership_type') == 'plus' ? "selected":"") }}>Plus</option>
+                            <option value="business" {{ (old('membership_type') == 'business' ? "selected":"") }}>Business</option>
+                            <option value="savings" {{ (old('membership_type') == 'savings' ? "selected":"") }}>Savings</option>
+                            <option value="trial" {{ (old('membership_type') == 'trial' ? "selected":"") }}>Trial Pass</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="membership_number"> Membership Number</label>
-                        <input type="text" class="form-control" name="membership_number">
+                        <input type="text" class="form-control" name="membership_number" value="{{ old('membership_number') }}">
                     </div>
 
                 </div>
@@ -148,45 +157,45 @@
 
                     <div class="form-group">
                         <label for="color"> Color</label>
-                        <input type="text" class="form-control" name="color">
+                        <input type="text" class="form-control" name="color" value="{{ old('color') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="serial_number"> Serial Number</label>
-                        <input type="text" class="form-control" name="serial_number">
+                        <input type="text" class="form-control" name="serial_number" value="{{ old('serial_number') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="carrier"> Carrier</label>
                         <select class="form-control" name="carrier">
                             <option value="">Choose a Carrier:</option>
-                            <option value="at&t">AT&T</option>
-                            <option value="sprint">Sprint</option>
-                            <option value="t-mobile">T-Mobile</option>
-                            <option value="verizon">Verizon</option>
-                            <option value="other">Other</option>
+                            <option value="at&t" {{ (old('carrier') == 'at&t' ? "selected":"") }}>AT&T</option>
+                            <option value="sprint" {{ (old('carrier') == 'sprint' ? "selected":"") }}>Sprint</option>
+                            <option value="t-mobile" {{ (old('carrier') == 't-mobile' ? "selected":"") }}>T-Mobile</option>
+                            <option value="verizon" {{ (old('carrier') == 'verizon' ? "selected":"") }}>Verizon</option>
+                            <option value="other" {{ (old('carrier') == 'other' ? "selected":"") }}>Other</option>
                         </select>
                     </div>
 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="claim"> Square Trade Claim?
+                            <input type="checkbox" name="claim" {{ (old('claim') == 'on' ? "checked":"") }}> Square Trade Claim?
                         </label>
                     </div>
 
                     <div class="form-group">
                         <label for="claim_number"> Claim Number</label>
-                        <input type="text" class="form-control" name="claim_number" placeholder="If checked yes">
+                        <input type="text" class="form-control" name="claim_number" placeholder="If checked yes" value="{{ old('claim_number') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="description"> Description</label>
-                        <textarea class="form-control" rows="5" name="description"></textarea>
+                        <textarea class="form-control" rows="5" name="description">{{ old('description') }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="store_number"> Store Number</label>
-                        <input type="text" class="form-control" name="store_number">
+                        <input type="text" class="form-control" name="store_number" value="{{ old('store_number') }}">
                     </div>
                 </div>
             </div>
@@ -210,7 +219,7 @@
                                     <td>{{ $service->name }}</td>
                                     <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
                                     <td>{{ $service->pivot->upc }}</td>
-                                    <td><input type="checkbox" name="service" value="{{ $service->name }}"></td>
+                                    <td><input type="checkbox" name="services[]" value="{{ $service->name }}"></td>
                                 </tr>
                             @endforeach
                             </tbody>
