@@ -8,6 +8,10 @@
 
     <div class="panel-body">
         <form action="{{ route('repairs.confirmed') }}" method="post">
+            <div class="center-all">
+                <button type="button" class="btn btn-default" onclick="window.print()">Print</button>
+                <button type="submit" class="btn btn-success">Finish</button>
+            </div>
             {!! csrf_field() !!}
 
             <div class="row">
@@ -53,7 +57,10 @@
                                 <tr>
                                     <td>{{ $index + 1 }} {{ $service['name'] }} - {{ $service['price'] }}</td>
                                     <td>
-                                        <img src="{{ \DNS1D::getBarcodePNGPath($service['upc'], "EAN13", 3, 30) }}" alt="barcode"   />
+                                        <img src="{{ \DNS1D::getBarcodePNGPath($service['upc'], "UPCA") }}"
+                                             alt="{{ $service['upc'] }}"/>
+
+                                        <p>{{ $service['upc'] }}</p>
                                     </td>
                                 </tr>
                             @endforeach

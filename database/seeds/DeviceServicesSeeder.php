@@ -18,7 +18,7 @@ class DeviceServicesSeeder extends Seeder
             foreach ($services as $service) {
                 $device->services()->save($service, [
                     'price' => rand(7500, 20000),
-                    'upc' => rand(111111, 222222)
+                    'upc' => rand(11111111111, 22222222222)
                 ]);
             }
         }
