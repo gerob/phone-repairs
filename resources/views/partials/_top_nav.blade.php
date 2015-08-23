@@ -1,4 +1,4 @@
-<nav class="pull-right" role="navigation">
+<nav class="primary-nav pull-right" role="navigation">
     <ul class="nav nav-pills">
       <li role="presentation" class=""><a href="/">Home</a></li>
       <li role="presentation"><a href="/repairs/manufacturer">New Work Order</a></li>
