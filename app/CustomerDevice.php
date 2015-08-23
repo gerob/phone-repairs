@@ -13,6 +13,7 @@ class CustomerDevice extends Model
         'device_name',
         'color',
         'serial_number',
+        'passcode',
         'carrier',
         'description',
         'claim',

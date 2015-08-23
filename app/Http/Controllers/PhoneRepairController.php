@@ -74,7 +74,7 @@ class PhoneRepairController extends Controller
         // Remove the service if it does not have a name
         $check_services = $request->get('services');
         $services = [];
-        foreach($check_services as $index => $service) {
+        foreach ($check_services as $index => $service) {
             if (array_has($service, 'name')) {
                 $services[$index] = $service;
             }
@@ -98,8 +98,9 @@ class PhoneRepairController extends Controller
             'device_name'   => $request->get('device'),
             'color'         => $request->get('color'),
             'serial_number' => $request->get('serial_number'),
+            'passcode'      => $request->get('passcode', null),
             'carrier'       => $request->get('carrier'),
-            'claim_number'  => $request->get('claim_number', NULL),
+            'claim_number'  => $request->get('claim_number', null),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
             'services'      => serialize($services)
@@ -120,12 +121,30 @@ class PhoneRepairController extends Controller
             'device_name'   => $request->get('device'),
             'color'         => $request->get('color'),
             'serial_number' => $request->get('serial_number'),
+            'passcode'      => $request->get('passcode', null),
             'carrier'       => $request->get('carrier'),
             'claim_number'  => $request->get('claim_number', null),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
-            'services'      => serialize($services)
+            'services'      => serialize($services),
+            'confirmed'     => false
         ]);
+
+        return redirect()->route('repairs.review', $invoice->id);
+    }
+
+    public function getReviewOrder($invoice_id)
+    {
+        $invoice = \App\CustomerInvoice::find($invoice_id);
+
+        return view('review')->with(['invoice' => $invoice]);
+    }
+
+    public function postReviewOrder(Request $request)
+    {
+        $invoice = \App\CustomerInvoice::find($request->get('invoice_id'));
+        $invoice->confirmed = true;
+        $invoice->save();
 
         return redirect()->route('repairs.confirmation', $invoice->id);
     }

@@ -16,11 +16,12 @@ class CreateCustomerDevicesTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
 
-            $table->string('device_name');
-            $table->string('store_number');
-            $table->string('color');
-            $table->string('serial_number');
-            $table->string('carrier');
+            $table->string('device_name', 50);
+            $table->string('store_number', 50);
+            $table->string('color', 20);
+            $table->string('serial_number', 50);
+            $table->string('passcode', 20)->nullable();
+            $table->string('carrier', 50);
             $table->text('description');
             $table->boolean('claim')->default(false);
             $table->string('claim_number')->nullable();

@@ -22,6 +22,7 @@ class CustomerInvoice extends Model
         'store_number',
         'color',
         'serial_number',
+        'passcode',
         'carrier',
         'description',
         'member_type',
@@ -30,6 +31,7 @@ class CustomerInvoice extends Model
         'claim_number',
         'warranty_years',
         'services',
+        'confirmed'
     ];
 
     public function customer()

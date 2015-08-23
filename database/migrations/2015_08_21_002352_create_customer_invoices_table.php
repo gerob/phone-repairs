@@ -32,12 +32,14 @@ class CreateCustomerInvoicesTable extends Migration
             $table->string('store_number');
             $table->string('color');
             $table->string('serial_number');
+            $table->string('passcode', 20)->nullable();
             $table->string('carrier');
             $table->text('description');
             $table->boolean('claim')->default(false);
             $table->string('claim_number')->nullable();
             $table->string('warranty_years');
             $table->text('services');
+            $table->boolean('confirmed')->default(false);
 
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
