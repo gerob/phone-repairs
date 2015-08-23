@@ -24,11 +24,11 @@ Route::group(['middleware' => 'auth'], function () {
     get('repairs/manufacturer', 'PhoneRepairController@getManufacturerSelection');
     post('repairs/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'PhoneRepairController@postManufacturerForm']);
 
-    get('repairs/review/{invoice_id}', ['as' => 'repairs.review', 'uses' => 'PhoneRepairController@getReviewOrder']);
+    get('repairs/review/{order_id}', ['as' => 'repairs.review', 'uses' => 'PhoneRepairController@getReviewOrder']);
     post('repairs/review', ['as' => 'repairs.review.post', 'uses' => 'PhoneRepairController@postReviewOrder']);
 
-    get('repairs/confirmation/{invoice_id}', ['as' => 'repairs.confirmation', 'uses' => 'PhoneRepairController@getConfirmRepairs']);
-    post('repairs/confirmed', ['as' => 'repairs.confirmed', 'uses' => 'PhoneRepairController@postConfirmedRepairs']);
+    get('repairs/confirmation/{order_id}', ['as' => 'repairs.confirmation', 'uses' => 'PhoneRepairController@getConfirmRepairs']);
+    get('repairs/finish', ['as' => 'repairs.finish', 'uses' => 'PhoneRepairController@postFinishOrder']);
 
     get('repairs/{manufacturer}', ['as' => 'repairs.device', 'uses' => 'PhoneRepairController@getDeviceSelection']);
     post('repairs/device', ['as' => 'repairs.device.post', 'uses' => 'PhoneRepairController@postDeviceSelection']);
@@ -38,6 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
     post('repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
 
     get('orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
-    get('orders/store/{store_id}', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
+    get('orders/store/{store_id}', ['as' => 'orders.list.store', 'uses' => 'OrdersController@getStoreList']);
 
 });

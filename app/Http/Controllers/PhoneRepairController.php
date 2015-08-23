@@ -71,15 +71,6 @@ class PhoneRepairController extends Controller
             'services'      => 'required'
         ]);
 
-        // Remove the service if it does not have a name
-        $check_services = $request->get('services');
-        $services = [];
-        foreach ($check_services as $index => $service) {
-            if (array_has($service, 'name')) {
-                $services[$index] = $service;
-            }
-        }
-
         // Find and update or create our customer
         $customer = \App\Customer::firstOrNew(['email' => $request->get('email')]);
         $customer->first_name = $request->get('first_name');
@@ -94,19 +85,17 @@ class PhoneRepairController extends Controller
         $customer->member_number = $request->get('member_number', null);
         $customer->save();
 
-        $customer->devices()->create([
-            'device_name'   => $request->get('device'),
-            'color'         => $request->get('color'),
-            'serial_number' => $request->get('serial_number'),
-            'passcode'      => $request->get('passcode', null),
-            'carrier'       => $request->get('carrier'),
-            'claim_number'  => $request->get('claim_number', null),
-            'description'   => $request->get('description'),
-            'store_number'  => $request->get('store_number'),
-            'services'      => serialize($services)
-        ]);
+        $device = $customer->devices()->firstOrNew(['serial_number' => $request->get('serial_number')]);
+        $device->device_name = $request->get('device');
+        $device->color = $request->get('color');
+        $device->passcode = $request->get('passcode', null);
+        $device->carrier = $request->get('carrier');
+        $device->claim_number = $request->get('claim_number', null);
+        $device->description = $request->get('description');
+        $device->store_number = $request->get('store_number');
+        $device->save();
 
-        $invoice = $customer->invoices()->create([
+        $order = $customer->orders()->create([
             'first_name'    => $request->get('first_name'),
             'last_name'     => $request->get('last_name'),
             'email'         => $request->get('email'),
@@ -126,33 +115,45 @@ class PhoneRepairController extends Controller
             'claim_number'  => $request->get('claim_number', null),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
-            'services'      => serialize($services),
             'confirmed'     => false
         ]);
 
-        return redirect()->route('repairs.review', $invoice->id);
+        // Only add the service if it has a name
+        foreach ($request->get('services') as $service) {
+            if (array_has($service, 'name')) {
+                $order->services()->create([
+                    'name'  => $service['name'],
+                    'price' => $service['price'],
+                    'upc'   => $service['upc']
+                ]);
+            }
+        }
+
+        return redirect()->route('repairs.review', $order->id);
     }
 
-    public function getReviewOrder($invoice_id)
+    public function getReviewOrder($order_id)
     {
-        $invoice = \App\CustomerInvoice::find($invoice_id);
+        $order = \App\CustomerOrder::find($order_id);
+        $services = $order->services()->get();
 
-        return view('review')->with(['invoice' => $invoice]);
+        return view('review')->with(['order' => $order, 'services' => $services]);
     }
 
     public function postReviewOrder(Request $request)
     {
-        $invoice = \App\CustomerInvoice::find($request->get('invoice_id'));
-        $invoice->confirmed = true;
-        $invoice->save();
+        $order = \App\CustomerOrder::find($request->get('order_id'));
+        $order->confirmed = true;
+        $order->save();
 
-        return redirect()->route('repairs.confirmation', $invoice->id);
+        return redirect()->route('repairs.confirmation', $order->id);
     }
 
-    public function getConfirmRepairs($invoice_id)
+    public function getConfirmRepairs($order_id)
     {
-        $invoice = \App\CustomerInvoice::find($invoice_id);
+        $order = \App\CustomerOrder::find($order_id);
+        $services = $order->services()->get();
 
-        return view('confirmation')->with(['invoice' => $invoice]);
+        return view('confirmation')->with(['order' => $order, 'services' => $services]);
     }
 }

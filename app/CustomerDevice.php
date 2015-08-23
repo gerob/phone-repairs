@@ -18,8 +18,7 @@ class CustomerDevice extends Model
         'description',
         'claim',
         'claim_number',
-        'warranty_years',
-        'services'
+        'warranty_years'
     ];
 
     public function customer()

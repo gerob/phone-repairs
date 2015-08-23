@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerInvoice extends Model
+class CustomerOrder extends Model
 {
-    protected $table = 'customer_invoices';
+    protected $table = 'customer_orders';
 
     protected $fillable = [
         'first_name',
@@ -37,6 +37,11 @@ class CustomerInvoice extends Model
     public function customer()
     {
         return $this->hasOne(Customer::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(OrderService::class);
     }
 
     /**

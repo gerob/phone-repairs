@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomerInvoicesTable extends Migration
+class CreateCustomerOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCustomerInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_invoices', function (Blueprint $table) {
+        Schema::create('customer_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
 
@@ -38,7 +38,6 @@ class CreateCustomerInvoicesTable extends Migration
             $table->boolean('claim')->default(false);
             $table->string('claim_number')->nullable();
             $table->string('warranty_years');
-            $table->text('services');
             $table->boolean('confirmed')->default(false);
 
             $table->timestamps();
@@ -53,6 +52,6 @@ class CreateCustomerInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('customer_invoices');
+        Schema::drop('customer_orders');
     }
 }

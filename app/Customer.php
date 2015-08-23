@@ -15,8 +15,8 @@ class Customer extends Model
         return $this->hasMany(CustomerDevice::class);
     }
 
-    public function invoices()
+    public function orders()
     {
-        return $this->hasMany(CustomerInvoice::class);
+        return $this->hasMany(CustomerOrder::class);
     }
 }

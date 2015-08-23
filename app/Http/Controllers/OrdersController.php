@@ -11,8 +11,15 @@ class OrdersController extends Controller
 {
     public function getList()
     {
-        $orders = \App\CustomerInvoice::all();
+        $orders = \App\CustomerOrder::all();
 
         return view('orders')->with(['orders' => $orders]);
+    }
+
+    public function getStoreList($store_id)
+    {
+        $orders = \App\CustomerOrder::where('store', $store_id);
+
+        return view('store-orders')->with(['orders' => $orders]);
     }
 }

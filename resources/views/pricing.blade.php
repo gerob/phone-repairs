@@ -227,7 +227,7 @@
                                     <td>{{ $service->pivot->upc }}</td>
                                     <td>
                                         <input type="checkbox" name="services[{{ $index }}][name]" value="{{ $service->name }}">
-                                        <input type="hidden" name="services[{{ $index }}][price]" value="${{ number_format(($service->pivot->price/100), 2) }}">
+                                        <input type="hidden" name="services[{{ $index }}][price]" value="{{ $service->pivot->price }}">
                                         <input type="hidden" name="services[{{ $index }}][upc]" value="{{ $service->pivot->upc }}">
                                     </td>
                                 </tr>

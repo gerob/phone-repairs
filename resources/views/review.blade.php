@@ -14,28 +14,28 @@
                 <div class="col-md-6">
                     <h4>Customer Information</h4>
 
-                    <strong>First Name: </strong> {{ $invoice->first_name }} <br>
-                    <strong>Last Name: </strong> {{ $invoice->last_name }} <br>
-                    <strong>Email: </strong> {{ $invoice->email }} <br>
-                    <strong>Address: </strong> {{ $invoice->address }} <br>
-                    <strong>Address2: </strong> {{ $invoice->address2 }} <br>
-                    <strong>Address: </strong> {{ $invoice->address }} <br>
-                    <strong>City: </strong> {{ $invoice->city }} <br>
-                    <strong>State: </strong> {{ $invoice->state }} <br>
-                    <strong>Zip Code: </strong> {{ $invoice->zip }} <br>
-                    <strong>Phone Number: </strong> {{ $invoice->phone }} <br>
-                    <strong>Member Type: </strong> {{ $invoice->member_type }} <br>
-                    <strong>Member Number: </strong> {{ $invoice->member_number }} <br>
+                    <strong>First Name: </strong> {{ $order->first_name }} <br>
+                    <strong>Last Name: </strong> {{ $order->last_name }} <br>
+                    <strong>Email: </strong> {{ $order->email }} <br>
+                    <strong>Address: </strong> {{ $order->address }} <br>
+                    <strong>Address2: </strong> {{ $order->address2 }} <br>
+                    <strong>Address: </strong> {{ $order->address }} <br>
+                    <strong>City: </strong> {{ $order->city }} <br>
+                    <strong>State: </strong> {{ $order->state }} <br>
+                    <strong>Zip Code: </strong> {{ $order->zip }} <br>
+                    <strong>Phone Number: </strong> {{ $order->phone }} <br>
+                    <strong>Member Type: </strong> {{ $order->member_type }} <br>
+                    <strong>Member Number: </strong> {{ $order->member_number }} <br>
                 </div>
                 <div class="col-md-6">
                     <h4>Device Information</h4>
 
-                    <strong>Device: </strong> {{ $invoice->device_name }} <br>
-                    <strong>Color: </strong> {{ $invoice->color }} <br>
-                    <strong>Carrier: </strong> {{ $invoice->carrier }} <br>
-                    <strong>Claim: </strong> {{ $invoice->claim == 'on' ? 'Square Trade Claim' : '' }} <br>
-                    <strong>Claim Number: </strong> {{ $invoice->claim_number }} <br>
-                    <strong>Description: </strong> {{ $invoice->description }} <br>
+                    <strong>Device: </strong> {{ $order->device_name }} <br>
+                    <strong>Color: </strong> {{ $order->color }} <br>
+                    <strong>Carrier: </strong> {{ $order->carrier }} <br>
+                    <strong>Claim: </strong> {{ $order->claim == 'on' ? 'Square Trade Claim' : '' }} <br>
+                    <strong>Claim Number: </strong> {{ $order->claim_number }} <br>
+                    <strong>Description: </strong> {{ $order->description }} <br>
                 </div>
             </div>
             <div class="row">
@@ -49,9 +49,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($invoice->services as $index => $service)
+                            @foreach($services as $index => $service)
                                 <tr>
-                                    <td>{{ $index + 1 }} {{ $service['name'] }} - {{ $service['price'] }}</td>
+                                    <td>{{ $index + 1 }} {{ $service['name'] }} - ${{ number_format(($service['price']/100), 2) }}</td>
                                     <td>
                                         <img src="{{ \DNS1D::getBarcodePNGPath($service['upc'], "UPCA") }}"
                                              alt="{{ $service['upc'] }}"/>
@@ -64,7 +64,7 @@
                         </table>
                     </div>
                     <div class="center-all">
-                        <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
+                        <input type="hidden" name="order_id" value="{{ $order->id }}">
                         <button type="button" class="btn btn-default back">Back</button>
                         <button type="submit" class="btn btn-success">Submit Work Order</button>
                     </div>
