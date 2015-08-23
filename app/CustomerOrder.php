@@ -30,7 +30,6 @@ class CustomerOrder extends Model
         'claim',
         'claim_number',
         'warranty_years',
-        'services',
         'confirmed'
     ];
 
@@ -39,7 +38,7 @@ class CustomerOrder extends Model
         return $this->hasOne(Customer::class);
     }
 
-    public function services()
+    public function coServices()
     {
         return $this->hasMany(OrderService::class);
     }

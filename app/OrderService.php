@@ -18,6 +18,6 @@ class OrderService extends Model
 
     public function order()
     {
-        return $this->hasOne(CustomerOrder::class);
+        return $this->belongsTo(CustomerOrder::class);
     }
 }

@@ -11,14 +11,8 @@ class OrdersController extends Controller
 {
     public function getList()
     {
-        $orders = \App\CustomerOrder::where('confirmed', true)->with('services')->get();
+        $orders = \App\CustomerOrder::where('confirmed', true)->with('coServices')->get();
 
-        foreach ($orders as $order) {
-            dd($order->services->get());
-            foreach ($order->services as $service) {
-                dd($service);
-            }
-        }
         return view('orders')->with(['orders' => $orders]);
     }
 
@@ -46,7 +40,7 @@ class OrdersController extends Controller
             $service->claim_completed = true;
             $service->save();
 		}
-        
+
 		return redirect()->route('orders.detail', $order->id);
 	}
 }
