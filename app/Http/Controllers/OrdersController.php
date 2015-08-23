@@ -37,22 +37,16 @@ class OrdersController extends Controller
 		return view('order-detail')->with(['order' => $order, 'services' => $services]);
 	}
 
-
-
 	public function postClaim(Request $request, $order_id)
 	{
 		$order = \App\CustomerOrder::find($order_id);
-		$services = $order->services()->get();
 
-		foreach ($services as $service) {
-			if (array_key_exists($service->id, $request->get('services'))) {
-				$newValue = $request->get('services')[$service->id];
-				$service->claim_completed = $newValue == 'On' ? true : false;
-			}
+		foreach ($request->get('services') as $service_id => $value) {
+            $service = \App\OrderService::find($service_id);
+            $service->claim_completed = true;
+            $service->save();
 		}
-
-		$order->save();
-
+        
 		return redirect()->route('orders.detail', $order->id);
 	}
 }

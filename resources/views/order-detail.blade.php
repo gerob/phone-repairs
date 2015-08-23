@@ -51,14 +51,14 @@
                             <tbody>
                             @foreach($services as $index => $service)
                                 <tr>
-                                    <td>{{ $index + 1 }} {{ $service['name'] }} - ${{ number_format(($service['price']/100), 2) }}</td>
+                                    <td>{{ $index + 1 }} {{ $service->name }} - ${{ number_format(($service->price/100), 2) }}</td>
                                     <td>
-                                        <img src="{{ \DNS1D::getBarcodePNGPath($service['upc'], "UPCA") }}"
-                                             alt="{{ $service['upc'] }}"/>
+                                        <img src="{{ \DNS1D::getBarcodePNGPath($service->upc, "UPCA") }}"
+                                             alt="{{ $service->upc }}"/>
 
                                         <p>{{ $service['upc'] }}</p>
                                     </td>
-                                        <td><input type="checkbox" name="services[{{ $service['id'] }}]" {{ $service['claim_completed'] ? "checked":""}} /></td>
+                                        <td><input type="checkbox" name="services[{{ $service->id }}]" {{ $service->claim_completed ? "checked":""}} /></td>
                                 </tr>
                             @endforeach
                             </tbody>
