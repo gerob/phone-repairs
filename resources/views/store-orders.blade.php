@@ -32,6 +32,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {{ dd($orders) }}
                         @foreach($orders as $order)
                             <tr>
                                 <td class="col-md-1">{{ $order->id }}</td>

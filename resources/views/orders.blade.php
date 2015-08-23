@@ -41,7 +41,7 @@
                                 <td class="col-md-2">{{ $order->color }}</td>
                                 <td class="col-md-4">
                                     @foreach($order->services as $service)
-                                        <span>{{ $service['name'] }} - {{ $service['price'] }}</span> <br>
+                                        <span>{{ $service->name }} - {{ $service->price }}</span> <br>
                                     @endforeach
                                 </td>
                             </tr>

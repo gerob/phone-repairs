@@ -19,7 +19,6 @@
                     <strong>Email: </strong> {{ $order->email }} <br>
                     <strong>Address: </strong> {{ $order->address }} <br>
                     <strong>Address2: </strong> {{ $order->address2 }} <br>
-                    <strong>Address: </strong> {{ $order->address }} <br>
                     <strong>City: </strong> {{ $order->city }} <br>
                     <strong>State: </strong> {{ $order->state }} <br>
                     <strong>Zip Code: </strong> {{ $order->zip }} <br>
