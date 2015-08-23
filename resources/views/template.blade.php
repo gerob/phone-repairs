@@ -12,6 +12,8 @@
             <div class="panel panel-default">
                 <img src="/img/stLogo1.png" alt="Square Trade" class="panel-logo">
 
+                @include ('partials/_top_nav')
+
                 @yield('content')
             </div>
         </div>
