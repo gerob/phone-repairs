@@ -152,7 +152,13 @@
 
                     <div class="form-group">
                         <label for="device"> Device Name</label>
-                        <input type="text" class="form-control" name="device" value="{{ $device->model }}" readonly>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="device" value="{{ $device->model }}" readonly>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Change Device</button>
+                              </span>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
