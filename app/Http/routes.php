@@ -38,4 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
     post('repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
 
     get('orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
+    get('orders/store/{store_id}', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
+
 });
