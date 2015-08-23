@@ -24,3 +24,7 @@
 .signature-line {
     border-bottom: 2px solid #000000;
 }
+
+.primary-nav {
+    margin: 20px;
+}
