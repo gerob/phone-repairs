@@ -25,7 +25,7 @@
                         <tr>
                             <th class="col-md-6">Device - Service</th>
                             <th class="col-md-5">UPC</th>
-                            <th class="col-md-3">Store</th>
+                            <th class="col-md-3">Store Number</th>
                             <th class="col-md-2">Count</th>
                         </tr>
                         </thead>
