@@ -37,11 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     post('repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
 
+	// ORDER LISTS
     get('orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
     get('orders/store/{store_id}', ['as' => 'orders.list.store', 'uses' => 'OrdersController@getStoreList']);
 
+	// CLAIMS
 	post('orders/{order_id}/claim', ['as' => 'orders.claim.post', 'uses' => 'OrdersController@postClaim']);
-	get('orders/{order_id}', ['as' => 'orders.detail', 'uses' => 'OrdersController@getDetail']);
+	get('orders/{order_id}/claim', ['as' => 'orders.claim', 'uses' => 'OrdersController@getDetail']);
 
     get('inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
 

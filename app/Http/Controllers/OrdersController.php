@@ -34,13 +34,16 @@ class OrdersController extends Controller
 	public function postClaim(Request $request, $order_id)
 	{
 		$order = \App\CustomerOrder::find($order_id);
+		$order->description = $request->get('description');
+		$order->save();
 
-		foreach ($request->get('services') as $service_id => $value) {
-            $service = \App\OrderService::find($service_id);
-            $service->claim_completed = true;
-            $service->save();
+		$services = \App\OrderService::where('order_id', $order_id);
+
+		foreach ($services as $service) {
+			$service->claim_completed = array_key_exists($service->id, $request->get('services')) ? true : false;
+			$service->save();
 		}
 
-		return redirect()->route('orders.detail', $order->id);
+		return redirect()->route('orders.claim', $order->id);
 	}
 }
