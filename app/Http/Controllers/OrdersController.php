@@ -9,8 +9,15 @@ use App\Http\Controllers\Controller;
 
 class OrdersController extends Controller
 {
-    public function getList()
+    public function getList(Request $request)
     {
+
+	    if ($request->has('q')) {
+			$q = $request->get('q');
+	    }
+
+	    // todo handle the search query.
+
         $orders = \App\CustomerOrder::where('confirmed', true)->with('coServices')->get();
 
         return view('orders')->with(['orders' => $orders]);
