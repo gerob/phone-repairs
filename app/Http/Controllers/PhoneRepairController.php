@@ -121,7 +121,7 @@ class PhoneRepairController extends Controller
         // Only add the service if it has a name
         foreach ($request->get('services') as $service) {
             if (array_has($service, 'name')) {
-                $order->services()->create([
+                $order->coServices()->create([
                     'name'  => $service['name'],
                     'price' => $service['price'],
                     'upc'   => $service['upc']
@@ -135,7 +135,7 @@ class PhoneRepairController extends Controller
     public function getReviewOrder($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
-        $services = $order->services()->get();
+        $services = $order->coServices()->get();
 
         return view('review')->with(['order' => $order, 'services' => $services]);
     }
@@ -152,7 +152,7 @@ class PhoneRepairController extends Controller
     public function getConfirmRepairs($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
-        $services = $order->services()->get();
+        $services = $order->coServices()->get();
 
         return view('confirmation')->with(['order' => $order, 'services' => $services]);
     }
