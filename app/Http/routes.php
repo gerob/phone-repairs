@@ -21,7 +21,7 @@ get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
 Route::group(['middleware' => 'auth'], function () {
 
-    get('repairs/manufacturer', 'PhoneRepairController@getManufacturerSelection');
+    get('repairs/manufacturer', ['as' => 'start.order', 'uses' => 'PhoneRepairController@getManufacturerSelection']);
     post('repairs/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'PhoneRepairController@postManufacturerForm']);
 
     get('repairs/review/{order_id}', ['as' => 'repairs.review', 'uses' => 'PhoneRepairController@getReviewOrder']);
