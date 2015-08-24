@@ -27,6 +27,7 @@
                             <th>Phone</th>
                             <th>Serial EID</th>
                             <th>Warranty Expiration</th>
+                            <th>Store Number</th>
                             <th>Make a Claim</th>
                         </tr>
                         </thead>
@@ -37,6 +38,7 @@
                                 <td class="col-md-3">{{ $order->phone }}</td>
                                 <td class="col-md-2">{{ $order->serial_number }}</td>
                                 <td class="col-md-2">{{ $order->warranty_years }}</td>
+                                <td><a href="{{ route('orders.list.store', $order->store_number) }}">{{ $order->store_number }}</a></td>
                                 <td class="col-md-2"><a href="{{ route('orders.claim', $order->id) }}"
                                                         class="btn btn-default">Make a Claim</a></td>
 
