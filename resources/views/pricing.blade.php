@@ -201,7 +201,12 @@
 
                     <div class="form-group">
                         <label for="store_number"> Store Number</label>
-                        <input type="text" class="form-control" name="store_number" value="{{ old('store_number') }}">
+                        <select class="form-control" name="store_number">
+                            <option value="">Choose a Store:</option>
+                            @foreach(Auth::user()->stores()->get() as $store)
+                                <option value="{{ $store->number }}" {{ (old('store_number') == $store->number ? "selected":"") }}>{{ $store->number }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
