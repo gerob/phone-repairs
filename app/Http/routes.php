@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// CLAIMS
 	post('orders/{order_id}/claim', ['as' => 'orders.claim.post', 'uses' => 'OrdersController@postClaim']);
 	get('orders/{order_id}/claim', ['as' => 'orders.claim', 'uses' => 'OrdersController@getDetail']);
+    post('orders/{order_id}/completed/{service_id}', ['as' => 'orders.work-completed', 'uses' => 'OrdersController@getDetail']);
 
     get('inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
 

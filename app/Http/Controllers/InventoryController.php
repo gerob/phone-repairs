@@ -11,6 +11,8 @@ class InventoryController extends Controller
 {
     public function getRequiredInventory()
     {
-        //
+        $inventory = \App\Inventory::all();
+
+        dd($inventory);
     }
 }

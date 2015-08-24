@@ -37,12 +37,9 @@
                                 <td class="col-md-3">{{ $order->phone }}</td>
                                 <td class="col-md-2">{{ $order->serial_number }}</td>
                                 <td class="col-md-2">{{ $order->warranty_years }}</td>
-                                <td class="col-md-2"><a href="{{ route('orders.claim', $order->id) }}" class="btn btn-default">Make a Claim</a></td>
-                                {{--<td class="col-md-4">--}}
-                                    {{--@foreach($order->coServices as $service)--}}
-                                        {{--<span>{{ $service->name }} - {{ $service->price }}</span> <br>--}}
-                                    {{--@endforeach--}}
-                                {{--</td>--}}
+                                <td class="col-md-2"><a href="{{ route('orders.claim', $order->id) }}"
+                                                        class="btn btn-default">Make a Claim</a></td>
+
                             </tr>
                         @endforeach
                         </tbody>

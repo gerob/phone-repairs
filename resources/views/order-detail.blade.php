@@ -8,7 +8,7 @@
 
     <div class="panel-body">
         <form action="{{ route('orders.claim.post', $order->id) }}" method="post">
-        {!! csrf_field() !!}
+            {!! csrf_field() !!}
             <div class="row">
                 <div class="col-md-6">
                     <h4>Customer Information</h4>
@@ -45,19 +45,26 @@
                                 <td><h4>Repair Description</h4></td>
                                 <td><h4>Repair UPC</h4></td>
                                 <td><h4>Make a Claim</h4></td>
+                                <td><h4>Complete Work</h4></td>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($services as $index => $service)
                                 <tr>
-                                    <td>{{ $index + 1 }} {{ $service->name }} - ${{ number_format(($service->price/100), 2) }}</td>
+                                    <td>{{ $index + 1 }} {{ $service->name }} -
+                                        ${{ number_format(($service->price/100), 2) }}</td>
                                     <td>
                                         <img src="{{ \DNS1D::getBarcodePNGPath($service->upc, "UPCA") }}"
                                              alt="{{ $service->upc }}"/>
 
                                         <p>{{ $service['upc'] }}</p>
                                     </td>
-                                        <td><input type="checkbox" name="services[{{ $service->id }}]" {{ $service->claim_completed ? "checked":""}} /></td>
+                                    <td><input type="checkbox"
+                                               name="services[{{ $service->id }}]['claim']" {{ $service->claim_completed ? "checked":""}} />
+                                    </td>
+                                    <td><input type="checkbox"
+                                               name="services[{{ $service->id }}]['work']" {{ $service->work_completed ? "checked":""}} />
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
