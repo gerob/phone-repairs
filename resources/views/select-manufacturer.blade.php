@@ -32,7 +32,7 @@
                             <input type="radio" name="manufacturer" value="AppleSC" class="hidden">
                         </div>
                         <div class="col-xs-5">
-                            <img src="/img/smartphoneimage-300x300.jpg" alt="Samsung Smartphone"
+                            <img src="/img/smartphoneImage-300x300.jpg" alt="Samsung Smartphone"
                                  class="img-responsive img-radio">
                             <button type="button" class="btn btn-radio">Samsung</button>
                             <input type="radio" name="manufacturer" value="SamsungSC" class="hidden">
