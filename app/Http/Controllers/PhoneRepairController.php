@@ -44,7 +44,6 @@ class PhoneRepairController extends Controller
     public function getPricingForm($device)
     {
         $device = \App\Device::find($device);
-
         $services = $device->services()->get();
 
         return view('pricing')->with(['device' => $device, 'services' => $services]);
@@ -136,6 +135,14 @@ class PhoneRepairController extends Controller
     {
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
+
+        foreach ($services as $service) {
+            $inventory = \App\Inventory::firstOrNew(['store_number' => $order->store_number, 'upc' => $service->upc]);
+            $inventory->count = $inventory->count + 1;
+            $inventory->device_name = $order->device_name;
+            $inventory->service_name = $service->name;
+            $inventory->save();
+        }
 
         return view('review')->with(['order' => $order, 'services' => $services]);
     }

@@ -13,4 +13,8 @@ class DeviceService extends Model
         'upc'
     ];
 
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

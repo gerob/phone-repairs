@@ -23,26 +23,21 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Customer</th>
-                            <th>Phone</th>
+                            <th>Store</th>
+                            <th>Work Required</th>
                             <th>Serial EID</th>
-                            <th>Warranty Expiration</th>
-                            <th>Make a Claim</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td class="col-md-3">{{ $order->first_name }} {{ $order->last_name }}</td>
-                                <td class="col-md-3">{{ $order->phone }}</td>
-                                <td class="col-md-2">{{ $order->serial_number }}</td>
-                                <td class="col-md-2">{{ $order->warranty_years }}</td>
-                                <td class="col-md-2"><button type="submit" class="btn btn-default">Make a Claim</button></td>
-                                {{--<td class="col-md-4">--}}
-                                {{--@foreach($order->coServices as $service)--}}
-                                {{--<span>{{ $service->name }} - {{ $service->price }}</span> <br>--}}
-                                {{--@endforeach--}}
-                                {{--</td>--}}
+                                <td class="col-md-4">{{ $order->store_number }}</td>
+                                <td class="col-md-4">
+                                    @foreach($order->coServices as $service)
+                                        {{ $order->phone }}
+                                    @endforeach
+                                </td>
+                                <td class="col-md-4">{{ $order->serial_number }}</td>
                             </tr>
                         @endforeach
                         </tbody>

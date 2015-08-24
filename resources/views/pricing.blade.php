@@ -222,6 +222,7 @@
                             <tbody>
                             @foreach($services as $index => $service)
                                 <tr>
+                                    {{--{{ var_dump($service->pivot) }}--}}
                                     <td>{{ $service->name }}</td>
                                     <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
                                     <td>{{ $service->pivot->upc }}</td>
