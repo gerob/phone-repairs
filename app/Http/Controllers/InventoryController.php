@@ -11,7 +11,10 @@ class InventoryController extends Controller
 {
     public function getRequiredInventory()
     {
-        $inventory = \App\Inventory::where('count', '<=', 20)->orderBy('store_number', 'desc')->get();
+        $inventory = \App\Inventory::where('count', '<=', 20)
+                        ->with('deviceService.dsDevice', 'deviceService.dsService')
+                        ->orderBy('store_number', 'desc')
+                        ->get();
 
         return view('inventory')->with('inventory', $inventory);
     }

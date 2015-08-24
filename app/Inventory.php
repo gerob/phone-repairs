@@ -16,4 +16,9 @@ class Inventory extends Model
         'upc',
         'threshold'
     ];
+
+    public function deviceService()
+    {
+        return $this->belongsTo(DeviceService::class);
+    }
 }

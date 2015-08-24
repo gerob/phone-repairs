@@ -35,9 +35,12 @@
                             <tbody>
                             @foreach($inventory as $inv)
                                 <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]" />
-
                                 <tr>
-                                    <td>{{ $inv->device_name }} - {{ $inv->service_name }}</td>
+                                    <td>
+                                        {{--@if(isset($inv->deviceService->dsDevice->model) && isset($inv->deviceService->dsDevice->model))--}}
+                                        {{--{{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}--}}
+                                        {{--@endif--}}
+                                    </td>
                                     <td><img src="{{ \DNS1D::getBarcodePNGPath($inv->upc, "UPCA") }}"
                                              alt="{{ $inv->upc }}"/>
                                         <p>{{ $inv->upc }}</p>

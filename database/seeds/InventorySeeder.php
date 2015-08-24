@@ -18,10 +18,8 @@ class InventorySeeder extends Seeder
         foreach ($stores as $store) {
             foreach ($device_services as $ds) {
                 $ds->inventory()->create([
-                    'count'        => 25,
+                    'count'        => rand(17, 20),
                     'store_number' => $store->number,
-                    'device_name'  => $ds->dsDevice->model,
-                    'service_name' => $ds->dsService->name,
                     'upc'          => $ds->upc
                 ]);
             }
