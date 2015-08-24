@@ -21,7 +21,7 @@ class CreateInventoryTable extends Migration
             $table->string('device_name');
             $table->string('service_name');
             $table->string('upc');
-            $table->integer('threshold')->unsigned()->default(20);
+            $table->integer('threshold')->unsigned()->default(0);
 
             $table->timestamps();
 	        $table->foreign('device_service_id')->references('id')->on('device_services');

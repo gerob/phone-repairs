@@ -15,11 +15,10 @@ class InventorySeeder extends Seeder
 
         $device_services = \App\DeviceService::with('dsDevice', 'dsService')->get();
 
-        foreach ($device_services as $ds) {
-            foreach ($stores as $store) {
-
+        foreach ($stores as $store) {
+            foreach ($device_services as $ds) {
                 $ds->inventory()->create([
-                    'count'        => 0,
+                    'count'        => 25,
                     'store_number' => $store->number,
                     'device_name'  => $ds->dsDevice->model,
                     'service_name' => $ds->dsService->name,

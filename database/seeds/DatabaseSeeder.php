@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServicesSeeder::class);
         $this->call(DeviceServicesSeeder::class);
         $this->call(WarrantiesSeeder::class);
+        $this->call(InventorySeeder::class);
 
         Model::reguard();
     }
