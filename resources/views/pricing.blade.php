@@ -208,6 +208,11 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="technician_initials"> Technician Initials</label>
+                        <input type="text" class="form-control" name="technician_initials" value="{{ old('technician_initials') }}">
+                    </div>
                 </div>
             </div>
             <div class="row">

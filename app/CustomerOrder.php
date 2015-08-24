@@ -20,6 +20,7 @@ class CustomerOrder extends Model
         'phone',
         'device_name',
         'store_number',
+	    'technician_initials',
         'color',
         'serial_number',
         'passcode',

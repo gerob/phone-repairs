@@ -67,7 +67,8 @@ class PhoneRepairController extends Controller
             'claim_number'  => 'required_with:claim',
             'description'   => 'required',
             'store_number'  => 'required',
-            'services'      => 'required'
+            'services'      => 'required',
+	        'technician_initials' => 'required'
         ]);
 
         // Find and update or create our customer
@@ -114,6 +115,7 @@ class PhoneRepairController extends Controller
             'claim_number'  => $request->get('claim_number', null),
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
+	        'technician_initials' => $request->get('technician_initials'),
             'confirmed'     => false
         ]);
 

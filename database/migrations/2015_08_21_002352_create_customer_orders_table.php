@@ -30,6 +30,7 @@ class CreateCustomerOrdersTable extends Migration
 
             $table->string('device_name');
             $table->string('store_number');
+	        $table->string('technician_initials');
             $table->string('color');
             $table->string('serial_number');
             $table->string('passcode', 20)->nullable();
