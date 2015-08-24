@@ -19,31 +19,39 @@
                     </div>
                 @endif
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th class="col-md-6">Device - Service</th>
-                            <th class="col-md-5">UPC</th>
-                            <th class="col-md-3">Store Number</th>
-                            <th class="col-md-2">Count</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($inventory as $inv)
+                <form action="{{route('inventory.update.post')}}" method="post">
+                {!!csrf_field()!!}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td>{{ $inv->device_name }} - {{ $inv->service_name }}</td>
-                                <td><img src="{{ \DNS1D::getBarcodePNGPath($inv->upc, "UPCA") }}"
-                                         alt="{{ $inv->upc }}"/>
-                                    <p>{{ $inv->upc }}</p>
-                                </td>
-                                <td>{{ $inv->store_number }}</td>
-                                <td>{{ $inv->count }}</td>
+                                <th class="">Device - Service</th>
+                                <th class="">UPC</th>
+                                <th class="">Store Number</th>
+                                <th class="">Count</th>
+                                <th class="">Inventory Fulfillment</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                            @foreach($inventory as $inv)
+                                <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]" />
+
+                                <tr>
+                                    <td>{{ $inv->device_name }} - {{ $inv->service_name }}</td>
+                                    <td><img src="{{ \DNS1D::getBarcodePNGPath($inv->upc, "UPCA") }}"
+                                             alt="{{ $inv->upc }}"/>
+                                        <p>{{ $inv->upc }}</p>
+                                    </td>
+                                    <td>{{ $inv->store_number }}</td>
+                                    <td>{{ $inv->count }}</td>
+                                    <td><input type="number" value="" name="inventories[{{$inv->id}}]" /></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Submit Inventory Replenishment" >
+                </form>
             </div>
         </div>
 

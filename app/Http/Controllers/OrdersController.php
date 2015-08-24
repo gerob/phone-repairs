@@ -57,14 +57,14 @@ class OrdersController extends Controller
             // If we have completed the work
             if ($work_comp == false && $service->work_completed == true) {
                 $inventory = \App\Inventory::firstOrNew(['store_number' => $order->store_number, 'upc' => $service->upc]);
-                $inventory->count = $inventory->count -= 1;
+                $inventory->count = $inventory->count += 1;
                 $inventory->save();
             }
 
             // If we have unchecked the work being completed
             if ($work_comp == true && $service->work_completed == false) {
                 $inventory = \App\Inventory::firstOrNew(['store_number' => $order->store_number, 'upc' => $service->upc]);
-                $inventory->count = $inventory->count += 1;
+                $inventory->count = $inventory->count -= 1;
                 $inventory->save();
             }
         }

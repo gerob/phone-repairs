@@ -47,5 +47,6 @@ Route::group(['middleware' => 'auth'], function () {
     post('orders/{order_id}/completed/{service_id}', ['as' => 'orders.work-completed', 'uses' => 'OrdersController@getDetail']);
 
     get('inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
+	post('inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
 
 });
