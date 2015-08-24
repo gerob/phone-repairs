@@ -11,15 +11,18 @@ class OrdersController extends Controller
 {
     public function getList(Request $request)
     {
+        $q = $request->get('q', '');
 
-	    if ($request->has('q')) {
-			$q = $request->get('q');
-	    }
+        // todo handle the search query.
 
-	    // todo handle the search query.
-
-        $orders = \App\CustomerOrder::where('confirmed', true)->with('coServices')->get();
-
+        $orders = \App\CustomerOrder::where('confirmed', true)
+            ->orWhere(function ($query) use ($q) {
+                $query->where('phone', '=', $q)
+                    ->orWhere('email', '=', $q)
+                    ->orWhere('last_name', '=', $q);
+            })
+            ->with('coServices')->toSql();
+dd($orders);
         return view('orders')->with(['orders' => $orders]);
     }
 

@@ -9,15 +9,16 @@
         <div class="row">
             <div class="col-md-12">
                 <form class="form-inline" method="get" action="{{route('orders.list')}}">
-                <div class="form-group">
-                    <label class="sr-only">Search</label>
-                    <p class="form-control-static">Search</p>
-                </div>
-                <div class="form-group">
-                    <label for="q" class="sr-only">Search for</label>
+                    <div class="form-group">
+                        <label class="sr-only">Search</label>
+
+                        <p class="form-control-static">Search</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="q" class="sr-only">Search for</label>
                         <input type="text" class="form-control" name="q" placeholder="Search for...">
-                </div>
-                <button type="submit" class="btn btn-default">Go</button>
+                    </div>
+                    <button type="submit" class="btn btn-default">Go</button>
                 </form>
             </div>
         </div>
@@ -53,10 +54,11 @@
                                 <td class="col-md-3">{{ $order->phone }}</td>
                                 <td class="col-md-2">{{ $order->serial_number }}</td>
                                 <td class="col-md-2">{{ $order->warranty_years }}</td>
-                                <td><a href="{{ route('orders.list.store', $order->store_number) }}">{{ $order->store_number }}</a></td>
+                                <td>
+                                    <a href="{{ route('orders.list.store', $order->store_number) }}">{{ $order->store_number }}</a>
+                                </td>
                                 <td class="col-md-2"><a href="{{ route('orders.claim', $order->id) }}"
                                                         class="btn btn-default">Make a Claim</a></td>
-
                             </tr>
                         @endforeach
                         </tbody>
