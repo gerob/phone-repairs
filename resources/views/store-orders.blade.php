@@ -32,7 +32,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{ dd($orders) }}
                         @foreach($orders as $order)
                             <tr>
                                 <td class="col-md-1">{{ $order->id }}</td>
@@ -41,8 +40,8 @@
                                 <td class="col-md-2">{{ $order->device_name }}</td>
                                 <td class="col-md-2">{{ $order->color }}</td>
                                 <td class="col-md-4">
-                                    @foreach($order->services as $service)
-                                        <span>{{ $service['name'] }} - {{ $service['price'] }}</span> <br>
+                                    @foreach($order->coServices as $service)
+                                        <span>{{ $service->name }} - ${{ number_format(($service->price/100), 2) }}</span> <br>
                                     @endforeach
                                 </td>
                             </tr>

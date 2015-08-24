@@ -18,7 +18,7 @@ class OrdersController extends Controller
 
     public function getStoreList($store_number)
     {
-        $orders = \App\CustomerOrder::where('store_number', $store_number)->get();
+        $orders = \App\CustomerOrder::where('store_number', $store_number)->with('coServices')->get();
 
         return view('store-orders')->with(['orders' => $orders]);
     }
