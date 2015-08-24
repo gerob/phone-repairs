@@ -15,8 +15,8 @@ get('/', function () {
     return redirect()->route('orders.list');
 });
 
-post('login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
+post('login', ['as' => 'login.post', 'uses' => 'Auth\AuthController@postLogin']);
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -49,4 +49,5 @@ Route::group(['middleware' => 'auth'], function () {
 	get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
 	post('werx/inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
 
+    get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });

@@ -41,6 +41,16 @@ class AuthController extends Controller
     }
 
     /**
+     * Show the application login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogin()
+    {
+        return view('login');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
