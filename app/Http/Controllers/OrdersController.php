@@ -37,10 +37,9 @@ class OrdersController extends Controller
 		$order->description = $request->get('description');
 		$order->save();
 
-		$services = \App\OrderService::where('order_id', $order_id);
-
+		$services = $order->coServices()->get();
 		foreach ($services as $service) {
-			$service->claim_completed = array_key_exists($service->id, $request->get('services')) ? true : false;
+			$service->claim_completed = array_key_exists($service->id, $request->get('services', []));
 			$service->save();
 		}
 
