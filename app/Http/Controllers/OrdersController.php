@@ -15,14 +15,14 @@ class OrdersController extends Controller
 
         // todo handle the search query.
 
-        $orders = \App\CustomerOrder::where('confirmed', true)
-            ->orWhere(function ($query) use ($q) {
-                $query->where('phone', '=', $q)
+        $orders = \App\CustomerOrder::where(function ($query) use ($q) {
+                $query->where('confirmed', true)
+                    ->orWhere('phone', '=', $q)
                     ->orWhere('email', '=', $q)
                     ->orWhere('last_name', '=', $q);
             })
-            ->with('coServices')->toSql();
-dd($orders);
+            ->with('coServices')->get();
+
         return view('orders')->with(['orders' => $orders]);
     }
 
