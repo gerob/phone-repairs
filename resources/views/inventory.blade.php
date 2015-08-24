@@ -25,17 +25,18 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="">Device - Service</th>
-                                <th class="">UPC</th>
-                                <th class="">Store Number</th>
-                                <th class="">Count</th>
-                                <th class="">Inventory Fulfillment</th>
+                                <th class="col-md-4">Device - Service</th>
+                                <th class="col-md-2">UPC</th>
+                                <th class="col-md-2">Store Number</th>
+                                <th class="col-md-1">Count</th>
+                                <th class="col-md-1">Inventory Threshold</th>
+                                <th class="col-md-1">Inventory Fulfillment</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($inventory as $inv)
                                 <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]" />
-                                <tr>
+                                <tr id="inventory-{{$inv->id}}">
                                     <td>
                                         {{--@if(isset($inv->deviceService->dsDevice->model) && isset($inv->deviceService->dsDevice->model))--}}
                                         {{--{{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}--}}
@@ -47,7 +48,8 @@
                                     </td>
                                     <td>{{ $inv->store_number }}</td>
                                     <td>{{ $inv->count }}</td>
-                                    <td><input type="number" value="" name="inventories[{{$inv->id}}]" /></td>
+                                    <td>{{ $inv->threshold }}</td>
+                                    <td><input class="form-control" type="number" value="" name="inventories[{{$inv->id}}]" /></td>
                                 </tr>
                             @endforeach
                             </tbody>
