@@ -13,6 +13,6 @@ class InventoryController extends Controller
     {
         $inventory = \App\Inventory::all();
 
-        dd($inventory);
+        return view('inventory')->with('inventory', $inventory);
     }
 }

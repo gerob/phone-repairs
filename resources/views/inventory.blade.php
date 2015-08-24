@@ -23,21 +23,22 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Store</th>
-                            <th>Work Required</th>
-                            <th>Serial EID</th>
+                            <th class="col-md-6">Device - Service</th>
+                            <th class="col-md-5">UPC</th>
+                            <th class="col-md-3">Store</th>
+                            <th class="col-md-2">Count</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($orders as $order)
+                        @foreach($inventory as $inv)
                             <tr>
-                                <td class="col-md-4">{{ $order->store_number }}</td>
-                                <td class="col-md-4">
-                                    @foreach($order->coServices as $service)
-                                        {{ $order->phone }}
-                                    @endforeach
+                                <td>{{ $inv->device_name }} - {{ $inv->service_name }}</td>
+                                <td><img src="{{ \DNS1D::getBarcodePNGPath($inv->upc, "UPCA") }}"
+                                         alt="{{ $inv->upc }}"/>
+                                    <p>{{ $inv->upc }}</p>
                                 </td>
-                                <td class="col-md-4">{{ $order->serial_number }}</td>
+                                <td>{{ $inv->store_number }}</td>
+                                <td>{{ $inv->count }}</td>
                             </tr>
                         @endforeach
                         </tbody>
