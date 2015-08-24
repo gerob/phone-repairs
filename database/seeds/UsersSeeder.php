@@ -11,16 +11,24 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
+        $stores = \App\Store::all();
+
+
+        $user1 = App\User::create([
             'name' => 'Gerob Lee',
             'email' => 'gerobk@gmail.com',
-            'password' => bcrypt('pa$$word')
+            'password' => bcrypt('pa$$word'),
         ]);
 
-	    App\User::create([
+	    $user2 = App\User::create([
 	        'name' => 'Sams Test',
 	        'email' => 'randall@giganticcreative.com',
 	        'password' => bcrypt('samsT3st')
         ]);
+
+        foreach ($stores as $store) {
+            $user1->stores()->attach($store->id);
+            $user2->stores()->attach($store->id);
+        }
     }
 }

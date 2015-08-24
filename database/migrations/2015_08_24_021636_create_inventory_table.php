@@ -15,11 +15,13 @@ class CreateInventoryTable extends Migration
         Schema::create('inventory', function (Blueprint $table) {
             $table->increments('id');
 			$table->integer('device_service_id')->unsigned();
+
             $table->integer('count');
             $table->string('store_number');
             $table->string('device_name');
             $table->string('service_name');
             $table->string('upc');
+            $table->integer('threshold')->unsigned()->default(20);
 
             $table->timestamps();
 	        $table->foreign('device_service_id')->references('id')->on('device_services');

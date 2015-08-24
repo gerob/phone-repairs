@@ -14,10 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call(StoresSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(DeviceSeeder::class);
         $this->call(ServicesSeeder::class);
         $this->call(DeviceServicesSeeder::class);
+        $this->call(WarrantiesSeeder::class);
 
         Model::reguard();
     }

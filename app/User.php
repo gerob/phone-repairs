@@ -39,4 +39,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // so it doesn't try to set the remember token
         // during logout. #hacks
     }
+
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'store_users');
+    }
 }
