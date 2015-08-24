@@ -17,4 +17,14 @@ class DeviceService extends Model
     {
         return $this->hasMany(Inventory::class);
     }
+
+    public function dsDevice()
+    {
+        return $this->hasOne(Device::class, 'id');
+    }
+
+    public function dsService()
+    {
+        return $this->hasOne(Service::class, 'id');
+    }
 }

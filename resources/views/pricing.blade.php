@@ -48,7 +48,8 @@
 
                     <div class="form-group">
                         <label for="phone"> Telephone Number</label>
-                        <input type="text" class="form-control" name="phone" placeholder="123-456-7890" value="{{ old('phone') }}">
+                        <input type="text" class="form-control" name="phone" placeholder="123-456-7890"
+                               value="{{ old('phone') }}">
 
                         <div class="help-block">List phone other than one being repaired.</div>
                     </div>
@@ -79,7 +80,8 @@
                             <option value="CO" {{ (old('state') == 'CO' ? "selected":"") }}>Colorado</option>
                             <option value="CT" {{ (old('state') == 'CT' ? "selected":"") }}>Connecticut</option>
                             <option value="DE" {{ (old('state') == 'DE' ? "selected":"") }}>Delaware</option>
-                            <option value="DC" {{ (old('state') == 'DC' ? "selected":"") }}>District Of Columbia</option>
+                            <option value="DC" {{ (old('state') == 'DC' ? "selected":"") }}>District Of Columbia
+                            </option>
                             <option value="FL" {{ (old('state') == 'FL' ? "selected":"") }}>Florida</option>
                             <option value="GA" {{ (old('state') == 'GA' ? "selected":"") }}>Georgia</option>
                             <option value="HI" {{ (old('state') == 'HI' ? "selected":"") }}>Hawaii</option>
@@ -135,15 +137,21 @@
                         <select class="form-control" name="membership_type">
                             <option value="">Choose a Membership:</option>
                             <option value="plus" {{ (old('membership_type') == 'plus' ? "selected":"") }}>Plus</option>
-                            <option value="business" {{ (old('membership_type') == 'business' ? "selected":"") }}>Business</option>
-                            <option value="savings" {{ (old('membership_type') == 'savings' ? "selected":"") }}>Savings</option>
-                            <option value="trial" {{ (old('membership_type') == 'trial' ? "selected":"") }}>Trial Pass</option>
+                            <option value="business" {{ (old('membership_type') == 'business' ? "selected":"") }}>
+                                Business
+                            </option>
+                            <option value="savings" {{ (old('membership_type') == 'savings' ? "selected":"") }}>
+                                Savings
+                            </option>
+                            <option value="trial" {{ (old('membership_type') == 'trial' ? "selected":"") }}>Trial Pass
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="membership_number"> Membership Number</label>
-                        <input type="text" class="form-control" name="membership_number" value="{{ old('membership_number') }}">
+                        <input type="text" class="form-control" name="membership_number"
+                               value="{{ old('membership_number') }}">
                     </div>
 
                 </div>
@@ -152,6 +160,7 @@
 
                     <div class="form-group">
                         <label for="device"> Device Name</label>
+
                         <div class="input-group">
                             <input type="text" class="form-control" name="device" value="{{ $device->model }}" readonly>
                             <span class="input-group-btn">
@@ -177,7 +186,8 @@
                             <option value="">Choose a Carrier:</option>
                             <option value="at&t" {{ (old('carrier') == 'at&t' ? "selected":"") }}>AT&T</option>
                             <option value="sprint" {{ (old('carrier') == 'sprint' ? "selected":"") }}>Sprint</option>
-                            <option value="t-mobile" {{ (old('carrier') == 't-mobile' ? "selected":"") }}>T-Mobile</option>
+                            <option value="t-mobile" {{ (old('carrier') == 't-mobile' ? "selected":"") }}>T-Mobile
+                            </option>
                             <option value="verizon" {{ (old('carrier') == 'verizon' ? "selected":"") }}>Verizon</option>
                             <option value="other" {{ (old('carrier') == 'other' ? "selected":"") }}>Other</option>
                         </select>
@@ -185,13 +195,15 @@
 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="claim" {{ (old('claim') == 'on' ? "checked":"") }}> Square Trade Claim?
+                            <input type="checkbox" name="claim" {{ (old('claim') == 'on' ? "checked":"") }}> Square
+                            Trade Claim?
                         </label>
                     </div>
 
                     <div class="form-group">
                         <label for="claim_number"> Claim Number</label>
-                        <input type="text" class="form-control" name="claim_number" placeholder="If checked yes" value="{{ old('claim_number') }}">
+                        <input type="text" class="form-control" name="claim_number" placeholder="If checked yes"
+                               value="{{ old('claim_number') }}">
                     </div>
 
                     <div class="form-group">
@@ -204,7 +216,9 @@
                         <select class="form-control" name="store_number">
                             <option value="">Choose a Store:</option>
                             @foreach(Auth::user()->stores()->get() as $store)
-                                <option value="{{ $store->number }}" {{ (old('store_number') == $store->number ? "selected":"") }}>{{ $store->number }}</option>
+                                <option value="{{ $store->number }}" {{ (old('store_number') == $store->number ? "selected":"") }}>
+                                    {{ $store->number }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -237,9 +251,12 @@
                                     <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
                                     <td>{{ $service->pivot->upc }}</td>
                                     <td>
-                                        <input type="checkbox" name="services[{{ $index }}][name]" value="{{ $service->name }}">
-                                        <input type="hidden" name="services[{{ $index }}][price]" value="{{ $service->pivot->price }}">
-                                        <input type="hidden" name="services[{{ $index }}][upc]" value="{{ $service->pivot->upc }}">
+                                        <input type="checkbox" name="services[{{ $index }}][name]"
+                                               value="{{ $service->name }}">
+                                        <input type="hidden" name="services[{{ $index }}][price]"
+                                               value="{{ $service->pivot->price }}">
+                                        <input type="hidden" name="services[{{ $index }}][upc]"
+                                               value="{{ $service->pivot->upc }}">
                                     </td>
                                 </tr>
                             @endforeach

@@ -13,6 +13,7 @@ class Inventory extends Model
         'store_number',
         'device_name',
         'service_name',
-        'upc'
+        'upc',
+        'threshold'
     ];
 }
