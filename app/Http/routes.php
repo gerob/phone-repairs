@@ -43,5 +43,6 @@ Route::group(['middleware' => 'auth'], function () {
 	post('orders/{order_id}/claim', ['as' => 'orders.claim.post', 'uses' => 'OrdersController@postClaim']);
 	get('orders/{order_id}', ['as' => 'orders.detail', 'uses' => 'OrdersController@getDetail']);
 
+//    get('inventory')
 
 });

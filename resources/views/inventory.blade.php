@@ -39,9 +39,9 @@
                                 <td class="col-md-2">{{ $order->warranty_years }}</td>
                                 <td class="col-md-2"><button type="submit" class="btn btn-default">Make a Claim</button></td>
                                 {{--<td class="col-md-4">--}}
-                                    {{--@foreach($order->coServices as $service)--}}
-                                        {{--<span>{{ $service->name }} - {{ $service->price }}</span> <br>--}}
-                                    {{--@endforeach--}}
+                                {{--@foreach($order->coServices as $service)--}}
+                                {{--<span>{{ $service->name }} - {{ $service->price }}</span> <br>--}}
+                                {{--@endforeach--}}
                                 {{--</td>--}}
                             </tr>
                         @endforeach

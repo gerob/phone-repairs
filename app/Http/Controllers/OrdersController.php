@@ -26,7 +26,7 @@ class OrdersController extends Controller
 	public function getDetail($order_id)
 	{
 		$order = \App\CustomerOrder::find($order_id);
-		$services = $order->services()->get();
+		$services = $order->coServices()->get();
 
 		return view('order-detail')->with(['order' => $order, 'services' => $services]);
 	}

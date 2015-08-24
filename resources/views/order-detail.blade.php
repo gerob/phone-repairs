@@ -34,7 +34,6 @@
                     <strong>Carrier: </strong> {{ $order->carrier }} <br>
                     <strong>Claim: </strong> {{ $order->claim == 'on' ? 'Square Trade Claim' : '' }} <br>
                     <strong>Claim Number: </strong> {{ $order->claim_number }} <br>
-                    <strong>Description: </strong> {{ $order->description }} <br>
                 </div>
             </div>
             <div class="row">
@@ -64,9 +63,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="">
+                        <label for="description">Notes: </label>
+                        <textarea class="form-control" name="description">{{ $order->description }}</textarea>
+                    </div>
                 </div>
             </div>
             <div class="center-all">
+                <hr>
                 <button type="submit" class="btn btn-success">Make Warranty Claim</button>
             </div>
         </form>
