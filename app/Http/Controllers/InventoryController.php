@@ -14,7 +14,7 @@ class InventoryController extends Controller
         $inventory = \App\Inventory::whereRaw('count <= threshold')
                         ->with('deviceService.dsDevice', 'deviceService.dsService')
                         ->orderBy('store_number', 'desc')
-                        ->get();
+                        ->paginate(30);
 
         return view('inventory')->with('inventory', $inventory);
     }

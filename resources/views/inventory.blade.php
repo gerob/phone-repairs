@@ -55,6 +55,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {!! $inventory->render() !!}
                     <input class="btn btn-success" type="submit" value="Submit Inventory Replenishment" >
                 </form>
             </div>
