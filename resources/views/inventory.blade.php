@@ -75,6 +75,7 @@
                         </table>
                     </div>
                     <div class="center-all">
+                    <div class="alert-info">Submit inventory replenishment prior to navigating to other pages!</div>
                     {!! $inventory->render() !!} <br>
                     <input class="btn btn-success" type="submit" value="Submit Inventory Replenishment">
                     </div>
