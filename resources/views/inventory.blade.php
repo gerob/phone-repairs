@@ -38,12 +38,10 @@
                                 <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]" />
                                 <tr id="inventory-{{$inv->id}}">
                                     <td>
-                                        {{--@if(isset($inv->deviceService->dsDevice->model) && isset($inv->deviceService->dsDevice->model))--}}
-                                        {{--{{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}--}}
-                                        {{--@endif--}}
+                                        {{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}
                                     </td>
-                                    <td><img src="{{ \DNS1D::getBarcodePNGPath($inv->upc, "UPCA") }}"
-                                             alt="{{ $inv->upc }}"/>
+                                    <td>
+                                        {!! $barcode->getBarcodeObj('UPCA', $inv->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
                                         <p>{{ $inv->upc }}</p>
                                     </td>
                                     <td>{{ $inv->store_number }}</td>

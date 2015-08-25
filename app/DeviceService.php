@@ -20,11 +20,11 @@ class DeviceService extends Model
 
     public function dsDevice()
     {
-        return $this->hasOne(Device::class, 'id');
+        return $this->hasOne(Device::class, 'id', 'device_id');
     }
 
     public function dsService()
     {
-        return $this->hasOne(Service::class, 'id');
+        return $this->hasOne(Service::class, 'id', 'service_id');
     }
 }

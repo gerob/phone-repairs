@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "dinesh/barcode": "V4.1"
+        "tecnick.com/tc-lib-barcode": "dev-master",
+        "tecnick.com/tc-lib-color": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -17,9 +17,9 @@ class OrdersController extends Controller
 
         $orders = \App\CustomerOrder::where('confirmed', true)
             ->where(function ($query) use ($q) {
-                $query->where('phone', 'LIKE', '%'.$q.'%')
-                    ->orWhere('email', 'LIKE', '%'.$q.'%')
-                    ->orWhere('last_name', 'LIKE', '%'.$q.'%');
+                $query->where('phone', 'LIKE', '%' . $q . '%')
+                    ->orWhere('email', 'LIKE', '%' . $q . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $q . '%');
             })->with('coServices')->get();
 
         return view('orders')->with(['orders' => $orders]);

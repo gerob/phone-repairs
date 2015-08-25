@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Inventory;
+use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,17 +13,19 @@ class InventoryController extends Controller
 {
     public function getRequiredInventory()
     {
-        $inventory = \App\Inventory::whereRaw('count <= threshold')
+        $inventory = Inventory::whereRaw('count <= threshold')
                         ->with('deviceService.dsDevice', 'deviceService.dsService')
                         ->orderBy('store_number', 'desc')
                         ->paginate(30);
 
-        return view('inventory')->with('inventory', $inventory);
+        $barcode = new Barcode();
+
+        return view('inventory')->with(['inventory' => $inventory, 'barcode'=> $barcode]);
     }
 
 	public function getAllInventory()
 	{
-		$inventory = \App\Inventory::with('deviceService.dsDevice', 'deviceService.dsService')
+		$inventory = Inventory::with('deviceService.dsDevice', 'deviceService.dsService')
 		                           ->orderBy('store_number', 'desc')
 		                           ->get();
 
@@ -33,7 +37,7 @@ class InventoryController extends Controller
         $inventories = $request->get('inventories');
 
         foreach ($inventories as $id => $count) {
-            $inventory = \App\Inventory::find($id);
+            $inventory = Inventory::find($id);
             $inventory->count += $count;
             $inventory->save();
         }

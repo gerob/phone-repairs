@@ -147,7 +147,7 @@ return [
         /*
          * Package service providers
          */
-        Dinesh\Barcode\BarcodeServiceProvider::class
+
 
     ],
 
@@ -200,8 +200,7 @@ return [
         /*
          * Package aliases
          */
-        'DNS1D' => Dinesh\Barcode\Facades\DNS1DFacade::class,
-        'DNS2D' => Dinesh\Barcode\Facades\DNS2DFacade::class
+
 
     ],
 
