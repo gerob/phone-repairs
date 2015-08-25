@@ -74,8 +74,10 @@
                             </tbody>
                         </table>
                     </div>
-                    {!! $inventory->render() !!}
+                    <div class="center-all">
+                    {!! $inventory->render() !!} <br>
                     <input class="btn btn-success" type="submit" value="Submit Inventory Replenishment">
+                    </div>
                 </form>
             </div>
         </div>
