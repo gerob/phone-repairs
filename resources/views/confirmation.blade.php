@@ -47,8 +47,10 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <td><h4>Repair Description</h4></td>
-                                <td><h4>Repair UPC</h4></td>
+                                <th>Repair Description</th>
+                                <th>Repair UPC</th>
+                                <th>Store Number</th>
+                                <th>Technician</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,6 +61,8 @@
                                         {!! $barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
                                         <p>{{ $service->upc }}</p>
                                     </td>
+                                    <td>{{ $order->store_number }}</td>
+                                    <td>{{ $order->technician_initials }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
