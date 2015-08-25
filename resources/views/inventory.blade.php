@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="panel-heading">
-        <h4 class="panel-title">Repair Orders</h4>
+        <h4 class="panel-title">Inventory Fulfillment</h4>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -25,7 +25,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="col-md-4">Device - Service</th>
+                                <th class="col-md-5">Device - Service</th>
                                 <th class="col-md-2">UPC</th>
                                 <th class="col-md-2">Store Number</th>
                                 <th class="col-md-1">Count</th>
