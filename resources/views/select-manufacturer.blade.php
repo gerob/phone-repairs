@@ -37,7 +37,7 @@
                             <button type="button" class="btn btn-radio">Samsung</button>
                             <input type="radio" name="manufacturer" value="SamsungSC" class="hidden">
                         </div>
-                        <div class="center-all">
+                        <div class="col-xs-12 center-all">
                             <button type="submit" class="btn btn-primary btn-block">Select manufacturer</button>
                         </div>
                     </div>
