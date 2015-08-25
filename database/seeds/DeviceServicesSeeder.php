@@ -803,7 +803,7 @@ class DeviceServicesSeeder extends Seeder
                 'name' => $ds['service']
             ]);
 
-            $service->devices()->attach($device, ['price' => $ds['price'], 'upc' => $ds['upc']]);
+            $service->devices()->attach($device, ['price' => ($ds['price'] * 100), 'upc' => $ds['upc']]);
         }
     }
 }
