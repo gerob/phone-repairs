@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <form action="{{route('inventory.update.post')}}" method="post">
+                <form action="{{route('inventory.review.post')}}" method="post">
                 {!!csrf_field()!!}
                     <div class="table-responsive">
                         <table class="table">
@@ -38,16 +38,23 @@
                                 <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]" />
                                 <tr id="inventory-{{$inv->id}}">
                                     <td>
+                                        <input type="hidden" value="{{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}" name="inventories[{{$inv->id}}][service_device]" />
                                         {{ $inv->deviceService->dsDevice->model }} - {{ $inv->deviceService->dsService->name }}
                                     </td>
                                     <td>
                                         {!! $barcode->getBarcodeObj('UPCA', $inv->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
                                         <p>{{ $inv->upc }}</p>
                                     </td>
-                                    <td>{{ $inv->store_number }}</td>
-                                    <td>{{ $inv->count }}</td>
+                                    <td>
+                                        <input type="hidden" value="{{ $inv->store_number }}" name="inventories[{{$inv->id}}][store]">
+                                        {{ $inv->store_number }}
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="{{ $inv->count }}" name="inventories[{{$inv->id}}][count]">
+                                        {{ $inv->count }}
+                                    </td>
                                     <td>{{ $inv->threshold }}</td>
-                                    <td><input class="form-control" type="number" value="" name="inventories[{{$inv->id}}]" /></td>
+                                    <td><input class="form-control" type="number" value="{{ old('inventories['.$inv->id.']') }}" name="inventories[{{$inv->id}}][quantity]" /></td>
                                 </tr>
                             @endforeach
                             </tbody>
