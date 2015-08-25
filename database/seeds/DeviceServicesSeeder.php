@@ -612,7 +612,7 @@ class DeviceServicesSeeder extends Seeder
                 'model'        => 'Samsung Galaxy S5',
                 'service'      => 'Charge Port (T-Mobile)',
                 'price'        => 39.00,
-                'upc'          => '817828019623'
+                'upc'          => '817828019622'
             ],
             [
                 'manufacturer' => 'SamsungSC',
