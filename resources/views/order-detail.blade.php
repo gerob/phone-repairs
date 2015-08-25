@@ -54,10 +54,8 @@
                                     <td>{{ $index + 1 }} {{ $service->name }} -
                                         ${{ number_format(($service->price/100), 2) }}</td>
                                     <td>
-                                        <img src="{{ \DNS1D::getBarcodePNGPath($service->upc, "UPCA") }}"
-                                             alt="{{ $service->upc }}"/>
-
-                                        <p>{{ $service['upc'] }}</p>
+                                        {!! $barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
+                                        <p>{{ $service->upc }}</p>
                                     </td>
                                     <td><input type="checkbox"
                                                name="services[{{ $service->id }}]['claim']" {{ $service->claim_completed ? "checked":""}} />

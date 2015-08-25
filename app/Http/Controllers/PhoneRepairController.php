@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -138,8 +139,9 @@ class PhoneRepairController extends Controller
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
 
+        $barcode = new Barcode();
 
-        return view('review')->with(['order' => $order, 'services' => $services]);
+        return view('review')->with(compact('order', 'services', 'barcode'));
     }
 
     public function postReviewOrder(Request $request)
@@ -156,6 +158,8 @@ class PhoneRepairController extends Controller
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
 
-        return view('confirmation')->with(['order' => $order, 'services' => $services]);
+        $barcode = new Barcode();
+
+        return view('confirmation')->with(compact('order', 'services', 'barcode'));
     }
 }

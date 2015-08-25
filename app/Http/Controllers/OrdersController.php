@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -37,7 +38,9 @@ class OrdersController extends Controller
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
 
-        return view('order-detail')->with(['order' => $order, 'services' => $services]);
+        $barcode = new Barcode();
+
+        return view('order-detail')->with(compact('order', 'services', 'barcode'));
     }
 
     public function postClaim(Request $request, $order_id)
