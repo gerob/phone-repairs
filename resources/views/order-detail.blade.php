@@ -42,10 +42,9 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <td><h4>Repair Description</h4></td>
-                                <td><h4>Repair UPC</h4></td>
-                                <td><h4>Make a Claim</h4></td>
-                                <td><h4>Complete Work</h4></td>
+                                <th>Repair Description</th>
+                                <th>Repair UPC</th>
+                                <th>Make a Claim</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,9 +58,6 @@
                                     </td>
                                     <td><input type="checkbox"
                                                name="services[{{ $service->id }}]['claim']" {{ $service->claim_completed ? "checked":""}} />
-                                    </td>
-                                    <td><input type="checkbox"
-                                               name="services[{{ $service->id }}]['work']" {{ $service->work_completed ? "checked":""}} />
                                     </td>
                                 </tr>
                             @endforeach

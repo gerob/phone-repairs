@@ -150,6 +150,14 @@ class PhoneRepairController extends Controller
         $order->confirmed = true;
         $order->save();
 
+        $services = $order->coServices()->get();
+        foreach ($services as $service) {
+            $inventory = \App\Inventory::where('upc', '=', $service->upc)
+                ->where('store_number', '=', $order->store_number)->first();
+            $inventory->count -= 1;
+            $inventory->save();
+        }
+
         return redirect()->route('repairs.confirmation', $order->id);
     }
 
