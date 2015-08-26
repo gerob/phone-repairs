@@ -6,3 +6,4 @@
 
 <script src="/js/main.js"></script>
 
+@yield('javascript')

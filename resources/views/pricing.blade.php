@@ -161,10 +161,10 @@
                     <div class="form-group">
                         <label for="devices">Choose Device: </label>
 
-                        <select class="form-control" name="devices" id="devices" onchange="loadServices()">
+                        <select class="form-control" name="device" id="devices" onchange="loadServices()">
                             <option value="">Choose a Device:</option>
                             @foreach ($devices as $device)
-                                <option value="{{ $device->id }}" name="device">{{  $device->model }}</option>
+                                <option value="{{ $device->id }}" {{ (old('device') == $device->id ? "selected":"") }}>{{  $device->model }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -244,9 +244,9 @@
                             </tr>
                             </thead>
                             <tbody id="services">
-                                <tr>
-                                    <td colspan="4" class="alert-warning">Please select a device to view services.</td>
-                                </tr>
+                            <tr>
+                                <td colspan="4" class="alert-warning">Please select a device to view services.</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -256,25 +256,27 @@
             </div>
         </form>
     </div>
+@endsection
 
-    <script>
-        function loadServices() {
-            $.ajax({
-                type: "GET",
-                url: '/werx/repairs/' + $("#devices").val(),
-                dataType: "json",
-                success: function (data) {
-                    $('#services').empty(); // empty out the old content
-                    $.each(data, function (i, item) {
-                        var $tr = $('<tr>').append(
-                                $('<td>').text(item.ds_service.name),
-                                $('<td>').text('$'+ (item.price/100).toFixed(2)),
-                                $('<td>').text(item.upc),
-                                $('<td>').html('<input type="checkbox" name="services[' + item.id + '][name]" value="' + item.ds_service.name + '">')
-                        ).appendTo('#services');
-                    });
-                }
+@section('javascript')
+    <script src="/js/pricing-form.js"></script>
+    @if (Session::hasOldInput())
+        <script>
+            // Get the old data from Laravel
+            var oldServices = {!! json_encode(old('services')) !!};
+
+            $(function () {
+                setTimeout(function () {
+                    if ($("#devices").val()) {
+                        console.log(oldServices);
+                        $.each(oldServices, function (i, item) {
+                            if (item.name) {
+                                $('[value="' + item.name + '"]').prop('checked', true);
+                            }
+                        });
+                    }
+                }, 500);
             });
-        }
-    </script>
+        </script>
+    @endif
 @endsection
