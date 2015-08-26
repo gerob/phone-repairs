@@ -268,7 +268,6 @@
             $(function () {
                 setTimeout(function () {
                     if ($("#devices").val()) {
-                        console.log(oldServices);
                         $.each(oldServices, function (i, item) {
                             if (item.name) {
                                 $('[value="' + item.name + '"]').prop('checked', true);
