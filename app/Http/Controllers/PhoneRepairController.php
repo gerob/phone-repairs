@@ -21,33 +21,22 @@ class PhoneRepairController extends Controller
             'manufacturer' => 'required'
         ]);
 
-        return redirect()->route('repairs.device', $request->get('manufacturer'));
+        return redirect()->route('repairs.pricing', $request->get('manufacturer'));
     }
 
-    public function getDeviceSelection($manufacturer)
+    public function getPricingForm($manufacturer)
     {
-        // Get available devices
         $devices = \App\Device::where('manufacturer', $manufacturer)->get();
 
-        return view('select-device')->with(['devices' => $devices, 'manufacturer' => $manufacturer]);
+        return view('pricing')->with(compact('devices', 'manufacturer'));
     }
 
-    public function postDeviceSelection(Request $request)
+    public function getDeviceSelectionJson($device_id)
     {
-        $this->validate($request, [
-            'device' => 'required|integer'
-        ]);
+        // Get available device services
+        $device = \App\DeviceService::where('device_id', $device_id)->with('dsService')->get();
 
-        return redirect()->route('repairs.pricing', $request->get('device'));
-
-    }
-
-    public function getPricingForm($device)
-    {
-        $device = \App\Device::find($device);
-        $services = $device->services()->get();
-
-        return view('pricing')->with(['device' => $device, 'services' => $services]);
+        return response()->json($device);
     }
 
     public function postPricingForm(Request $request)

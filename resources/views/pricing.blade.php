@@ -159,15 +159,17 @@
                     <h4>Device Information</h4>
 
                     <div class="form-group">
-                        <label for="device"> Device Name</label>
+                        <label for="devices">Choose Device: </label>
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="device" value="{{ $device->model }}" readonly>
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">Change Device</button>
-                              </span>
-                        </div>
-
+                        <select class="form-control" name="devices" id="devices">
+                            <option value="">Choose a Carrier:</option>
+                            @foreach ($devices as $device)
+                                <option value="{{ $device->id }}">{{  $device->model }}</option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-primary btn-block" type="button" onclick="loadServices()">Get Device
+                            Services
+                        </button>
                     </div>
 
                     <div class="form-group">
@@ -225,7 +227,8 @@
 
                     <div class="form-group">
                         <label for="technician_initials"> Technician Initials</label>
-                        <input type="text" class="form-control" name="technician_initials" value="{{ old('technician_initials') }}">
+                        <input type="text" class="form-control" name="technician_initials"
+                               value="{{ old('technician_initials') }}">
                     </div>
                 </div>
             </div>
@@ -243,23 +246,8 @@
                                 <th>Select</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach($services as $index => $service)
-                                <tr>
-                                    {{--{{ var_dump($service->pivot) }}--}}
-                                    <td>{{ $service->name }}</td>
-                                    <td>${{ number_format(($service->pivot->price/100), 2) }}</td>
-                                    <td>{{ $service->pivot->upc }}</td>
-                                    <td>
-                                        <input type="checkbox" name="services[{{ $index }}][name]"
-                                               value="{{ $service->name }}">
-                                        <input type="hidden" name="services[{{ $index }}][price]"
-                                               value="{{ $service->pivot->price }}">
-                                        <input type="hidden" name="services[{{ $index }}][upc]"
-                                               value="{{ $service->pivot->upc }}">
-                                    </td>
-                                </tr>
-                            @endforeach
+                            <tbody id="services">
+
                             </tbody>
                         </table>
                     </div>
@@ -269,4 +257,25 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function loadServices() {
+            $.ajax({
+                type: "GET",
+                url: '/werx/repairs/' + $("#devices").val(),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $.each(data, function (i, item) {
+                        var $tr = $('<tr>').append(
+                                $('<td>').text(item.ds_service.name),
+                                $('<td>').text('$'+ (item.price/100).toFixed(2)),
+                                $('<td>').text(item.upc),
+                                $('<td>').html('<input type="checkbox" name="services[' + item.id + '][name]" value="' + item.ds_service.name + '">')
+                        ).appendTo('#services');
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

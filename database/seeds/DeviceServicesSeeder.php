@@ -20,7 +20,7 @@ class DeviceServicesSeeder extends Seeder
                 'upc'          => '817828013231'
             ],
             [
-                'manufacturer' => 'AppleSC',
+                'manufacturer' => 'SamsungSC',
                 'model'        => 'Samsung Galaxy S4',
                 'service'      => 'Back Camera',
                 'price'        => 39.00,

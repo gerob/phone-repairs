@@ -29,11 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
     get('werx/repairs/confirmation/{order_id}', ['as' => 'repairs.confirmation', 'uses' => 'PhoneRepairController@getConfirmRepairs']);
     get('werx/repairs/finish', ['as' => 'repairs.finish', 'uses' => 'PhoneRepairController@postFinishOrder']);
 
-    get('werx/repairs/{manufacturer}', ['as' => 'repairs.device', 'uses' => 'PhoneRepairController@getDeviceSelection']);
-    post('werx/repairs/device', ['as' => 'repairs.device.post', 'uses' => 'PhoneRepairController@postDeviceSelection']);
+    get('werx/repairs/{device_id}', ['as' => 'device.services.ajax', 'uses' => 'PhoneRepairController@getDeviceSelectionJson']);
 
+    // Pricing form
     get('werx/repairs/pricing/{device}', ['as' => 'repairs.pricing', 'uses' => 'PhoneRepairController@getPricingForm']);
-
     post('werx/repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
 
 	// ORDER LISTS
@@ -45,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
 	get('werx/orders/{order_id}', ['as' => 'orders.claim', 'uses' => 'OrdersController@getDetail']);
     post('werx/orders/{order_id}/completed/{service_id}', ['as' => 'orders.work-completed', 'uses' => 'OrdersController@getDetail']);
 
+    // Inventory
     get('werx/inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
     get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
     get('werx/inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
