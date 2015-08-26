@@ -161,15 +161,12 @@
                     <div class="form-group">
                         <label for="devices">Choose Device: </label>
 
-                        <select class="form-control" name="devices" id="devices">
+                        <select class="form-control" name="devices" id="devices" onchange="loadServices()">
                             <option value="">Choose a Device:</option>
                             @foreach ($devices as $device)
-                                <option value="{{ $device->id }}">{{  $device->model }}</option>
+                                <option value="{{ $device->id }}" name="device">{{  $device->model }}</option>
                             @endforeach
                         </select>
-                        <button class="btn btn-primary btn-block" type="button" onclick="loadServices()">Get Device
-                            Services
-                        </button>
                     </div>
 
                     <div class="form-group">
