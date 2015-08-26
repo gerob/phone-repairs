@@ -162,7 +162,7 @@
                         <label for="devices">Choose Device: </label>
 
                         <select class="form-control" name="devices" id="devices">
-                            <option value="">Choose a Carrier:</option>
+                            <option value="">Choose a Device:</option>
                             @foreach ($devices as $device)
                                 <option value="{{ $device->id }}">{{  $device->model }}</option>
                             @endforeach
@@ -247,7 +247,9 @@
                             </tr>
                             </thead>
                             <tbody id="services">
-
+                                <tr>
+                                    <td colspan="4" class="alert-warning">Please select a device to view services.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -265,7 +267,7 @@
                 url: '/werx/repairs/' + $("#devices").val(),
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
+                    $('#services').empty(); // empty out the old content
                     $.each(data, function (i, item) {
                         var $tr = $('<tr>').append(
                                 $('<td>').text(item.ds_service.name),
