@@ -22,7 +22,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('repairs.manufacturer') }}" method="post">
+                <form action="{{ route('order.new.manufacturer.post') }}" method="post">
                     {!! csrf_field() !!}
                     <div class="row">
                         <div class="col-xs-5 col-xs-offset-1">

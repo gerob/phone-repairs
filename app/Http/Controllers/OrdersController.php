@@ -43,7 +43,7 @@ class OrdersController extends Controller
         return view('orders/detail')->with(compact('order', 'services', 'barcode'));
     }
 
-    public function postClaim(Request $request, $order_id)
+    public function postDetail(Request $request, $order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
         $order->description = $request->get('description');
@@ -81,6 +81,6 @@ class OrdersController extends Controller
             }
         }
 
-        return redirect()->route('orders.claim', $order->id);
+        return redirect()->route('orders.detail', $order->id);
     }
 }

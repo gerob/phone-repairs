@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('repairs.pricing.post') }}" method="post">
+        <form action="{{ route('order.new.details.post') }}" method="post">
             {!! csrf_field() !!}
             <div class="row">
                 <div class="col-sm-12">

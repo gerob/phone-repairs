@@ -60,7 +60,7 @@
                                 <td>
                                     <a href="{{ route('orders.list.store', $order->store_number) }}">{{ $order->store_number }}</a>
                                 </td>
-                                <td class="col-md-2"><a href="{{ route('orders.claim', $order->id) }}"
+                                <td class="col-md-2"><a href="{{ route('orders.detail', $order->id) }}"
                                                         class="btn btn-default">Details</a></td>
                             </tr>
                         @endforeach

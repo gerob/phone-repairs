@@ -7,7 +7,7 @@
     </div>
 
     <div class="panel-body">
-        <form action="{{ route('orders.claim.post', $order->id) }}" method="post">
+        <form action="{{ route('orders.detail.post', $order->id) }}" method="post">
             {!! csrf_field() !!}
             <div class="row">
                 <div class="col-md-6">

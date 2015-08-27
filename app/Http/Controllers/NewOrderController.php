@@ -22,7 +22,7 @@ class NewOrderController extends Controller
             'manufacturer' => 'required'
         ]);
 
-        return redirect()->route('repairs.pricing', $request->get('manufacturer'));
+        return redirect()->route('order.new.details', $request->get('manufacturer'));
     }
 
 
@@ -121,7 +121,7 @@ class NewOrderController extends Controller
             }
         }
 
-        return redirect()->route('repairs.review', $order->id);
+        return redirect()->route('order.new.review', $order->id);
     }
 
 
@@ -149,7 +149,7 @@ class NewOrderController extends Controller
             $inventory->save();
         }
 
-        return redirect()->route('repairs.confirmation', $order->id);
+        return redirect()->route('order.new.confirm', $order->id);
     }
 
 
