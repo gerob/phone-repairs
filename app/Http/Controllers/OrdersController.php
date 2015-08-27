@@ -48,42 +48,42 @@ class OrdersController extends Controller
 
     public function postDetail(Request $request, $order_id)
     {
-        $order = \App\CustomerOrder::find($order_id);
-        $order->description = $request->get('description');
-        $order->save();
 
-        $services = $order->coServices()->get();
-        $checked = $request->get('services', []);
+	    $order = \App\CustomerOrder::find($order_id);
+	    $order->description = $request->get('description');
+	    $order->save(); // always save the description when the page is submitted.
 
-        foreach ($services as $service) {
-            $work_comp = $service->work_completed;
+	    switch ($request->get('action')) {
+		    case 'warranty-claim':
 
-            if (array_key_exists($service->id, $checked)) {
-                $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
-                $service->work_completed = array_key_exists("'work'", $checked[$service->id]);
-                $service->save();
-            } else {
-                // Key doesn't exist so both are false
-                $service->claim_completed = false;
-                $service->work_completed = false;
-                $service->save();
-            }
+			    $services = $order->coServices()->get();
+			    $checked = $request->get('services', []);
 
-            // If we have completed the work
-            if ($work_comp == false && $service->work_completed == true) {
-                $inventory = \App\Inventory::firstOrNew(['store_number' => $order->store_number, 'upc' => $service->upc]);
-                $inventory->count = $inventory->count += 1;
-                $inventory->save();
-            }
+			    foreach ($services as $service) {
+				    $work_comp = $service->work_completed;
 
-            // If we have unchecked the work being completed
-            if ($work_comp == true && $service->work_completed == false) {
-                $inventory = \App\Inventory::firstOrNew(['store_number' => $order->store_number, 'upc' => $service->upc]);
-                $inventory->count = $inventory->count -= 1;
-                $inventory->save();
-            }
-        }
+				    if (array_key_exists($service->id, $checked)) {
+					    $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
+					    $service->save();
+				    } else {
+					    // Key doesn't exist so both are false
+					    $service->claim_completed = false;
+					    $service->save();
+				    }
+			    }
 
-        return redirect()->route('orders.detail', $order->id);
+				// setup a flash message
+				// @todo: setup a flash confirmation message
+
+				// after the page is submitted as a warranty-claim, we want to redirect to the home page
+				$redirect = redirect()->route('orders.list');
+
+			    break;
+		    default:
+			    break;
+	    }
+
+
+        return $redirect ? $redirect : redirect()->route('orders.detail', $order->id);
     }
 }

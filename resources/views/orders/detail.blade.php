@@ -78,7 +78,7 @@
             </div>
             <div class="center-all">
                 <hr>
-                <button type="submit" class="btn btn-success">Make Warranty Claim</button>
+                <button type="submit" value="warranty-claim" name="action" class="btn btn-success">Make Warranty Claim</button>
             </div>
         </form>
     </div>
