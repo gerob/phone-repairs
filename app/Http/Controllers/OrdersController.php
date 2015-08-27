@@ -23,14 +23,14 @@ class OrdersController extends Controller
                     ->orWhere('last_name', 'LIKE', '%' . $q . '%');
             })->with('coServices')->get();
 
-        return view('orders')->with(['orders' => $orders]);
+        return view('orders/all')->with(['orders' => $orders]);
     }
 
     public function getStoreList($store_number)
     {
         $orders = \App\CustomerOrder::where('store_number', $store_number)->with('coServices')->get();
 
-        return view('store-orders')->with(['orders' => $orders]);
+        return view('orders/store/all')->with(['orders' => $orders]);
     }
 
     public function getDetail($order_id)
@@ -40,7 +40,7 @@ class OrdersController extends Controller
 
         $barcode = new Barcode();
 
-        return view('order-detail')->with(compact('order', 'services', 'barcode'));
+        return view('orders/detail')->with(compact('order', 'services', 'barcode'));
     }
 
     public function postClaim(Request $request, $order_id)

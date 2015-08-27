@@ -3,7 +3,7 @@ function loadServices() {
     $('#services').append('<td><i class="fa fa-refresh fa-spin"></i> Loading...</td>');
     $.ajax({
         type: "GET",
-        url: '/werx/repairs/' + $("#devices").val(),
+        url: '/werx/api/device/' + $("#devices").val() + '/services',
         dataType: "json",
         success: function (data) {
             $('#services').empty(); // empty out the old content

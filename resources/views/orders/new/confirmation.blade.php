@@ -1,4 +1,4 @@
-@extends('template')
+@extends('......template')
 
 @section('content')
 
@@ -35,9 +35,13 @@
                     <strong>Device: </strong> {{ $order->device_name }} <br>
                     <strong>Color: </strong> {{ $order->color }} <br>
                     <strong>Carrier: </strong> {{ $order->carrier }} <br>
-                    <strong>Claim: </strong> {{ $order->claim == 'on' ? 'Square Trade Claim' : '' }} <br>
+                    <strong>Claim: </strong> {{ $order->claim == 'on' ? 'Square Trade' : '' }} <br>
                     <strong>Claim Number: </strong> {{ $order->claim_number }} <br>
                     <strong>Description: </strong> {{ $order->description }} <br>
+
+                    <h4>Order Information</h4>
+                    <strong>Store Number</strong> {{ $order->store_number }} <br>
+                    <strong>Technician Initials</strong> {{ $order->technician_initials }} <br>
                 </div>
             </div>
             <div class="row">
@@ -46,22 +50,22 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>Repair Description</th>
+                                <th>Price</th>
                                 <th>Repair UPC</th>
-                                <th>Store Number</th>
-                                <th>Technician</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($services as $index => $service)
                                 <tr>
-                                    <td>{{ $index + 1 }} {{ $service['name'] }} - ${{ number_format(($service['price']/100), 2) }}</td>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $service['name'] }}</td>
+                                    <td>${{ number_format(($service['price']/100), 2) }}</td>
                                     <td>
                                         {!! $barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
                                         <p>{{ $service->upc }}</p>
                                     </td>
-                                    <td>{{ $order->store_number }}</td>
-                                    <td>{{ $order->technician_initials }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

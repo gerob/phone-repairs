@@ -9,11 +9,11 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PhoneRepairController extends Controller
+class NewOrderController extends Controller
 {
     public function getManufacturerSelection()
     {
-        return view('select-manufacturer');
+        return view('orders/new/manufacturer');
     }
 
     public function postManufacturerForm(Request $request)
@@ -25,11 +25,12 @@ class PhoneRepairController extends Controller
         return redirect()->route('repairs.pricing', $request->get('manufacturer'));
     }
 
-    public function getPricingForm($manufacturer)
+
+    public function getOrderDetailsForm($manufacturer)
     {
         $devices = \App\Device::where('manufacturer', $manufacturer)->get();
 
-        return view('pricing')->with(compact('devices', 'manufacturer'));
+        return view('orders/new/order-details')->with(compact('devices', 'manufacturer'));
     }
 
     public function getDeviceSelectionJson($device_id)
@@ -40,7 +41,7 @@ class PhoneRepairController extends Controller
         return response()->json($device);
     }
 
-    public function postPricingForm(Request $request)
+    public function postOrderDetailsForm(Request $request)
     {
         $this->validate($request, [
             'first_name'    => 'required',
@@ -123,17 +124,18 @@ class PhoneRepairController extends Controller
         return redirect()->route('repairs.review', $order->id);
     }
 
-    public function getReviewOrder($order_id)
+
+    public function getOrderReview($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
 
         $barcode = new Barcode();
 
-        return view('review')->with(compact('order', 'services', 'barcode'));
+        return view('orders/new/review')->with(compact('order', 'services', 'barcode'));
     }
 
-    public function postReviewOrder(Request $request)
+    public function postOrderReview(Request $request)
     {
         $order = \App\CustomerOrder::find($request->get('order_id'));
         $order->confirmed = true;
@@ -150,13 +152,23 @@ class PhoneRepairController extends Controller
         return redirect()->route('repairs.confirmation', $order->id);
     }
 
-    public function getConfirmRepairs($order_id)
+
+    public function getOrderConfirm($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
         $services = $order->coServices()->get();
 
         $barcode = new Barcode();
 
-        return view('confirmation')->with(compact('order', 'services', 'barcode'));
+        return view('orders/new/confirmation')->with(compact('order', 'services', 'barcode'));
     }
+
+	public function postOrderConfirm($order_id)
+	{
+		$order = \App\CustomerOrder::find($order_id);
+		$order->confirmed = true;
+		$order->save();
+
+		return redirect()->route('orders.list');
+	}
 }

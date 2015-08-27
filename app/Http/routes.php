@@ -20,31 +20,36 @@ post('login', ['as' => 'login.post', 'uses' => 'Auth\AuthController@postLogin'])
 
 Route::group(['middleware' => 'auth'], function () {
 
-    get('werx/repairs/manufacturer', ['as' => 'start.order', 'uses' => 'PhoneRepairController@getManufacturerSelection']);
-    post('werx/repairs/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'PhoneRepairController@postManufacturerForm']);
+	// 1. SELECT A MANUFACTURER
+    get('werx/order/new/manufacturer', ['as' => 'start.order', 'uses' => 'NewOrderController@getManufacturerSelection']);
+    post('werx/order/new/manufacturer', ['as' => 'repairs.manufacturer', 'uses' => 'NewOrderController@postManufacturerForm']);
 
-    get('werx/repairs/review/{order_id}', ['as' => 'repairs.review', 'uses' => 'PhoneRepairController@getReviewOrder']);
-    post('werx/repairs/review', ['as' => 'repairs.review.post', 'uses' => 'PhoneRepairController@postReviewOrder']);
+	// 2. COMPLETE ORDER DETAILS
+	get('werx/order/new/{device}', ['as' => 'repairs.pricing', 'uses' => 'NewOrderController@getOrderDetailsForm']);
+	post('werx/order/new/{device}', ['as' => 'repairs.pricing.post', 'uses' => 'NewOrderController@postOrderDetailsForm']);
 
-    get('werx/repairs/confirmation/{order_id}', ['as' => 'repairs.confirmation', 'uses' => 'PhoneRepairController@getConfirmRepairs']);
-    get('werx/repairs/finish', ['as' => 'repairs.finish', 'uses' => 'PhoneRepairController@postFinishOrder']);
+	// 3. REVIEW THE ORDER
+    get('werx/order/{order_id}/review/', ['as' => 'repairs.review', 'uses' => 'NewOrderController@getOrderReview']);
+    post('werx/order/{order_id}/review', ['as' => 'repairs.review.post', 'uses' => 'NewOrderController@postOrderReview']);
 
-    get('werx/repairs/{device_id}', ['as' => 'device.services.ajax', 'uses' => 'PhoneRepairController@getDeviceSelectionJson']);
+	// 4. CONFIRM THE ORDER
+    get('werx/order/{order_id}/confirm', ['as' => 'repairs.confirmation', 'uses' => 'NewOrderController@getOrderConfirm']);
+    post('werx/order/{order_id}/confirm', ['as' => 'repairs.confirmation.post', 'uses' => 'NewOrderController@postOrderConfirm']);
 
-    // Pricing form
-    get('werx/repairs/pricing/{device}', ['as' => 'repairs.pricing', 'uses' => 'PhoneRepairController@getPricingForm']);
-    post('werx/repairs', ['as' => 'repairs.pricing.post', 'uses' => 'PhoneRepairController@postPricingForm']);
+	// JSON DEVICE SELECTION
+    get('werx/api/device/{device_id}/services', ['as' => 'device.services.ajax', 'uses' => 'NewOrderController@getDeviceSelectionJson']);
 
 	// ORDER LISTS
     get('werx/orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
     get('werx/orders/store/{store_id}', ['as' => 'orders.list.store', 'uses' => 'OrdersController@getStoreList']);
 
-	// CLAIMS
-	post('werx/orders/{order_id}', ['as' => 'orders.claim.post', 'uses' => 'OrdersController@postClaim']);
+	// ORDER DETAIL
 	get('werx/orders/{order_id}', ['as' => 'orders.claim', 'uses' => 'OrdersController@getDetail']);
-    post('werx/orders/{order_id}/completed/{service_id}', ['as' => 'orders.work-completed', 'uses' => 'OrdersController@getDetail']);
 
-    // Inventory
+	// POST A CLAIM
+	post('werx/orders/{order_id}', ['as' => 'orders.claim.post', 'uses' => 'OrdersController@postClaim']);
+
+    // INVENTORY
     get('werx/inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
     get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
     get('werx/inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
