@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c79c6ba96c0788fb6289cdd8add043bd",
+    "hash": "2cb971b8f08b16d71f1cd36081d874ae",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1658,7 +1658,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/47dba32770461219f9198659be86a5e307351bd3",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/9303a1ccf2b9fe4a804257d0b91e79a49b846c71",
                 "reference": "47dba32770461219f9198659be86a5e307351bd3",
                 "shasum": ""
             },
@@ -3079,6 +3079,7 @@
         "tecnick.com/tc-lib-color": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9"
     },

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -51,11 +52,9 @@ class PhoneRepairController extends Controller
             'state'         => 'required',
             'zip'           => 'required',
             'device'        => 'required',
-            'color'         => 'required',
             'serial_number' => 'required',
             'carrier'       => 'required',
             'claim_number'  => 'required_with:claim',
-            'description'   => 'required',
             'store_number'  => 'required',
             'services'      => 'required',
 	        'technician_initials' => 'required'
@@ -106,7 +105,8 @@ class PhoneRepairController extends Controller
             'description'   => $request->get('description'),
             'store_number'  => $request->get('store_number'),
 	        'technician_initials' => $request->get('technician_initials'),
-            'confirmed'     => false
+            'confirmed'     => false,
+	        'warranty_years' => Carbon::now()->addYear()
         ]);
 
         // Only add the service if it has a name

@@ -11,5 +11,6 @@
               <li role="presentation"><a href="{{ route('inventory.required') }}">Inventory</a></li>
           </ul>
         </li>
+      <li><a href="http://www.werxparts.com/articles.asp?id=285">Werx Support</a></li>
     </ul>
 </nav>
