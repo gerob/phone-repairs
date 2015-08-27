@@ -9,6 +9,9 @@
     <div class="panel-body">
         <form action="{{ route('orders.detail.post', $order->id) }}" method="post">
             {!! csrf_field() !!}
+            <div class="center-all">
+                <button type="button" class="btn btn-default" onclick="window.print()">Print</button>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <h4>Customer Information</h4>
@@ -33,6 +36,10 @@
                     <strong>Carrier: </strong> {{ $order->carrier }} <br>
                     <strong>Claim: </strong> {{ $order->claim == 'on' ? 'Square Trade Claim' : '' }} <br>
                     <strong>Claim Number: </strong> {{ $order->claim_number }} <br>
+
+                    <h4>Order Information</h4>
+                    <strong>Store Number</strong> {{ $order->store_number }} <br>
+                    <strong>Technician Initials</strong> {{ $order->technician_initials }} <br>
                 </div>
             </div>
             <div class="row">
