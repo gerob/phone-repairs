@@ -17,6 +17,7 @@ class CreateStoreUsersTable extends Migration
 
             $table->integer('user_id')->unsigned();
             $table->integer('store_id')->unsigned();
+            $table->boolean('default');
 
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

@@ -42,6 +42,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function stores()
     {
-        return $this->belongsToMany(Store::class, 'store_users');
+        return $this->belongsToMany(Store::class, 'store_users')->withPivot('default')->withTimestamps();
     }
 }

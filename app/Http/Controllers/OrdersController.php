@@ -13,17 +13,20 @@ class OrdersController extends Controller
     public function getList(Request $request)
     {
         $q = $request->get('q', '');
-
-        // todo handle the search query.
+        $store = \Auth::user()->stores()->where('default', true)->first();
 
         $orders = \App\CustomerOrder::where('confirmed', true)
             ->where(function ($query) use ($q) {
                 $query->where('phone', 'LIKE', '%' . $q . '%')
                     ->orWhere('email', 'LIKE', '%' . $q . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $q . '%');
-            })->with('coServices')->get();
+            })->with('coServices');
 
-        return view('orders/all')->with(['orders' => $orders]);
+        if ($q == "") {
+            $orders->where('store_number', $store->number);
+        }
+
+        return view('orders')->with(['orders' => $orders->get()]);
     }
 
     public function getStoreList($store_number)

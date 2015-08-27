@@ -15,22 +15,28 @@ class UsersSeeder extends Seeder
 
 
         $user1 = App\User::create([
-            'name' => 'Gerob Lee',
+            'name'     => 'Gerob Lee',
             'username' => 'glk',
-            'email' => 'gerobk@gmail.com',
+            'email'    => 'gerobk@gmail.com',
             'password' => bcrypt('pa$$word'),
         ]);
 
-	    $user2 = App\User::create([
-	        'name' => 'Sams Test',
+        $user2 = App\User::create([
+            'name'     => 'Sams Test',
             'username' => 'samstest',
-	        'email' => 'randall@giganticcreative.com',
-	        'password' => bcrypt('samsT3st')
+            'email'    => 'randall@giganticcreative.com',
+            'password' => bcrypt('samsT3st')
         ]);
 
-        foreach ($stores as $store) {
-            $user1->stores()->attach($store->id);
-            $user2->stores()->attach($store->id);
+        foreach ($stores as $index => $store) {
+            if ($index == 1) {
+                $user1->stores()->attach($store->id, ['default' => true]);
+                $user2->stores()->attach($store->id, ['default' =>  true]);
+                continue;
+            }
+
+            $user1->stores()->attach($store->id, ['default' => false]);
+            $user2->stores()->attach($store->id, ['default' => false]);
         }
     }
 }
