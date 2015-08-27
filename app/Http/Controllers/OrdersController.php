@@ -26,7 +26,7 @@ class OrdersController extends Controller
             $orders->where('store_number', $store->number);
         }
 
-        return view('orders')->with(['orders' => $orders->get()]);
+        return view('orders.all')->with(['orders' => $orders->get()]);
     }
 
     public function getStoreList($store_number)

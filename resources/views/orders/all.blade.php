@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <form class="form-inline" method="get" action="{{route('orders.list')}}">
-                        <div><small>NOTE: Search by customer’s phone number (format 111-222-3333) or e-mail address.</small></div>
+                        <div><small>NOTE: Search by customer’s last name, phone number (format 111-222-3333) or e-mail address.</small></div>
                         <div class="form-group">
                             <label class="sr-only">Search</label>
 

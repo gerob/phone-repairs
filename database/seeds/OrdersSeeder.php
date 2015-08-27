@@ -34,7 +34,8 @@ class OrdersSeeder extends Seeder
             ];
             $customer = \App\Customer::create($details);
 
-            $customer->orders()->create([
+            $device = $devices[array_rand($devices)];
+            $order = $customer->orders()->create([
                 'first_name'          => $details['first_name'],
                 'last_name'           => $details['last_name'],
                 'email'               => $details['email'],
@@ -47,7 +48,7 @@ class OrdersSeeder extends Seeder
                 'member_type'         => $details['member_type'],
                 'member_number'       => $details['member_number'],
 
-                'device_name'         => $devices[array_rand($devices)]['model'],
+                'device_name'         => $device['model'],
                 'color'               => $faker->colorName,
                 'serial_number'       => rand(111111111111, 222222222222),
                 'passcode'            => rand(1111, 2222),
@@ -58,6 +59,18 @@ class OrdersSeeder extends Seeder
                 'technician_initials' => $faker->word,
                 'confirmed'           => true
             ]);
+
+            $services = \App\DeviceService::where('device_id', $device['id'])->with('dsService')->get();
+
+            foreach ($services as $index => $service) {
+                if (($index % 2) == 0) {
+                    $order->coServices()->create([
+                        'name' => $service->dsService->name,
+                        'price' => $service->price,
+                        'upc' => $service->upc
+                    ]);
+                }
+            }
 
         }
     }
