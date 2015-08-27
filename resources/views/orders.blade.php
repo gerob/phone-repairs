@@ -6,20 +6,23 @@
         <h4 class="panel-title">Repair Orders</h4>
     </div>
     <div class="panel-body">
-        <div class="row">
-            <div class="col-md-12">
-                <form class="form-inline" method="get" action="{{route('orders.list')}}">
-                    <div class="form-group">
-                        <label class="sr-only">Search</label>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-inline" method="get" action="{{route('orders.list')}}">
+                        <div><small>NOTE: Search by customer’s phone number (format 111-222-3333) or e-mail address.</small></div>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
 
-                        <p class="form-control-static">Search</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="q" class="sr-only">Search for</label>
-                        <input type="text" class="form-control" name="q" placeholder="Search for...">
-                    </div>
-                    <button type="submit" class="btn btn-default">Go</button>
-                </form>
+                            <p class="form-control-static">Search</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="q" class="sr-only">Search for</label>
+                            <input type="text" class="form-control" name="q" placeholder="Search for...">
+                        </div>
+                        <button type="submit" class="btn btn-default">Go</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="row">
