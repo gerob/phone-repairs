@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 
 class NewOrderController extends Controller
 {
+
+	// START ORDER - SELECT MANUFACTURER
     public function getManufacturerSelection()
     {
         return view('orders/new/manufacturer');
@@ -26,11 +28,12 @@ class NewOrderController extends Controller
     }
 
 
+	// STEP 2 -ORDER DETAILS
     public function getOrderDetailsForm($manufacturer)
     {
         $devices = \App\Device::where('manufacturer', $manufacturer)->get();
 
-        return view('orders/new/order-details')->with(compact('devices', 'manufacturer'));
+        return view('orders/new/details')->with(compact('devices', 'manufacturer'));
     }
 
     public function getDeviceSelectionJson($device_id)
@@ -125,6 +128,7 @@ class NewOrderController extends Controller
     }
 
 
+	// STEP 3 - ORDER REVIEW
     public function getOrderReview($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
@@ -153,6 +157,7 @@ class NewOrderController extends Controller
     }
 
 
+	// STEP 4 - ORDER CONFIRM
     public function getOrderConfirm($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
@@ -160,7 +165,7 @@ class NewOrderController extends Controller
 
         $barcode = new Barcode();
 
-        return view('orders/new/confirmation')->with(compact('order', 'services', 'barcode'));
+        return view('orders/new/confirm')->with(compact('order', 'services', 'barcode'));
     }
 
 	public function postOrderConfirm($order_id)
