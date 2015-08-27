@@ -15,6 +15,8 @@
             padding-bottom: 20px;
         }
     </style>
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/main.css">
 

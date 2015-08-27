@@ -1,4 +1,6 @@
 function loadServices() {
+    $('#services').empty(); // empty out the old content
+    $('#services').append('<td><i class="fa fa-refresh fa-spin"></i> Loading...</td>');
     $.ajax({
         type: "GET",
         url: '/werx/repairs/' + $("#devices").val(),
@@ -17,8 +19,15 @@ function loadServices() {
                     )
                 ).appendTo('#services');
             });
+            $('#services').addClass('animated flash');
         }
     });
+}
+
+
+$('#services').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', onTransitionEnd);
+function onTransitionEnd() {
+  $('#services').removeClass('animated flash');
 }
 
 $(function () {
