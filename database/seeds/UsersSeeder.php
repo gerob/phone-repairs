@@ -29,7 +29,7 @@ class UsersSeeder extends Seeder
         ]);
 
         foreach ($stores as $index => $store) {
-            $user1->stores()->attach($store->id, ['default' => ($index == 1 ? true : false) ]);
+            $user1->stores()->attach($store->id, ['default' => ($index == 1 ? true : false)]);
             $user2->stores()->attach($store->id, ['default' => ($index == 1 ? true : false)]);
         }
     }
