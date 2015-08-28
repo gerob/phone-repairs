@@ -7,8 +7,10 @@
     </div>
 
     <div class="panel-body">
-        <form action="{{ route('orders.list.store', $order->store_number) }}" method="get">
+        <form action="{{ route('order.new.confirm.post', $order->id) }}" method="post">
+            {!! csrf_field() !!}
             <div class="center-all">
+                <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <button type="button" class="btn btn-default" onclick="window.print()">Print</button>
                 <button type="submit" class="btn btn-success">Finish</button>
             </div>

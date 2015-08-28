@@ -7,7 +7,7 @@
     </div>
 
     <div class="panel-body">
-        <form action="{{ route('order.new.review.post') }}" method="post">
+        <form action="{{ route('order.new.review.post', $order->id) }}" method="post">
             {!! csrf_field() !!}
 
             <div class="center-all">
