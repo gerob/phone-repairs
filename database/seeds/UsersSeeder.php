@@ -29,14 +29,8 @@ class UsersSeeder extends Seeder
         ]);
 
         foreach ($stores as $index => $store) {
-            if ($index == 1) {
-                $user1->stores()->attach($store->id, ['default' => true]);
-                $user2->stores()->attach($store->id, ['default' =>  true]);
-                continue;
-            }
-
-            $user1->stores()->attach($store->id, ['default' => false]);
-            $user2->stores()->attach($store->id, ['default' => false]);
+            $user1->stores()->attach($store->id, ['default' => ($index == 1 ? true : false)]);
+            $user2->stores()->attach($store->id, ['default' => ($index == 1 ? true : false)]);
         }
     }
 }

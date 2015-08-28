@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class OrdersSeeder extends Seeder
 {
@@ -57,7 +58,8 @@ class OrdersSeeder extends Seeder
                 'description'         => $faker->text(),
                 'store_number'        => $store[array_rand($store)]['number'],
                 'technician_initials' => $faker->word,
-                'confirmed'           => true
+                'confirmed'           => true,
+                'warranty_years'      => Carbon::now()->addYear()
             ]);
 
             $services = \App\DeviceService::where('device_id', $device['id'])->with('dsService')->get();

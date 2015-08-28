@@ -1654,12 +1654,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-barcode.git",
-                "reference": "47dba32770461219f9198659be86a5e307351bd3"
+                "reference": "9303a1ccf2b9fe4a804257d0b91e79a49b846c71"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/9303a1ccf2b9fe4a804257d0b91e79a49b846c71",
-                "reference": "47dba32770461219f9198659be86a5e307351bd3",
+                "reference": "9303a1ccf2b9fe4a804257d0b91e79a49b846c71",
                 "shasum": ""
             },
             "require": {
@@ -1733,7 +1733,7 @@
                 "tc-lib-barcode",
                 "upc"
             ],
-            "time": "2015-08-11 10:13:15"
+            "time": "2015-08-26 17:32:55"
         },
         {
             "name": "tecnick.com/tc-lib-color",
