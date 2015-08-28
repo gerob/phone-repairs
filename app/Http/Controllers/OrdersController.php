@@ -67,7 +67,6 @@ class OrdersController extends Controller
                     $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
                     $service->save();
                 } else {
-                    // Key doesn't exist so both are false
                     $service->claim_completed = false;
                     $service->save();
                 }

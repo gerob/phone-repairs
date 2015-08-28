@@ -62,8 +62,13 @@
                                         {!! $barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
                                         <p>{{ $service->upc }}</p>
                                     </td>
-                                    <td><input type="checkbox"
-                                               name="services[{{ $service->id }}]['claim']" {{ $service->claim_completed ? "checked":""}} />
+                                    <td>
+                                        @if($service->claim_completed)
+                                            <p class="alert-success">Claim Made</p>
+                                        @else
+                                        <input type="checkbox"
+                                               name="services[{{ $service->id }}]['claim']" />
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
