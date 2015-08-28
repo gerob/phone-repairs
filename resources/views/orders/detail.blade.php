@@ -46,6 +46,7 @@
                 <div class="col-sm-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
+                            <caption>Repair Services</caption>
                             <thead>
                             <tr>
                                 <th>Repair Description</th>
@@ -54,6 +55,8 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {{--Set variable to not show warranty table--}}
+                            <?php $claims_made = false ?>
                             @foreach($services as $index => $service)
                                 <tr>
                                     <td>{{ $index + 1 }} {{ $service->name }} -
@@ -65,6 +68,8 @@
                                     <td>
                                         @if($service->claim_completed)
                                             <p class="alert-success">Claim Made</p>
+                                            {{--Set variable to show warranty table--}}
+                                            <?php $claims_made = true ?>
                                         @else
                                         <input type="checkbox"
                                                name="services[{{ $service->id }}]['claim']" />
@@ -81,6 +86,41 @@
                     </div>
                 </div>
             </div>
+            @if ($claims_made)
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <caption>Repair Claims</caption>
+                            <thead>
+                            <tr>
+                                <th>Repair Services</th>
+                                <th>Warranty UPC</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($services as $index => $service)
+                                @if($service->claim_completed)
+                                <tr>
+                                    <td>{{ $index + 1 }} {{ $service->name }} -
+                                        WARRANTY CLAIM HAS BEEN SUBMITTED</td>
+                                    <td>
+                                        {!! $barcode->getBarcodeObj('UPCA', 000000000000, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
+                                        <p>000000000000</p>
+                                    </td>
+                                </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="">
+                        <label for="description">Notes: </label>
+                        <textarea class="form-control" name="description">{{ $order->description }}</textarea>
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="center-all">
                 <hr>
                 <button type="submit" value="warranty-claim" name="action" class="btn btn-success">Make Warranty Claim</button>
