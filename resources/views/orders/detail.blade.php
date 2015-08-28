@@ -58,6 +58,7 @@
                             <tbody>
                             {{--Set variable to not show warranty table--}}
                             <?php $claims_made = false ?>
+                            <?php $unclaimed_warranty = false ?>
                             @foreach($services as $index => $service)
                                 <tr>
                                     <td>{{ $index + 1 }} {{ $service->name }} -
@@ -77,6 +78,7 @@
                                             @else
                                                 <input type="checkbox"
                                                        name="services[{{ $service->id }}]['claim']"/>
+                                                <?php $unclaimed_warranty = true ?>
                                             @endif
                                         @endif
                                     </td>
@@ -123,11 +125,14 @@
                 <label for="description">Notes: </label>
                 <textarea class="form-control" name="description">{{ $order->description }}</textarea>
             </div>
-            <div class="center-all">
-                <hr>
-                <button type="submit" value="warranty-claim" name="action" class="btn btn-success">Make Warranty Claim
-                </button>
-            </div>
+            @if($unclaimed_warranty)
+                <div class="center-all">
+                    <hr>
+                    <button type="submit" value="warranty-claim" name="action" class="btn btn-success">Make Warranty
+                        Claim
+                    </button>
+                </div>
+            @endif
         </form>
     </div>
 @endsection
