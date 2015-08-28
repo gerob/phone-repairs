@@ -76,7 +76,7 @@ class OrdersController extends Controller
             $checked = $request->get('services', []);
 
             foreach ($services as $service) {
-                $work_comp = $service->work_completed;
+                if ($service->claim_completed) continue;
 
                 if (array_key_exists($service->id, $checked)) {
                     $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
