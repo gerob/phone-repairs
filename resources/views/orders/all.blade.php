@@ -1,5 +1,9 @@
 @extends('...template')
 
+@section('page-title')
+Mobile Device Repair Portal - Store {{ $store_number }} Orders
+@endsection
+
 @section('content')
 
     <div class="panel-heading">

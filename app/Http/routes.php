@@ -15,6 +15,10 @@ get('/', function () {
     return redirect()->route('orders.list');
 });
 
+get('/werx', function () {
+	return redirect()->route('orders.list');
+});
+
 get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
 post('login', ['as' => 'login.post', 'uses' => 'Auth\AuthController@postLogin']);
 
