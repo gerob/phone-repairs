@@ -75,7 +75,7 @@ class OrdersController extends Controller
             $request->session()->flash('success', 'Warranties claimed!');
 
             // after the page is submitted as a warranty-claim, we want to redirect to the home page
-            return redirect()->route('orders.list');
+            return redirect()->route('orders.detail', $order_id);
         }
 
         $request->session()->flash('success', 'Task was successful!');
