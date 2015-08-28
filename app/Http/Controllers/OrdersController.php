@@ -16,17 +16,14 @@ class OrdersController extends Controller
         $store = \Auth::user()->stores()->where('default', true)->first();
 
         $orders = \App\CustomerOrder::where('confirmed', true)
+            ->where('store_number', $store->number)
             ->where(function ($query) use ($q) {
                 $query->where('phone', 'LIKE', '%' . $q . '%')
                     ->orWhere('email', 'LIKE', '%' . $q . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $q . '%');
             })->with('coServices');
 
-        if ($q == "") {
-            $orders->where('store_number', $store->number);
-        }
-
-        return view('orders.all')->with(['orders' => $orders->get()]);
+        return view('orders.all')->with(['orders' => $orders->get(), 'store' => $store->number]);
     }
 
     public function getStoreList($store_number)
