@@ -22,11 +22,13 @@ class OrdersController extends Controller
                     ->orWhere('last_name', 'LIKE', '%' . $q . '%');
             })->with('coServices');
 
+        $store_number = "";
         if ($q == "") {
+            $store_number = $store->number;
             $orders->where('store_number', $store->number);
         }
 
-        return view('orders.all')->with(['orders' => $orders->get()]);
+        return view('orders.all')->with(['orders' => $orders->get(), 'store_number' => $store_number]);
     }
 
     public function getStoreList($store_number)
