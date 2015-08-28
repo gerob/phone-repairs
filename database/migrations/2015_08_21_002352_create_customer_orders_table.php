@@ -38,7 +38,7 @@ class CreateCustomerOrdersTable extends Migration
             $table->text('description');
             $table->boolean('claim')->default(false);
             $table->string('claim_number')->nullable();
-            $table->string('warranty_years');
+            $table->timestamp('warranty_years');
             $table->boolean('confirmed')->default(false);
 
             $table->timestamps();

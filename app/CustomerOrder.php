@@ -8,6 +8,8 @@ class CustomerOrder extends Model
 {
     protected $table = 'customer_orders';
 
+    protected $dates = ['created_at', 'updated_at', 'warranty_years'];
+
     protected $fillable = [
         'first_name',
         'last_name',
