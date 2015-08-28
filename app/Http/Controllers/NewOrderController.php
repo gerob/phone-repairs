@@ -141,7 +141,7 @@ class NewOrderController extends Controller
         return view('orders/new/review')->with(compact('order', 'services', 'barcode'));
     }
 
-    public function postOrderReview(Request $request)
+    public function postOrderReview(Request $request, $order_id)
     {
         $order = \App\CustomerOrder::find($request->get('order_id'));
         $order->confirmed = true;
@@ -170,7 +170,7 @@ class NewOrderController extends Controller
         return view('orders/new/confirm')->with(compact('order', 'services', 'barcode'));
     }
 
-    public function postOrderConfirm($order_id)
+    public function postOrderConfirm(Request $request, $order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
         $order->confirmed = true;
