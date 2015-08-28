@@ -33,7 +33,7 @@ class OrdersController extends Controller
     {
         $orders = \App\CustomerOrder::where('store_number', $store_number)->with('coServices')->get();
 
-        return view('orders/store/all')->with(['orders' => $orders]);
+        return view('orders.store.all')->with(['orders' => $orders, 'store_number' => $store_number]);
     }
 
     public function getDetail($order_id)
@@ -43,7 +43,7 @@ class OrdersController extends Controller
 
         $barcode = new Barcode();
 
-        return view('orders/detail')->with(compact('order', 'services', 'barcode'));
+        return view('orders.detail')->with(compact('order', 'services', 'barcode'));
     }
 
     public function postDetail(Request $request, $order_id)
