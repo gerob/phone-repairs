@@ -7,7 +7,8 @@
             Reports <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-              <li role="presentation"><a href="{{ route('orders.list') }}">All Orders</a></li>
+              <li role="presentation"><a href="{{ route('orders.list') }}">Store Orders</a></li>
+              <li role="presentation"><a href="{{ route('orders.list.all') }}">All Orders</a></li>
               <li role="presentation"><a href="{{ route('inventory.required') }}">Inventory</a></li>
           </ul>
         </li>

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class OrdersController extends Controller
 {
-    public function getList(Request $request)
+    public function getCurrentStoreOrders(Request $request)
     {
         $q = $request->get('q', '');
         $store = \Auth::user()->stores()->where('default', true)->first();
@@ -28,8 +28,23 @@ class OrdersController extends Controller
             $orders->where('store_number', $store->number);
         }
 
-        return view('orders.all')->with(['orders' => $orders->get(), 'store_number' => $store_number]);
+	    // @todo: could combine all and current user views into one controller and view
+        return view('orders.allForCurrentUser')->with(['orders' => $orders->get(), 'store_number' => $store_number]);
     }
+
+	public function getAllOrders(Request $request)
+	{
+		$q = $request->get('q', '');
+
+		$orders = \App\CustomerOrder::where('confirmed', true)
+		                            ->where(function ($query) use ($q) {
+			                            $query->where('phone', 'LIKE', '%' . $q . '%')
+			                                  ->orWhere('email', 'LIKE', '%' . $q . '%')
+			                                  ->orWhere('last_name', 'LIKE', '%' . $q . '%');
+		                            })->with('coServices');
+
+		return view('orders.all')->with(['orders' => $orders->get()]);
+	}
 
     public function getStoreList($store_number)
     {
