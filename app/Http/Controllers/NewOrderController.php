@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class NewOrderController extends Controller
 {
 
-	// START ORDER - SELECT MANUFACTURER
+    // START ORDER - SELECT MANUFACTURER
     public function getManufacturerSelection()
     {
         return view('orders/new/manufacturer');
@@ -28,7 +28,7 @@ class NewOrderController extends Controller
     }
 
 
-	// STEP 2 -ORDER DETAILS
+    // STEP 2 -ORDER DETAILS
     public function getOrderDetailsForm($manufacturer)
     {
         $devices = \App\Device::where('manufacturer', $manufacturer)->get();
@@ -47,21 +47,22 @@ class NewOrderController extends Controller
     public function postOrderDetailsForm(Request $request)
     {
         $this->validate($request, [
-            'first_name'    => 'required',
-            'last_name'     => 'required',
-            'email'         => 'required|email',
-            'phone'         => 'required',
-            'address'       => 'required',
-            'city'          => 'required',
-            'state'         => 'required',
-            'zip'           => 'required',
-            'device'        => 'required',
-            'serial_number' => 'required',
-            'carrier'       => 'required',
-            'claim_number'  => 'required_with:claim',
-            'store_number'  => 'required',
-            'services'      => 'required',
-	        'technician_initials' => 'required'
+            'first_name'          => 'required',
+            'last_name'           => 'required',
+            'email'               => 'required|email',
+            'phone'               => 'required',
+            'address'             => 'required',
+            'city'                => 'required',
+            'state'               => 'required',
+            'zip'                 => 'required',
+            'device'              => 'required',
+            'serial_number'       => 'required',
+            'carrier'             => 'required',
+            'claim_number'        => 'required_with:claim',
+            'store_number'        => 'required',
+            'services'            => 'required',
+            'services_details'    => 'required_with:services',
+            'technician_initials' => 'required'
         ]);
 
         // Find and update or create our customer
@@ -89,37 +90,38 @@ class NewOrderController extends Controller
         $device->save();
 
         $order = $customer->orders()->create([
-            'first_name'    => $request->get('first_name'),
-            'last_name'     => $request->get('last_name'),
-            'email'         => $request->get('email'),
-            'phone'         => $request->get('phone'),
-            'address'       => $request->get('address'),
-            'address2'      => $request->get('address2', null),
-            'city'          => $request->get('city'),
-            'state'         => $request->get('state'),
-            'zip'           => $request->get('zip'),
-            'member_type'   => $request->get('member_type', 'trial'),
-            'member_number' => $request->get('member_number', null),
-            'device_name'   => $request->get('device'),
-            'color'         => $request->get('color'),
-            'serial_number' => $request->get('serial_number'),
-            'passcode'      => $request->get('passcode', null),
-            'carrier'       => $request->get('carrier'),
-            'claim_number'  => $request->get('claim_number', null),
-            'description'   => $request->get('description'),
-            'store_number'  => $request->get('store_number'),
-	        'technician_initials' => $request->get('technician_initials'),
-            'confirmed'     => false,
-	        'warranty_years' => Carbon::now()->addYear()
+            'first_name'          => $request->get('first_name'),
+            'last_name'           => $request->get('last_name'),
+            'email'               => $request->get('email'),
+            'phone'               => $request->get('phone'),
+            'address'             => $request->get('address'),
+            'address2'            => $request->get('address2', null),
+            'city'                => $request->get('city'),
+            'state'               => $request->get('state'),
+            'zip'                 => $request->get('zip'),
+            'member_type'         => $request->get('member_type', 'trial'),
+            'member_number'       => $request->get('member_number', null),
+            'device_name'         => $request->get('device'),
+            'color'               => $request->get('color'),
+            'serial_number'       => $request->get('serial_number'),
+            'passcode'            => $request->get('passcode', null),
+            'carrier'             => $request->get('carrier'),
+            'claim_number'        => $request->get('claim_number', null),
+            'description'         => $request->get('description'),
+            'store_number'        => $request->get('store_number'),
+            'technician_initials' => $request->get('technician_initials'),
+            'confirmed'           => false,
+            'warranty_years'      => Carbon::now()->addYear()
         ]);
 
         // Only add the service if it has a name
-        foreach ($request->get('services') as $service) {
+        $service_details = $request->get('services_details');
+        foreach ($request->get('services') as $service_id => $service) {
             if (array_has($service, 'name')) {
                 $order->coServices()->create([
                     'name'  => $service['name'],
-                    'price' => $service['price'],
-                    'upc'   => $service['upc']
+                    'price' => $service_details[$service_id]['price'],
+                    'upc'   => $service_details[$service_id]['upc']
                 ]);
             }
         }
@@ -128,7 +130,7 @@ class NewOrderController extends Controller
     }
 
 
-	// STEP 3 - ORDER REVIEW
+    // STEP 3 - ORDER REVIEW
     public function getOrderReview($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
@@ -157,7 +159,7 @@ class NewOrderController extends Controller
     }
 
 
-	// STEP 4 - ORDER CONFIRM
+    // STEP 4 - ORDER CONFIRM
     public function getOrderConfirm($order_id)
     {
         $order = \App\CustomerOrder::find($order_id);
@@ -168,12 +170,12 @@ class NewOrderController extends Controller
         return view('orders/new/confirm')->with(compact('order', 'services', 'barcode'));
     }
 
-	public function postOrderConfirm($order_id)
-	{
-		$order = \App\CustomerOrder::find($order_id);
-		$order->confirmed = true;
-		$order->save();
+    public function postOrderConfirm($order_id)
+    {
+        $order = \App\CustomerOrder::find($order_id);
+        $order->confirmed = true;
+        $order->save();
 
-		return redirect()->route('orders.list');
-	}
+        return redirect()->route('orders.list');
+    }
 }

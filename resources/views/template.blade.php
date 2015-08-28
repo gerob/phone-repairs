@@ -4,6 +4,15 @@
 <body>
 
 {{--@include('partials/_top_nav')--}}
+@if (Session::has('success'))
+    <div class="alert alert-success alert-dismissible success-message" role="alert">
+        <div class="container center-all">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Success!</strong> {{Session::get('success')}}
+        </div>
+    </div>
+@endif
 
 <div class="container">
     <div class="row">

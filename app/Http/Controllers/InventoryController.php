@@ -68,6 +68,8 @@ class InventoryController extends Controller
             $inventory->save();
         }
 
+        $request->session()->flash('success', 'Inventory has been updated!');
+
         return redirect()->route('inventory.required');
     }
 }

@@ -14,8 +14,8 @@ function loadServices() {
                     $('<td>').text(item.upc),
                     $('<td>').html(
                         '<input type="checkbox" name="services[' + item.id + '][name]" value="' + item.ds_service.name + '">' +
-                        '<input type="hidden" name="services[' + item.id + '][price]" value="' + item.price + '">' +
-                        '<input type="hidden" name="services[' + item.id + '][upc]" value="' + item.upc + '">'
+                        '<input type="hidden" name="services_details[' + item.id + '][price]" value="' + item.price + '">' +
+                        '<input type="hidden" name="services_details[' + item.id + '][upc]" value="' + item.upc + '">'
                     )
                 ).appendTo('#services');
             });

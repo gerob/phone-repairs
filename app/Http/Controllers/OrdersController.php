@@ -49,41 +49,36 @@ class OrdersController extends Controller
     public function postDetail(Request $request, $order_id)
     {
 
-	    $order = \App\CustomerOrder::find($order_id);
-	    $order->description = $request->get('description');
-	    $order->save(); // always save the description when the page is submitted.
+        $order = \App\CustomerOrder::find($order_id);
+        $order->description = $request->get('description');
+        $order->save(); // always save the description when the page is submitted.
 
-	    switch ($request->get('action')) {
-		    case 'warranty-claim':
+        if ($request->get('action') == 'warranty-claim') {
 
-			    $services = $order->coServices()->get();
-			    $checked = $request->get('services', []);
+            $services = $order->coServices()->get();
+            $checked = $request->get('services', []);
 
-			    foreach ($services as $service) {
-				    $work_comp = $service->work_completed;
+            foreach ($services as $service) {
+                $work_comp = $service->work_completed;
 
-				    if (array_key_exists($service->id, $checked)) {
-					    $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
-					    $service->save();
-				    } else {
-					    // Key doesn't exist so both are false
-					    $service->claim_completed = false;
-					    $service->save();
-				    }
-			    }
+                if (array_key_exists($service->id, $checked)) {
+                    $service->claim_completed = array_key_exists("'claim'", $checked[$service->id]);
+                    $service->save();
+                } else {
+                    // Key doesn't exist so both are false
+                    $service->claim_completed = false;
+                    $service->save();
+                }
+            }
 
-				// setup a flash message
-				// @todo: setup a flash confirmation message
+            $request->session()->flash('success', 'Warranties claimed!');
 
-				// after the page is submitted as a warranty-claim, we want to redirect to the home page
-				$redirect = redirect()->route('orders.list');
+            // after the page is submitted as a warranty-claim, we want to redirect to the home page
+            return redirect()->route('orders.list');
+        }
 
-			    break;
-		    default:
-			    break;
-	    }
+        $request->session()->flash('success', 'Task was successful!');
 
-
-        return $redirect ? $redirect : redirect()->route('orders.detail', $order->id);
+        return redirect()->route('orders.detail', $order->id);
     }
 }
