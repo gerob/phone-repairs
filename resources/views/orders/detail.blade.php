@@ -42,15 +42,16 @@
                     <strong>Technician Initials</strong> {{ $order->technician_initials }} <br>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <caption>Repair Services</caption>
+                            <h4>Repair Services</h4>
                             <thead>
                             <tr>
-                                <th>Repair Description</th>
-                                <th>Repair UPC</th>
+                                <th>Description</th>
+                                <th>UPC</th>
                                 <th>Make a Claim</th>
                             </tr>
                             </thead>
@@ -84,10 +85,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="">
-                        <label for="description">Notes: </label>
-                        <textarea class="form-control" name="description">{{ $order->description }}</textarea>
-                    </div>
                 </div>
             </div>
             @if ($claims_made)
@@ -95,7 +92,7 @@
                     <div class="col-sm-12">
                         <div class="table-responsive">
                             <table class="table table-striped">
-                                <caption>Repair Claims</caption>
+                                <h4>Repair Claims</h4>
                                 <thead>
                                 <tr>
                                     <th>Repair Services</th>
@@ -119,13 +116,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="">
-                            <label for="description">Notes: </label>
-                            <textarea class="form-control" name="description">{{ $order->description }}</textarea>
-                        </div>
                     </div>
                 </div>
             @endif
+            <div class="">
+                <label for="description">Notes: </label>
+                <textarea class="form-control" name="description">{{ $order->description }}</textarea>
+            </div>
             <div class="center-all">
                 <hr>
                 <button type="submit" value="warranty-claim" name="action" class="btn btn-success">Make Warranty Claim
