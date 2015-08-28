@@ -95,7 +95,7 @@
                                 <h4>Repair Claims</h4>
                                 <thead>
                                 <tr>
-                                    <th>Repair Services</th>
+                                    <th>Description</th>
                                     <th>Warranty UPC</th>
                                 </tr>
                                 </thead>
