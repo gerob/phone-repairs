@@ -1,19 +1,19 @@
 @extends('...template')
 
 @section('page-title')
-Mobile Device Repair Portal - All Orders
+Mobile Device Repair Portal - Store {{ $store_number }} Orders
 @endsection
 
 @section('content')
 
     <div class="panel-heading">
-        <h4 class="panel-title">Mobile Device Repair Portal - All Orders</h4>
+        <h4 class="panel-title">Mobile Device Repair Portal - Store {{ $store_number }} Orders</h4>
     </div>
     <div class="panel-body">
         <div class="well">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-inline" method="get" action="{{route('orders.list.all')}}">
+                    <form class="form-inline" method="get" action="{{route('orders.list')}}">
                         <div><small>NOTE: Search by customer’s last name, phone number (format 111-222-3333) or e-mail address.</small></div>
                         <div class="form-group">
                             <label class="sr-only">Search</label>
@@ -49,7 +49,6 @@ Mobile Device Repair Portal - All Orders
                             <th>Customer</th>
                             <th>Phone</th>
                             <th>Serial EID</th>
-                            <th>Store Number</th>
                             <th>Warranty Expiration</th>
                             <th>Make a Claim</th>
                         </tr>
@@ -60,9 +59,8 @@ Mobile Device Repair Portal - All Orders
                                 <td class="col-md-3">{{ $order->first_name }} {{ $order->last_name }}</td>
                                 <td class="col-md-3">{{ $order->phone }}</td>
                                 <td class="col-md-2">{{ $order->serial_number }}</td>
-                                <td class="col-md-1">{{ $order->store_number }}</td>
                                 <td class="col-md-2">{{ $order->warranty_years->diffForHumans() }}</td>
-                                <td class="col-md-1"><a href="{{ route('orders.detail', $order->id) }}"
+                                <td class="col-md-2"><a href="{{ route('orders.detail', $order->id) }}"
                                                         class="btn btn-default">Details</a></td>
                             </tr>
                         @endforeach

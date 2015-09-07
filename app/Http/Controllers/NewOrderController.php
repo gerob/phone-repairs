@@ -144,7 +144,7 @@ class NewOrderController extends Controller
     public function postOrderReview(Request $request, $order_id)
     {
         $order = \App\CustomerOrder::find($request->get('order_id'));
-        $order->confirmed = true;
+        $order->confirmed = false;
         $order->save();
 
         $services = $order->coServices()->get();

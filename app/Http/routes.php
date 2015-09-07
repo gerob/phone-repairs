@@ -44,7 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
     get('werx/api/device/{device_id}/services', ['as' => 'api.device.services', 'uses' => 'NewOrderController@getDeviceSelectionJson']);
 
 	// ORDER LISTS
-    get('werx/orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getList']);
+    get('werx/orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getCurrentStoreOrders']);
+	get('werx/orders/all', ['as' => 'orders.list.all', 'uses' => 'OrdersController@getAllOrders']);
     get('werx/orders/store/{store_id}', ['as' => 'orders.list.store', 'uses' => 'OrdersController@getStoreList']);
 
 	// ORDER DETAIL
