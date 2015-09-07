@@ -34,4 +34,7 @@ $(function () {
     if ($("#devices").val()) {
         loadServices();
     }
+
+    // Mask on phone input
+    $('.phone_us').mask('000-000-0000');
 });

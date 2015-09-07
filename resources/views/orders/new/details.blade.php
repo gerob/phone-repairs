@@ -48,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="phone"> Telephone Number</label>
-                        <input type="text" class="form-control" name="phone" placeholder="123-456-7890"
+                        <input type="text" class="form-control phone_us" name="phone" placeholder="123-456-7890"
                                value="{{ old('phone') }}">
 
                         <div class="help-block">List phone other than one being repaired.</div>
@@ -259,6 +259,7 @@
 @endsection
 
 @section('javascript')
+    <script src="/js/vendor/jquery.mask.min.js"></script>
     <script src="/js/pricing-form.js"></script>
     @if (Session::hasOldInput())
         <script>

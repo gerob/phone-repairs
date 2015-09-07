@@ -44,7 +44,7 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-xs-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <h4>Repair Services</h4>
@@ -91,7 +91,7 @@
             </div>
             @if ($claims_made)
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <h4>Repair Claims</h4>
