@@ -67,5 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
     get('werx/admin/users/edit/{user_id}', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
     post('werx/admin/users/edit/{user_id}', ['as' => 'users.edit.post', 'uses' => 'UsersController@update']);
 
+    // ADMIN DEVICES
+    get('werx/admin/devices', ['as' => 'devices.all', 'uses' => 'DevicesController@index']);
+    get('werx/admin/devices/new', ['as' => 'devices.new', 'uses' => 'DevicesController@create']);
+    post('werx/admin/devices/new', ['as' => 'devices.new.post', 'uses' => 'DevicesController@store']);
+    get('werx/admin/devices/edit/{user_id}', ['as' => 'devices.edit', 'uses' => 'DevicesController@edit']);
+    post('werx/admin/devices/edit/{user_id}', ['as' => 'devices.edit.post', 'uses' => 'DevicesController@update']);
+
+    // LOGOUT
     get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
