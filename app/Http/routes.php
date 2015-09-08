@@ -60,10 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
     post('werx/inventory/review', ['as' => 'inventory.review.post', 'uses' => 'InventoryController@postReviewInventory']);
 	post('werx/inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
 
-    // ADMIN
+    // ADMIN USERS
     get('werx/admin/users', ['as' => 'users.all', 'uses' => 'UsersController@index']);
+    get('werx/admin/users/new', ['as' => 'users.new', 'uses' => 'UsersController@create']);
+    post('werx/admin/users/new', ['as' => 'users.new.post', 'uses' => 'UsersController@store']);
     get('werx/admin/users/edit/{user_id}', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
-    post('werx/admin/users/edit', ['as' => 'users.edit.post', 'uses' => 'UsersController@update']);
+    post('werx/admin/users/edit/{user_id}', ['as' => 'users.edit.post', 'uses' => 'UsersController@update']);
 
     get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });

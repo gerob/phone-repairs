@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="panel-heading">
-        <h4 class="panel-title">Edit User</h4>
+        <h4 class="panel-title">Create New User</h4>
     </div>
 
     <div class="panel-body">
@@ -15,21 +15,20 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('users.edit.post', $user->id) }}" method="POST">
+        <form action="{{ route('users.new.post') }}" method="POST">
             {!! csrf_field() !!}
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username"
-                       value="{{ old('username') ?: $user->username }}">
+                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" value="{{ old('email') ?: $user->email }}">
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
             </div>
 
             <div class="form-group">
-                <label for="password">Password (enter new password to change)</label>
+                <label for="password">Password</label>
                 <input type="password" class="form-control" name="password">
             </div>
 
@@ -43,13 +42,7 @@
                 <select class="form-control" name="store_id">
                     <option value="">Choose a Store:</option>
                     @foreach($stores as $store)
-                        <option value="{{ $store->id }}"
-                                @if(old('store_id') == $store->id)
-                                selected
-                                @elseif($store->pivot->default)
-                                selected
-                                @endif
-                                >
+                        <option value="{{ $store->id }}" {{ (old('store_id') == $store->id ? "selected":"") }}>
                             {{ $store->number }}
                         </option>
                     @endforeach
@@ -57,7 +50,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Update User</button>
+                <button type="submit" class="btn btn-primary">Create User</button>
             </div>
         </form>
     </div>
