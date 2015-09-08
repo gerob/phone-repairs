@@ -7,11 +7,10 @@
             Reports <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-              <li role="presentation"><a href="{{ route('orders.list') }}">Store Orders</a></li>
               <li role="presentation"><a href="{{ route('orders.list.all') }}">All Orders</a></li>
               <li role="presentation"><a href="{{ route('inventory.required') }}">Inventory</a></li>
           </ul>
         </li>
-      <li><a href="http://www.werxparts.com/articles.asp?id=285">Werx Support</a></li>
+      <li><a href="http://www.werxparts.com/articles.asp?id=285" target="_blank">Werx Support</a></li>
     </ul>
 </nav>

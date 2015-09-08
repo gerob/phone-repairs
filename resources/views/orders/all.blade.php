@@ -46,23 +46,19 @@ Mobile Device Repair Portal - All Orders
                     <table class="table">
                         <thead>
                         <tr>
+                            <th>Order Date</th>
                             <th>Customer</th>
-                            <th>Phone</th>
-                            <th>Serial EID</th>
                             <th>Store Number</th>
-                            <th>Warranty Expiration</th>
                             <th>Make a Claim</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td class="col-md-3">{{ $order->first_name }} {{ $order->last_name }}</td>
-                                <td class="col-md-3">{{ $order->phone }}</td>
-                                <td class="col-md-2">{{ $order->serial_number }}</td>
-                                <td class="col-md-1">{{ $order->store_number }}</td>
-                                <td class="col-md-2">{{ $order->warranty_years->diffForHumans() }}</td>
-                                <td class="col-md-1"><a href="{{ route('orders.detail', $order->id) }}"
+                                <td class="col-md-4">{{ $order->created_at }}</td>
+                                <td class="col-md-4">{{ $order->first_name }} {{ $order->last_name }}</td>
+                                <td class="col-md-2">{{ $order->store_number }}</td>
+                                <td class="col-md-2"><a href="{{ route('orders.detail', $order->id) }}"
                                                         class="btn btn-default">Details</a></td>
                             </tr>
                         @endforeach

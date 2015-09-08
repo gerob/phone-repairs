@@ -23,6 +23,18 @@ class InventoryController extends Controller
         return view('inventory')->with(['inventory' => $inventory, 'barcode' => $barcode]);
     }
 
+    public function getWerxInventory()
+    {
+        $inventory = Inventory::whereRaw('count < threshold')
+            ->with('deviceService.dsDevice', 'deviceService.dsService')
+            ->orderBy('store_number', 'desc')
+            ->get();
+
+        $barcode = new Barcode();
+
+        return view('werx-inventory')->with(['inventory' => $inventory, 'barcode' => $barcode]);
+    }
+
     public function getAllInventory()
     {
         $inventory = Inventory::with('deviceService.dsDevice', 'deviceService.dsService')

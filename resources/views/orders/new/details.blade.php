@@ -223,7 +223,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="technician_initials"> Technician Initials</label>
+                        <label for="technician_initials"> Technician Name</label>
                         <input type="text" class="form-control" name="technician_initials"
                                value="{{ old('technician_initials') }}">
                     </div>

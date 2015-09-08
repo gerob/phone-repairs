@@ -27,7 +27,6 @@ class NewOrderController extends Controller
         return redirect()->route('order.new.details', $request->get('manufacturer'));
     }
 
-
     // STEP 2 -ORDER DETAILS
     public function getOrderDetailsForm($manufacturer)
     {
@@ -39,7 +38,9 @@ class NewOrderController extends Controller
     public function getDeviceSelectionJson($device_id)
     {
         // Get available device services
-        $device = \App\DeviceService::where('device_id', $device_id)->with('dsService')->get();
+        $device = \App\DeviceService::where('device_id', $device_id)->with(['dsService' => function ($query) {
+            $query->orderBy('name', 'desc');
+        }])->get();
 
         return response()->json($device);
     }

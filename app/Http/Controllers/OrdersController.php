@@ -41,7 +41,9 @@ class OrdersController extends Controller
 			                            $query->where('phone', 'LIKE', '%' . $q . '%')
 			                                  ->orWhere('email', 'LIKE', '%' . $q . '%')
 			                                  ->orWhere('last_name', 'LIKE', '%' . $q . '%');
-		                            })->with('coServices');
+		                            })->with('coServices')
+                                    ->orderBy('store_number', 'ASC')
+                                    ->orderBy('created_at', 'DESC');
 
 		return view('orders.all')->with(['orders' => $orders->get()]);
 	}

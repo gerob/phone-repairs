@@ -54,10 +54,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     // INVENTORY
     get('werx/inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
+    get('werx/secret-inventory', ['as' => 'inventory.werx', 'uses' => 'InventoryController@getWerxInventory']);
     get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
     get('werx/inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
     post('werx/inventory/review', ['as' => 'inventory.review.post', 'uses' => 'InventoryController@postReviewInventory']);
 	post('werx/inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
+
+    // ADMIN
+    get('werx/admin/users', ['as' => 'users.all', 'uses' => 'UsersController@index']);
+    get('werx/admin/users/edit/{user_id}', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+    post('werx/admin/users/edit', ['as' => 'users.edit.post', 'uses' => 'UsersController@update']);
 
     get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
