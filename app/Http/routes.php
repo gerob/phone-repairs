@@ -71,8 +71,22 @@ Route::group(['middleware' => 'auth'], function () {
     get('werx/admin/devices', ['as' => 'devices.all', 'uses' => 'DevicesController@index']);
     get('werx/admin/devices/new', ['as' => 'devices.new', 'uses' => 'DevicesController@create']);
     post('werx/admin/devices/new', ['as' => 'devices.new.post', 'uses' => 'DevicesController@store']);
-    get('werx/admin/devices/edit/{user_id}', ['as' => 'devices.edit', 'uses' => 'DevicesController@edit']);
-    post('werx/admin/devices/edit/{user_id}', ['as' => 'devices.edit.post', 'uses' => 'DevicesController@update']);
+    get('werx/admin/devices/edit/{device_id}', ['as' => 'devices.edit', 'uses' => 'DevicesController@edit']);
+    post('werx/admin/devices/edit/{device_id}', ['as' => 'devices.edit.post', 'uses' => 'DevicesController@update']);
+
+    // ADMIN SERVICES
+    get('werx/admin/services', ['as' => 'services.all', 'uses' => 'ServicesController@index']);
+    get('werx/admin/services/new', ['as' => 'services.new', 'uses' => 'ServicesController@create']);
+    post('werx/admin/services/new', ['as' => 'services.new.post', 'uses' => 'ServicesController@store']);
+    get('werx/admin/services/edit/{service_id}', ['as' => 'services.edit', 'uses' => 'ServicesController@edit']);
+    post('werx/admin/services/edit/{service_id}', ['as' => 'services.edit.post', 'uses' => 'ServicesController@update']);
+
+    // ADMIN STORES
+    get('werx/admin/stores', ['as' => 'stores.all', 'uses' => 'StoresController@index']);
+    get('werx/admin/stores/new', ['as' => 'stores.new', 'uses' => 'StoresController@create']);
+    post('werx/admin/stores/new', ['as' => 'stores.new.post', 'uses' => 'StoresController@store']);
+    get('werx/admin/stores/edit/{store_id}', ['as' => 'stores.edit', 'uses' => 'StoresController@edit']);
+    post('werx/admin/stores/edit/{store_id}', ['as' => 'stores.edit.post', 'uses' => 'StoresController@update']);
 
     // LOGOUT
     get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);

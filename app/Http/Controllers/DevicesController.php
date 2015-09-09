@@ -75,17 +75,16 @@ class DevicesController extends Controller
      */
     public function update(Request $request, $device_id)
     {
-        //
-    }
+        $this->validate($request, [
+            'manufacturer' => 'required',
+            'model' => 'required|unique:devices,model,'.$device_id
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $device = Device::findOrFail($device_id);
+        $device->manufacturer = $request->get('manufacturer');
+        $device->model = $request->get('model');
+        $device->save();
+
+        return redirect(route('devices.all'))->with('success', $device->model . ' updated!');
     }
 }

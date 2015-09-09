@@ -15,25 +15,25 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('devices.new.post') }}" method="POST">
+        <form action="{{ route('devices.edit.post', $device->id) }}" method="POST">
             {!! csrf_field() !!}
 
             <div class="form-group">
                 <label for="manufacturer">Manufacturer</label>
                 <select name="manufacturer" id="manufacturer" class="form-control">
                     <option>Choose a Manufacturer:</option>
-                    <option value="SamsungSC">SamsungSC</option>
-                    <option value="AppleSC">AppleSC</option>
+                    <option value="SamsungSC" {{ $device->manufacturer == 'SamsungSC' ? 'selected' : '' }}>SamsungSC</option>
+                    <option value="AppleSC" {{ $device->manufacturer == 'AppleSC' ? 'selected' : '' }}>AppleSC</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="model">Model Name</label>
-                <input type="text" name="model" class="form-control">
+                <input type="text" name="model" class="form-control" value="{{ old('model') ?: $device->model }}">
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Device</button>
+                <button type="submit" class="btn btn-primary">Update Device</button>
             </div>
         </form>
     </div>
