@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Inventory;
+use Carbon\Carbon;
 use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use League\Csv\Writer;
 
 class InventoryController extends Controller
 {
@@ -83,5 +85,28 @@ class InventoryController extends Controller
         $request->session()->flash('success', 'Inventory has been updated!');
 
         return redirect()->route('inventory.required');
+    }
+
+    public function exportInventoryToCSV()
+    {
+        $inventory = Inventory::whereRaw('count < threshold')
+            ->with('deviceService.dsDevice', 'deviceService.dsService')
+            ->orderBy('store_number', 'desc')
+            ->get();
+
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['Device - Service', 'UPC', 'Store Number', 'Count', 'Inventory Threshold']);
+
+        foreach ($inventory as $inv) {
+            $csv->insertOne([
+                $inv->deviceService->dsDevice->model . '-' . $inv->deviceService->dsService->name,
+                $inv->upc,
+                $inv->store_number,
+                $inv->count,
+                $inv->threshold
+            ]);
+        }
+
+        $csv->output(Carbon::now()->toDateString() . '-inventory.csv');
     }
 }

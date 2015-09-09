@@ -31,7 +31,7 @@ Mobile Device Repair Portal - All Orders
         </div>
         <div class="row">
             <div class="col-md-12">
-
+                <a href="{{ route('orders.export.all', ['q' => Input::get('q')]) }}" class="btn btn-warning">Export to CSV</a>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>

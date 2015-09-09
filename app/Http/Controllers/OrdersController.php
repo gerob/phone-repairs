@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Schema;
+use League\Csv\Writer;
 
 class OrdersController extends Controller
 {
@@ -28,25 +31,25 @@ class OrdersController extends Controller
             $orders->where('store_number', $store->number);
         }
 
-	    // @todo: could combine all and current user views into one controller and view
+        // @todo: could combine all and current user views into one controller and view
         return view('orders.allForCurrentUser')->with(['orders' => $orders->get(), 'store_number' => $store_number]);
     }
 
-	public function getAllOrders(Request $request)
-	{
-		$q = $request->get('q', '');
+    public function getAllOrders(Request $request)
+    {
+        $q = $request->get('q', '');
 
-		$orders = \App\CustomerOrder::where('confirmed', true)
-		                            ->where(function ($query) use ($q) {
-			                            $query->where('phone', 'LIKE', '%' . $q . '%')
-			                                  ->orWhere('email', 'LIKE', '%' . $q . '%')
-			                                  ->orWhere('last_name', 'LIKE', '%' . $q . '%');
-		                            })->with('coServices')
-                                    ->orderBy('store_number', 'ASC')
-                                    ->orderBy('created_at', 'DESC');
+        $orders = \App\CustomerOrder::where('confirmed', true)
+            ->where(function ($query) use ($q) {
+                $query->where('phone', 'LIKE', '%' . $q . '%')
+                    ->orWhere('email', 'LIKE', '%' . $q . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $q . '%');
+            })->with('coServices')
+            ->orderBy('store_number', 'ASC')
+            ->orderBy('created_at', 'DESC');
 
-		return view('orders.all')->with(['orders' => $orders->get()]);
-	}
+        return view('orders.all')->with(['orders' => $orders->get()]);
+    }
 
     public function getStoreList($store_number)
     {
@@ -98,5 +101,33 @@ class OrdersController extends Controller
         $request->session()->flash('success', 'Task was successful!');
 
         return redirect()->route('orders.detail', $order->id);
+    }
+
+    public function exportOrdersToCSV(Request $request)
+    {
+        $q = $request->get('q', '');
+
+        $orders = \App\CustomerOrder::where('confirmed', true)
+            ->where(function ($query) use ($q) {
+                $query->where('phone', 'LIKE', '%' . $q . '%')
+                    ->orWhere('email', 'LIKE', '%' . $q . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $q . '%');
+            })
+            ->orderBy('store_number', 'ASC')
+            ->orderBy('created_at', 'DESC')->get();
+
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['Order ID', 'Order Date', 'Customer', 'Store Number']);
+
+        foreach ($orders as $order) {
+            $csv->insertOne([
+                $order->id,
+                $order->created_at,
+                $order->first_name . ' ' . $order->last_name,
+                $order->store_number
+            ]);
+        }
+
+        $csv->output(Carbon::now()->toDateString() . '-orders.csv');
     }
 }

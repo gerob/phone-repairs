@@ -9,7 +9,7 @@
         "laravel/framework": "5.1.*",
         "tecnick.com/tc-lib-barcode": "dev-master",
         "tecnick.com/tc-lib-color": "dev-master",
-        "maatwebsite/excel": "~2.0.0"
+        "league/csv": "^7.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

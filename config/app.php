@@ -147,7 +147,6 @@ return [
         /*
          * Package service providers
          */
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -200,7 +199,6 @@ return [
         /*
          * Package aliases
          */
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
     ],
 

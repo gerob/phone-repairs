@@ -45,7 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// ORDER LISTS
     get('werx/orders', ['as' => 'orders.list', 'uses' => 'OrdersController@getCurrentStoreOrders']);
-	get('werx/orders/all', ['as' => 'orders.list.all', 'uses' => 'OrdersController@getAllOrders']);
+    get('werx/orders/all', ['as' => 'orders.list.all', 'uses' => 'OrdersController@getAllOrders']);
+    get('werx/orders/all/export', ['as' => 'orders.export.all', 'uses' => 'OrdersController@exportOrdersToCSV']);
     get('werx/orders/store/{store_id}', ['as' => 'orders.list.store', 'uses' => 'OrdersController@getStoreList']);
 
 	// ORDER DETAIL
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     // INVENTORY
     get('werx/inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
     get('werx/secret-inventory', ['as' => 'inventory.werx', 'uses' => 'InventoryController@getWerxInventory']);
+    get('werx/secret-inventory/export', ['as' => 'inventory.werx.export', 'uses' => 'InventoryController@exportInventoryToCSV']);
     get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
     get('werx/inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
     post('werx/inventory/review', ['as' => 'inventory.review.post', 'uses' => 'InventoryController@postReviewInventory']);
