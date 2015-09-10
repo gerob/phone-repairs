@@ -53,7 +53,15 @@ Mobile Device Repair Portal - All Orders
                         </tr>
                         </thead>
                         <tbody>
+                        {{ $last_store = "" }}
                         @foreach($orders as $order)
+                            @if($last_store !== $order->store_number)
+                                <tr>
+                                    <td colspan="6" class="alert alert-warning" style="text-align: center;">
+                                        <strong>{{$order->store_number}}</strong></td>
+                                </tr>
+                            @endif
+                            <?php $last_store = $order->store_number ?>
                             <tr>
                                 <td class="col-md-4">{{ $order->created_at }}</td>
                                 <td class="col-md-4">{{ $order->first_name }} {{ $order->last_name }}</td>

@@ -39,7 +39,7 @@ class NewOrderController extends Controller
     {
         // Get available device services
         $device = \App\DeviceService::where('device_id', $device_id)->with(['dsService' => function ($query) {
-            $query->orderBy('name', 'desc');
+            $query->orderBy('name', 'ASC');
         }])->get();
 
         return response()->json($device);
