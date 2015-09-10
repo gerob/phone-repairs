@@ -36,7 +36,6 @@ class InventoryController extends Controller
         $inventory = Inventory::whereRaw('count < threshold')
             ->where('store_number', $store_number)
             ->with('deviceService.dsDevice', 'deviceService.dsService')
-            ->orderBy('store_number', 'desc')
             ->get();
 
         $barcode = new Barcode();
@@ -74,7 +73,6 @@ class InventoryController extends Controller
 
     public function getReviewInventory(Request $request)
     {
-        dd($request->session()->all());
         $updates = $request->session()->get('updates');
 
         return view('inventory-review')->with('updates', $updates[0]);
