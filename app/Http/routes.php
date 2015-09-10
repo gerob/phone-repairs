@@ -55,12 +55,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     // INVENTORY
     get('werx/inventory', ['as' => 'inventory.required', 'uses' => 'InventoryController@getRequiredInventory']);
-    get('werx/secret-inventory', ['as' => 'inventory.werx', 'uses' => 'InventoryController@getWerxInventory']);
+    get('werx/secret-inventory/{store_number?}', ['as' => 'inventory.werx', 'uses' => 'InventoryController@getWerxInventory']);
     get('werx/secret-inventory/export', ['as' => 'inventory.werx.export', 'uses' => 'InventoryController@exportInventoryToCSV']);
+    get('werx/secret-inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
+    post('werx/secret-inventory/review', ['as' => 'inventory.review.post', 'uses' => 'InventoryController@postReviewInventory']);
+	post('werx/secret-inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
     get('werx/inventory/all', ['as' => 'inventory.all', 'uses' => 'InventoryController@getAllInventory']);
-    get('werx/inventory/review', ['as' => 'inventory.review', 'uses' => 'InventoryController@getReviewInventory']);
-    post('werx/inventory/review', ['as' => 'inventory.review.post', 'uses' => 'InventoryController@postReviewInventory']);
-	post('werx/inventory', ['as' => 'inventory.update.post', 'uses' => 'InventoryController@postUpdateInventory']);
 
     // ADMIN USERS
     get('werx/admin/users', ['as' => 'users.all', 'uses' => 'UsersController@index']);

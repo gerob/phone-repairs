@@ -25,16 +25,23 @@ class InventoryController extends Controller
         return view('inventory')->with(['inventory' => $inventory, 'barcode' => $barcode]);
     }
 
-    public function getWerxInventory()
+    public function getWerxInventory($store_number = null)
     {
+        if ($store_number == null) {
+            foreach (\Auth::user()->stores()->get() as $store) {
+                if ($store->pivot->default = true) $store_number = $store->number;
+            }
+        }
+
         $inventory = Inventory::whereRaw('count < threshold')
+            ->where('store_number', $store_number)
             ->with('deviceService.dsDevice', 'deviceService.dsService')
             ->orderBy('store_number', 'desc')
             ->get();
 
         $barcode = new Barcode();
 
-        return view('werx-inventory')->with(['inventory' => $inventory, 'barcode' => $barcode]);
+        return view('werx-inventory')->with(compact('inventory', 'barcode', 'store_number'));
     }
 
     public function getAllInventory()
@@ -60,13 +67,14 @@ class InventoryController extends Controller
             ];
         }
 
-        $request->session()->flash('updates', [$updates]);
+        $request->session()->put('updates', [$updates]);
 
         return redirect()->route('inventory.review');
     }
 
     public function getReviewInventory(Request $request)
     {
+        dd($request->session()->all());
         $updates = $request->session()->get('updates');
 
         return view('inventory-review')->with('updates', $updates[0]);
@@ -84,7 +92,7 @@ class InventoryController extends Controller
 
         $request->session()->flash('success', 'Inventory has been updated!');
 
-        return redirect()->route('inventory.required');
+        return redirect()->route('inventory.werx');
     }
 
     public function exportInventoryToCSV()

@@ -8,8 +8,11 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('inventory.werx.export') }}" class="btn btn-warning">Export to CSV</a>
-
+                <a href="{{ route('inventory.werx.export') }}" class="btn btn-warning pull-right">Export to CSV</a>
+                @foreach(\App\Store::all() as $store)
+                    <a href="{{ route('inventory.werx', $store->number) }}" class="btn btn-sm btn-default"
+                       style="margin-bottom: 5px;">{{$store->number}}</a>
+                @endforeach
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
@@ -20,7 +23,7 @@
                     </div>
                 @endif
 
-                <form action="{{route('inventory.review.post')}}" method="post">
+                <form action="{{route('inventory.review.post')}}" method="post" id="inventory-form">
                     {!!csrf_field()!!}
                     <div class="table-responsive">
                         <table class="table">
@@ -35,14 +38,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{ $last_store = "" }}
+                            <tr>
+                                <td colspan="6" class="alert alert-warning" style="text-align: center;">
+                                    <strong>{{$store_number}}</strong></td>
+                            </tr>
                             @foreach($inventory as $inv)
-                                @if($last_store !== $inv->store_number)
-                                    <tr>
-                                        <td colspan="6" class="alert alert-warning" style="text-align: center;"><strong>{{$inv->store_number}}</strong></td>
-                                    </tr>
-                                @endif
-                                <?php $last_store = $inv->store_number ?>
                                 <input type="hidden" value="{{$inv->id}}" name="inventories[{{$inv->id}}]"/>
                                 <tr id="inventory-{{$inv->id}}">
                                     <td>
@@ -76,9 +76,9 @@
                         </table>
                     </div>
                     <div class="center-all">
-                        <div class="alert-info">Submit inventory replenishment prior to navigating to other pages!</div>
                         <br>
-                        <input class="btn btn-success" type="submit" value="Submit Inventory Replenishment">
+                        <input class="btn btn-success" type="submit"
+                               value="Submit Inventory Replenishment for {{ $store_number }}">
                     </div>
                 </form>
             </div>
