@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Device;
+use App\DeviceService;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,11 @@ class DeviceServicesController extends Controller
         $services = $device->services()->orderBy('name', 'ASC')->get();
         $all_services = Service::orderBy('name', 'ASC')->get();
 
-        return view('deviceservices.edit')->with(compact('device', 'services', 'all_services'));
+        foreach($services as $service) {
+            $service_ids[$service->id] = true;
+        }
+
+        return view('deviceservices.edit')->with(compact('device', 'services', 'all_services', 'service_ids'));
     }
 
     /**
@@ -47,7 +52,18 @@ class DeviceServicesController extends Controller
      */
     public function update(Request $request, $device_id)
     {
-        //
+        foreach($request->get('services') as $service_id => $service) {
+            if (isset($service['active'])) {
+                $ds = DeviceService::firstOrNew(['service_id' => $service_id, 'device_id' => $device_id]);
+                $ds->service_id = $service_id;
+                $ds->device_id = $device_id;
+                $ds->upc = $service['upc'];
+                $ds->price = $service['price'];
+                $ds->save();
+            }
+        }
+
+        return redirect(route('deviceservices.edit', $device_id))->with('success', 'Services have been updated!');
     }
 
 }

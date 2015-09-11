@@ -26,35 +26,40 @@
                     <th>Active</th>
                 </tr>
                 @foreach ($all_services as $all_service)
-                    <tr>
-                        <td>{{$all_service->name}}</td>
-                        <td>
-                            <input type="text" name="services[{{$all_service->id}}][price]"
-                                   value="" class="form-control">
-                        </td>
-                        <td>
-                            <input type="text" name="services[{{$all_service->id}}][upc]" class="form-control">
-                        </td>
-                        <td>
-                            <input type="checkbox" name="services[{{$all_service->id}}]"
-                                   value="{{ $all_service->id }}">
-                        </td>
-                        {{--@foreach($services as $service)--}}
-                            {{--@if($service->id == $all_service->id)--}}
-                                {{--<td>--}}
-                                    {{--<input type="text" name="services[{{$service->id}}][price]"--}}
-                                           {{--value="{{$service->pivot->price}}" class="form-control">--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<input type="text" name="services[{{$service->id}}][upc]" class="form-control">--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<input type="checkbox" name="services[{{$service->id}}]"--}}
-                                           {{--value="{{ $all_service->id }}" checked>--}}
-                                {{--</td>--}}
-                            {{--@endif--}}
-                        {{--@endforeach--}}
-                    </tr>
+                    @foreach($services as $service)
+                        @if($service->id == $all_service->id)
+                            <tr>
+                                <td>{{$all_service->name}}</td>
+                                <td>
+                                    <input type="text" name="services[{{$all_service->id}}][price]"
+                                           value="{{$service->pivot->price}}" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" name="services[{{$all_service->id}}][upc]"
+                                           value="{{$service->pivot->upc}}" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="services[{{$all_service->id}}][active]"
+                                           value="{{ $all_service->id }}" checked>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                    @if(! array_key_exists($all_service->id, $service_ids))
+                        <tr>
+                            <td>{{$all_service->name}}</td>
+                            <td>
+                                <input type="text" name="services[{{$all_service->id}}][price]" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" name="services[{{$all_service->id}}][upc]" class="form-control">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="services[{{$all_service->id}}][active]"
+                                       value="{{ $all_service->id }}">
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </table>
             <div class="form-group">
