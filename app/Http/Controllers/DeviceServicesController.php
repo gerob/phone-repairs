@@ -52,14 +52,13 @@ class DeviceServicesController extends Controller
      */
     public function update(Request $request, $device_id)
     {
+        $device = Device::findOrFail($device_id);
+
         foreach($request->get('services') as $service_id => $service) {
             if (isset($service['active'])) {
-                $ds = DeviceService::firstOrNew(['service_id' => $service_id, 'device_id' => $device_id]);
-                $ds->service_id = $service_id;
-                $ds->device_id = $device_id;
-                $ds->upc = $service['upc'];
-                $ds->price = $service['price'];
-                $ds->save();
+                $device->services()->sync([$service_id => ['price' => $service['price'], 'upc' => $service['upc']]], false);
+            } else {
+                $device->services()->detach($service_id);
             }
         }
 
