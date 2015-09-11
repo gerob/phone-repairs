@@ -14,6 +14,8 @@ class AlterInventoryTable extends Migration
     {
         Schema::table('inventory', function(Blueprint $table) {
             $table->dropForeign('inventory_device_service_id_foreign');
+
+            $table->foreign('device_service_id')->references('id')->on('device_services')->onDelete('cascade');
         });
     }
 
@@ -24,6 +26,6 @@ class AlterInventoryTable extends Migration
      */
     public function down()
     {
-        //
+        // Nothing to do here
     }
 }
