@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Device;
 use App\DeviceService;
 use App\Service;
 use Illuminate\Http\Request;
@@ -19,17 +18,8 @@ class ServicesController extends Controller
      */
     public function index()
     {
-//        $device_services = Device::with(['services' => function ($query) {
-//            $query->orderBy('name', 'ASC');
-//        }])->get();
+        $services = Service::orderBy('name', 'ASC')->get();
 
-        $device = Device::find(1);
-        $services = $device->services()->orderBy('name', 'ASC')->get();
-        dd($services->toArray());
-//            ->orderBy('devices.model', 'ASC')
-//            ->select('device_services.*')
-//            ->with('dsDevice')
-//            ->get();
         return view('services.all')->with(compact('services'));
     }
 

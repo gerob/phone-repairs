@@ -83,6 +83,11 @@ Route::group(['middleware' => 'auth'], function () {
     get('werx/admin/services/edit/{service_id}', ['as' => 'services.edit', 'uses' => 'ServicesController@edit']);
     post('werx/admin/services/edit/{service_id}', ['as' => 'services.edit.post', 'uses' => 'ServicesController@update']);
 
+    // ADMIN DEVICE SERVICES
+    get('werx/admin/deviceservices', ['as' => 'deviceservices.all', 'uses' => 'DeviceServicesController@index']);
+    get('werx/admin/deviceservices/edit/{device_id}', ['as' => 'deviceservices.edit', 'uses' => 'DeviceServicesController@edit']);
+    post('werx/admin/deviceservices/edit/{device_id}', ['as' => 'deviceservices.edit.post', 'uses' => 'DeviceServicesController@update']);
+
     // ADMIN STORES
     get('werx/admin/stores', ['as' => 'stores.all', 'uses' => 'StoresController@index']);
     get('werx/admin/stores/new', ['as' => 'stores.new', 'uses' => 'StoresController@create']);
