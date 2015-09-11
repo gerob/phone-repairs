@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Device;
 use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class NewOrderController extends Controller
     // STEP 2 -ORDER DETAILS
     public function getOrderDetailsForm($manufacturer)
     {
-        $devices = \App\Device::where('manufacturer', $manufacturer)->get();
+        $devices = Device::where('manufacturer', $manufacturer)->get();
 
         return view('orders/new/details')->with(compact('devices', 'manufacturer'));
     }
@@ -38,11 +39,10 @@ class NewOrderController extends Controller
     public function getDeviceSelectionJson($device_id)
     {
         // Get available device services
-        $device = \App\DeviceService::where('device_id', $device_id)->with(['dsService' => function ($query) {
-            $query->orderBy('name', 'ASC');
-        }])->get();
+        $device = Device::findOrFail($device_id);
+        $services = $device->services()->orderBy('name', 'ASC')->get();
 
-        return response()->json($device);
+        return response()->json($services);
     }
 
     public function postOrderDetailsForm(Request $request)
