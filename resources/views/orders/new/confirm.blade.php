@@ -21,14 +21,6 @@
 
                     <strong>First Name: </strong> {{ $order->first_name }} <br>
                     <strong>Last Name: </strong> {{ $order->last_name }} <br>
-                    <strong>Email: </strong> {{ $order->email }} <br>
-                    <strong>Address: </strong> {{ $order->address }} <br>
-                    <strong>Address 2: </strong> {{ $order->address2 }} <br>
-                    <strong>City: </strong> {{ $order->city }} <br>
-                    <strong>State: </strong> {{ $order->state }} <br>
-                    <strong>Zip Code: </strong> {{ $order->zip }} <br>
-                    <strong>Phone Number: </strong> {{ $order->phone }} <br>
-                    <strong>Member Type: </strong> {{ $order->member_type }} <br>
                     <strong>Member Number: </strong> {{ $order->member_number }} <br>
                 </div>
                 <div class="col-md-6">
@@ -277,13 +269,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <hr>
-                    <br>
-                    <img src="/img/samsForm.jpg" alt="Technicians Form" class="img-responsive">
-                </div>
-            </div>
+
         </form>
     </div>
 @endsection

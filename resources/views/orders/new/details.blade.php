@@ -149,9 +149,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="membership_number"> Membership Number</label>
-                        <input type="text" class="form-control" name="membership_number"
-                               value="{{ old('membership_number') }}">
+                        <label for="member_number"> Membership Number</label>
+                        <input type="text" class="form-control" name="member_number"
+                               value="{{ old('member_number') }}">
                     </div>
 
                 </div>
