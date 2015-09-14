@@ -80,8 +80,10 @@ class NewOrderController extends Controller
         $customer->member_number = $request->get('member_number', null);
         $customer->save();
 
+        $device_model = Device::find($request->get('device'))->model;
+
         $device = $customer->devices()->firstOrNew(['serial_number' => $request->get('serial_number')]);
-        $device->device_name = $request->get('device');
+        $device->device_name = $device_model;
         $device->color = $request->get('color');
         $device->passcode = $request->get('passcode', null);
         $device->carrier = $request->get('carrier');
@@ -102,7 +104,7 @@ class NewOrderController extends Controller
             'zip'                 => $request->get('zip'),
             'member_type'         => $request->get('member_type', 'trial'),
             'member_number'       => $request->get('member_number', null),
-            'device_name'         => $request->get('device'),
+            'device_name'         => $device_model,
             'color'               => $request->get('color'),
             'serial_number'       => $request->get('serial_number'),
             'passcode'            => $request->get('passcode', null),
