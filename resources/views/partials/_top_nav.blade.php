@@ -1,5 +1,5 @@
-<nav class="primary-nav pull-right" role="navigation">
-    <ul class="nav nav-pills">
+<nav class="primary-nav pull-right hidden-print" role="navigation">
+    <ul class="nav nav-pills hidden-print">
       <li role="presentation" class=""><a href="/">Home</a></li>
       <li role="presentation"><a href="{{ route('order.new.manufacturer') }}">New Work Order</a></li>
       <li role="presentation" class="dropdown">
