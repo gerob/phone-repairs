@@ -45,7 +45,7 @@
                                     <td>{{ $service['name'] }}</td>
                                     <td>${{ number_format(($service['price']/100), 2) }}</td>
                                     <td>
-                                        {!! $barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
+                                        <img src="data:image/png;base64,{{ base64_encode($barcode->getBarcodeObj('UPCA', $service->upc, -2, -30, 'black', array(0, 0, 0, 0))->getPngData()) }}" alt="{{ $service->upc }}">
                                         <p>{{ $service->upc }}</p>
                                     </td>
                                 </tr>

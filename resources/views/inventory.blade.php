@@ -50,7 +50,7 @@
                                     - {{ $inv->deviceService->dsService->name }}
                                 </td>
                                 <td>
-                                    {!! $barcode->getBarcodeObj('UPCA', $inv->upc, -2, -30, 'black', array(0, 0, 0, 0))->getHtmlDiv() !!}
+                                    <img src="data:image/png;base64,{{ base64_encode($barcode->getBarcodeObj('UPCA', $inv->upc, -2, -30, 'black', array(0, 0, 0, 0))->getPngData()) }}" alt="{{ $inv->upc }}">
                                     <p>{{ $inv->upc }}</p>
                                 </td>
                                 <td>
