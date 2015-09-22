@@ -189,6 +189,7 @@
                             </option>
                             <option value="verizon" {{ (old('carrier') == 'verizon' ? "selected":"") }}>Verizon</option>
                             <option value="other" {{ (old('carrier') == 'other' ? "selected":"") }}>Other</option>
+                            <option value="no-carrier" {{ (old('carrier') == 'no-carrier' ? "selected":"") }}>No Carrier</option>
                         </select>
                     </div>
 
