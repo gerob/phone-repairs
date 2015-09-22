@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <div class="panel-heading">
+    <div class="panel-heading hidden-print">
         <h4 class="panel-title">Mobile Device Repair Pricing Portal</h4>
     </div>
 
     <div class="panel-body">
         <form action="{{ route('order.new.confirm.post', $order->id) }}" method="post">
             {!! csrf_field() !!}
-            <div class="center-all">
+            <div class="center-all hidden-print">
                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <button type="button" class="btn btn-default" onclick="window.print()">Print</button>
                 <button type="submit" class="btn btn-success">Finish</button>
