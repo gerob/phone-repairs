@@ -48,7 +48,7 @@ Mobile Device Repair Portal - All Orders
                         <tr>
                             <th>Order Date</th>
                             <th>Customer</th>
-                            <th>Store Number</th>
+                            <th>Club Number</th>
                             <th>Make a Claim</th>
                         </tr>
                         </thead>

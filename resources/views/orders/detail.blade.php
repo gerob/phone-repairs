@@ -38,7 +38,7 @@
                     <strong>Claim Number: </strong> {{ $order->claim_number }} <br>
 
                     <h4>Order Information</h4>
-                    <strong>Store Number</strong> {{ $order->store_number }} <br>
+                    <strong>Club Number</strong> {{ $order->store_number }} <br>
                     <strong>Technician Initials</strong> {{ $order->technician_initials }} <br>
                 </div>
             </div>

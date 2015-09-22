@@ -211,7 +211,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="store_number"> Store Number</label>
+                        <label for="store_number"> Club Number</label>
                         <select class="form-control" name="store_number">
                             <option value="">Choose a Store:</option>
                             @foreach(Auth::user()->stores()->get() as $store)

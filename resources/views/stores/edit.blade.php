@@ -19,7 +19,7 @@
             {!! csrf_field() !!}
 
             <div class="form-group">
-                <label for="store_number">Store Number</label>
+                <label for="store_number">Club Number</label>
                 <input type="text" name="store_number" class="form-control" value="{{ old('store_number') ?: $store->number }}">
             </div>
 

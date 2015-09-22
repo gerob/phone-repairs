@@ -30,7 +30,7 @@ Mobile Device Repair Portal - Store {{ $store_number }} Orders
                         <tr>
                             <th>Order Number</th>
                             <th>Date</th>
-                            <th>Store Number</th>
+                            <th>Club Number</th>
                             <th>Device Name</th>
                             <th>Color</th>
                             <th>Services</th>

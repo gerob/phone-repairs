@@ -26,7 +26,7 @@
                             <thead>
                             <tr>
                                 <th class="col-md-4">Device - Service</th>
-                                <th class="col-md-2">Store Number</th>
+                                <th class="col-md-2">Club Number</th>
                                 <th class="col-md-1">Count</th>
                                 <th class="col-md-1">Inventory Change</th>
                             </tr>

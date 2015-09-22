@@ -31,7 +31,7 @@
                             <tr>
                                 <th class="col-md-5">Device - Service</th>
                                 <th class="col-md-2">UPC</th>
-                                <th class="col-md-2">Store Number</th>
+                                <th class="col-md-2">Club Number</th>
                                 <th class="col-md-1">Count</th>
                                 <th class="col-md-1">Inventory Threshold</th>
                                 <th class="col-md-1">Inventory Fulfillment</th>
