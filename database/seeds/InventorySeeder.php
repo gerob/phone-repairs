@@ -13,7 +13,7 @@ class InventorySeeder extends Seeder
     {
         $stores = \App\Store::all();
 
-        $devices_and_services = \League\Csv\Reader::createFromPath(storage_path('app/imports/sams-new-services.csv'));
+        $devices_and_services = \League\Csv\Reader::createFromPath(storage_path('imports/sams-new-services.csv'));
         $devices_and_services->setFlags(SplFileObject::READ_AHEAD|SplFileObject::SKIP_EMPTY);
 
         $serviceMap = [];
