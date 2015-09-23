@@ -32,7 +32,7 @@
                                 <td>{{$all_service->name}}</td>
                                 <td>
                                     <input type="text" name="services[{{$all_service->id}}][price]"
-                                           value="{{$service->pivot->price}}" class="form-control">
+                                           value="{{ number_format(($service->pivot->price / 100), 2) }}" class="form-control">
                                 </td>
                                 <td>
                                     <input type="text" name="services[{{$all_service->id}}][upc]"

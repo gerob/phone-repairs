@@ -66,7 +66,7 @@ class DeviceServicesController extends Controller
                     }
                 }
 
-                $device->services()->sync([$service_id => ['price' => $service['price'], 'upc' => $service['upc']]], false);
+                $device->services()->sync([$service_id => ['price' => ($service['price'] * 100), 'upc' => $service['upc']]], false);
             } else {
                 $device->services()->detach($service_id);
             }

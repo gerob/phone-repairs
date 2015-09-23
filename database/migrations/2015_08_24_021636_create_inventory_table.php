@@ -16,7 +16,7 @@ class CreateInventoryTable extends Migration
             $table->increments('id');
 			$table->integer('device_service_id')->unsigned();
 
-            $table->integer('count');
+            $table->integer('count')->default(0);
             $table->string('store_number');
             $table->string('upc');
             $table->integer('threshold')->unsigned()->default(20);
