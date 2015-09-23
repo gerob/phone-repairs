@@ -27,7 +27,7 @@ class DeviceServicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $device_id
+     * @param  int $device_id
      * @return Response
      */
     public function edit($device_id)
@@ -36,7 +36,7 @@ class DeviceServicesController extends Controller
         $services = $device->services()->orderBy('name', 'ASC')->get();
         $all_services = Service::orderBy('name', 'ASC')->get();
 
-        foreach($services as $service) {
+        foreach ($services as $service) {
             $service_ids[$service->id] = true;
         }
 
@@ -46,16 +46,26 @@ class DeviceServicesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $device_id
+     * @param  Request $request
+     * @param  int $device_id
      * @return Response
      */
     public function update(Request $request, $device_id)
     {
         $device = Device::findOrFail($device_id);
 
-        foreach($request->get('services') as $service_id => $service) {
+        foreach ($request->get('services') as $service_id => $service) {
             if (isset($service['active'])) {
+                $old_upc = $device->services()->find($service_id)->pivot->upc;
+                $inventory = \App\Inventory::where('upc', $old_upc)->get();
+                // If our UPC has changed
+                if ($old_upc !== $service['upc']) {
+                    foreach ($inventory as $inv) {
+                        $inv->upc = $service['upc'];
+                        $inv->save();
+                    }
+                }
+
                 $device->services()->sync([$service_id => ['price' => $service['price'], 'upc' => $service['upc']]], false);
             } else {
                 $device->services()->detach($service_id);
