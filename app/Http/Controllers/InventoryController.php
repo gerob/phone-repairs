@@ -15,8 +15,7 @@ class InventoryController extends Controller
 {
     public function getRequiredInventory()
     {
-        $inventory = Inventory::whereRaw('count < threshold')
-            ->with('deviceService.dsDevice', 'deviceService.dsService')
+        $inventory = Inventory::with('deviceService.dsDevice', 'deviceService.dsService')
             ->orderBy('store_number', 'desc')
             ->paginate(30);
 
@@ -33,8 +32,7 @@ class InventoryController extends Controller
             }
         }
 
-        $inventory = Inventory::whereRaw('count < threshold')
-            ->where('store_number', $store_number)
+        $inventory = Inventory::where('store_number', $store_number)
             ->with('deviceService.dsDevice', 'deviceService.dsService')
             ->get();
 
@@ -48,7 +46,7 @@ class InventoryController extends Controller
         $inventory = Inventory::with('deviceService.dsDevice', 'deviceService.dsService')
             ->orderBy('store_number', 'desc')
             ->get();
-
+        dd($inventory);
         return view('inventory')->with('inventory', $inventory);
     }
 
