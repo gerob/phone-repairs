@@ -32,7 +32,8 @@ class InventoryController extends Controller
             }
         }
 
-        $inventory = Inventory::where('store_number', $store_number)
+        $inventory = Inventory::whereRaw('count < threshold')
+            ->where('store_number', $store_number)
             ->with('deviceService.dsDevice', 'deviceService.dsService')
             ->get();
 
