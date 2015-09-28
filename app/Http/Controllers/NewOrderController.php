@@ -122,9 +122,11 @@ class NewOrderController extends Controller
         foreach ($request->get('services') as $service_id => $service) {
             if (array_has($service, 'name')) {
                 $order->coServices()->create([
-                    'name'  => $service['name'],
-                    'price' => $service_details[$service_id]['price'],
-                    'upc'   => $service_details[$service_id]['upc']
+                    // Need to add device service ID to this
+                    'device_service_id' => $service['device_service'],
+                    'name'              => $service['name'],
+                    'price'             => $service_details[$service_id]['price'],
+                    'upc'               => $service_details[$service_id]['upc']
                 ]);
             }
         }
@@ -150,14 +152,6 @@ class NewOrderController extends Controller
         $order->confirmed = false;
         $order->save();
 
-        $services = $order->coServices()->get();
-        foreach ($services as $service) {
-            $inventory = \App\Inventory::where('upc', '=', $service->upc)
-                ->where('store_number', '=', $order->store_number)->first();
-            $inventory->count -= 1;
-            $inventory->save();
-        }
-
         return redirect()->route('order.new.confirm', $order->id);
     }
 
@@ -178,6 +172,16 @@ class NewOrderController extends Controller
         $order = \App\CustomerOrder::find($order_id);
         $order->confirmed = true;
         $order->save();
+
+        // Grab the customer order services
+        $services = $order->coServices()->get();
+        foreach ($services as $service) {
+            // Decrease our inventory count now that the order has been confirmed
+            $inventory = \App\Inventory::where('device_service_id', '=', $service->device_service_id)
+                ->where('store_number', '=', $order->store_number)->first();
+            $inventory->count -= 1;
+            $inventory->save();
+        }
 
         return redirect()->route('orders.list');
     }

@@ -98,3 +98,10 @@ Route::group(['middleware' => 'auth'], function () {
     // LOGOUT
     get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
+
+//get('testing', function() {
+//    $device = \App\Device::findOrFail(5);
+//    $services = $device->services()->orderBy('name', 'ASC')->get();
+//
+//    dd($services);
+//});

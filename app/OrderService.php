@@ -14,6 +14,7 @@ class OrderService extends Model
         'upc',
         'work_completed',
         'claim_completed',
+        'device_services_id'
     ];
 
     public function order()

@@ -8,12 +8,14 @@ function loadServices() {
         success: function (data) {
             $('#services').empty(); // empty out the old content
             $.each(data, function (i, item) {
+                console.log(item);
                 $('<tr>').append(
                     $('<td>').text(item.name),
                     $('<td>').text('$' + (item.pivot.price / 100).toFixed(2)),
                     $('<td>').text(item.pivot.upc),
                     $('<td>').html(
                         '<input type="checkbox" name="services[' + item.id + '][name]" value="' + item.name + '">' +
+                        '<input type="hidden" name="services[' + item.id + '][device_service]" value="' + item.pivot.id + '">' +
                         '<input type="hidden" name="services_details[' + item.id + '][price]" value="' + item.pivot.price + '">' +
                         '<input type="hidden" name="services_details[' + item.id + '][upc]" value="' + item.pivot.upc + '">'
                     )
