@@ -117,17 +117,83 @@ class OrdersController extends Controller
             ->orderBy('created_at', 'DESC')->get();
 
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
-        $csv->insertOne(['Order ID', 'Order Date', 'Customer', 'Store Number']);
+        $csv->insertOne([
+            'Order Date',
+            'Order Time',
+            'Order ID',
+            'First Name',
+            'Last Name',
+            'Email',
+            'Telephone #',
+            'Address',
+            'City',
+            'State',
+            'Zip',
+            'Membership Type',
+            'Membership #',
+            'Club #',
+            'Technician Name',
+            'ST Claim',
+            'Claim #',
+            'Device Type',
+            'Color',
+            'Serial #',
+            'Carrier',
+            'Repair Description',
+            'Repair Price',
+            'Repair UPC'
+        ]);
 
         foreach ($orders as $order) {
+            // Get the Repair services ready for adding to the CSV
+            list($repairPrices, $repairDescriptions, $repairUpcs) = $this->getServicesForOrderExport($order);
+
             $csv->insertOne([
+                $order->created_at->toDateString(),
+                $order->created_at->toTimeString(),
                 $order->id,
-                $order->created_at,
-                $order->first_name . ' ' . $order->last_name,
-                $order->store_number
+                $order->first_name,
+                $order->last_name,
+                $order->email,
+                $order->phone,
+                $order->address,
+                $order->city,
+                $order->state,
+                $order->zip,
+                $order->member_type,
+                $order->member_number,
+                $order->store_number,
+                $order->technician_initials,
+                $order->claim,
+                $order->claim_number,
+                $order->device_name,
+                $order->color,
+                $order->serial_number,
+                $order->carrier,
+                $repairDescriptions,
+                $repairPrices,
+                $repairUpcs
             ]);
+
         }
 
         $csv->output(Carbon::now()->toDateString() . '-orders.csv');
+    }
+
+    private function getServicesForOrderExport($order)
+    {
+        $services = $order->coServices()->get();
+
+        $repairPrices = '';
+        $repairDescriptions = '';
+        $repairUpcs = '';
+
+        foreach ($services as $service) {
+            $repairPrices .= '$' . money_format($service->price, 2) . '  ';
+            $repairDescriptions .= $service->name . '  ';
+            $repairUpcs .= $service->upc . '  ';
+        }
+
+        return [$repairPrices, $repairDescriptions, $repairUpcs];
     }
 }
