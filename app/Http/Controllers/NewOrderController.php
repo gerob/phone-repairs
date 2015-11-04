@@ -102,7 +102,7 @@ class NewOrderController extends Controller
             'city'                => $request->get('city'),
             'state'               => $request->get('state'),
             'zip'                 => $request->get('zip'),
-            'member_type'         => $request->get('member_type', 'trial'),
+            'member_type'         => $request->get('membership_type', 'trial'),
             'member_number'       => $request->get('member_number', null),
             'device_name'         => $device_model,
             'color'               => $request->get('color'),
